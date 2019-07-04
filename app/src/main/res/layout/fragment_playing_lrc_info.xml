@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.se.music.widget.lrc.LrcView
+        android:id="@+id/playing_lrc_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lrcCurrentTextColor="@color/medium_sea_green"
+        app:lrcDividerHeight="20dp"
+        app:lrcLabel="暂无歌词"
+        app:lrcPlayDrawable="@drawable/lrc_play" />
+</FrameLayout>

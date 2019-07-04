@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="local_music" type="id" />
+    <item name="download_music" type="id" />
+    <item name="recent_music" type="id" />
+    <item name="love_music" type="id" />
+    <item name="running_radio" type="id" />
+    <item name="buy_music" type="id" />
+
+</resources>

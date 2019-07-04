@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">SEMusic</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="string_help_text">当前应用缺少必要的权限</string>
+
+
+    <string name="help">帮助</string>
+    <string name="quit">退出</string>
+    <string name="settings">设置</string>
+    <string name="save">保存</string>
+    <string name="logan">音乐你的生活</string>
+
+    <string name="mine">我的</string>
+    <string name="music_room">音乐馆</string>
+    <string name="find">发现</string>
+
+    <string name="mine_local_music">本地歌曲</string>
+    <string name="mine_down_music">下载歌曲</string>
+    <string name="mine_recent_music">最近播放</string>
+    <string name="mine_love_music">我喜欢</string>
+    <string name="mine_running_radio">跑步电台</string>
+    <string name="mine_buy_music">已购音乐</string>
+
+
+    <string name="created_song_list">自建歌单</string>
+    <string name="collect_song_list">收藏歌单</string>
+    <string name="song_list_count">%d个歌单</string>
+    <string name="create_new_song_list">新建歌单</string>
+    <string name="no_collected_song_list">没有收藏的歌单</string>
+
+    <string name="classify_singer">歌手</string>
+    <string name="classify_rank">排行</string>
+    <string name="classify_radio">电台</string>
+    <string name="classify_song_list">分类歌单</string>
+    <string name="classify_mv">视频MV</string>
+    <string name="classify_album">数字专辑</string>
+
+
+    <string name="online_recommend_song_list">新 歌 速 递</string>
+    <string name="online_day_recommend_song">每 日 歌 曲 推 荐</string>
+
+    <string name="local_music_song">歌曲%d</string>
+    <string name="local_music_singer">歌手%d</string>
+    <string name="local_music_album">专辑%d</string>
+    <string name="local_music_folder">文件夹%d</string>
+    <string name="local_music_title">本地音乐</string>
+
+    <string name="down_music_title">下载歌曲</string>
+    <string name="love_music_title">我喜欢</string>
+
+
+    <string name="recent_music_title">最近播放</string>
+    <string name="se_play_all">播放全部</string>
+    <string name="playing_song_origin">来源:</string>
+    <string name="playing_song_artist">演唱者:</string>
+    <string name="playing_song_album">专辑:</string>
+    <string name="playing_song_publish_time">发行时间:</string>
+    <string name="playing_song_style">歌曲流派:</string>
+    <string name="playing_song_info_detail">查看详情</string>
+    <string name="playing_song_info">张艺谋钦点“亚洲天王”王力宏，为其执导的史诗级魔幻电影《长城》的片尾曲献声，邀请“摇滚歌者”谭维维一同参与合唱，
+        并首度与善于着墨中国风歌词的方文山合作，透过方文山的笔下将原本场面雄阔的边塞诗《出塞》发挥得更淋漓尽致，以独特的中国风搭配上史诗历史奇幻的剧情，
+        男女合唱营造出气势磅礡的片尾曲《缘分一道桥》！</string>
+    <string name="related_other_version">其他版本</string>
+    <string name="related_song_list">相关歌单</string>
+    <string name="related_song">相关单曲</string>
+
+</resources>

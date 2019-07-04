@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/player_activity_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/player_background_real"
+    android:orientation="vertical">
+
+    <Space
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_view_height"
+        android:background="@color/transparent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/playing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_bar_height"
+        android:theme="@style/toolbarStyle.Transparent"
+        app:navigationIcon="@drawable/player_btn_close_normal">
+
+        <TextView
+            android:id="@+id/playing_song_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.se.music.widget.PlayingViewPager
+        android:id="@+id/content_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:background="@android:color/holo_blue_bright" />
+
+    <com.se.music.widget.MultiButtonLayout
+        android:id="@+id/playing_select_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        app:buttonMarginLeft="2.5dp"
+        app:buttonMarginRight="2.5dp"
+        app:button_count="3"
+        app:button_radius="3dp"
+        app:button_selected_color="@color/white"
+        app:button_solid="@color/gray" />
+
+    <com.se.music.view.PlayingBottomView
+        android:id="@+id/playing_bottom_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp" />
+
+</LinearLayout>

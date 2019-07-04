@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/playing_song_info_item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/playing_song_origin"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/playing_song_info_item_text_size" />
+
+            <TextView
+                android:id="@+id/song_origin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/playing_song_info_item_text_size"
+                tools:text="本地音乐" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/playing_song_info_item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/playing_song_artist"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/playing_song_info_item_text_size" />
+
+            <TextView
+                android:id="@+id/song_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/playing_song_info_item_text_size"
+                tools:text="周杰伦" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/playing_song_info_item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/playing_song_album"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/playing_song_info_item_text_size" />
+
+            <TextView
+                android:id="@+id/song_album"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/playing_song_info_item_text_size"
+                tools:text="七里香" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/playing_song_info_item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/playing_song_publish_time"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/playing_song_info_item_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="2016-09-01"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/playing_song_info_item_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/playing_song_info_item_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/playing_song_style"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/playing_song_info_item_text_size" />
+
+            <TextView
+                android:id="@+id/first_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Pop"
+                android:textColor="@color/white"
+                android:textSize="@dimen/playing_song_info_item_text_size" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/playing_song_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLines="3"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/playing_song_info_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawableRight="@drawable/arrow_right_normal"
+            android:drawablePadding="3dp"
+            android:gravity="right"
+            android:text="@string/playing_song_info_detail"
+            android:textColor="@color/white" />
+
+        <com.se.music.view.PlayingSongRelatedInfoView
+            android:id="@+id/related_song_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

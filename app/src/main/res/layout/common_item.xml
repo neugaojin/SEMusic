@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0.5dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/local_music_play_all_size"
+            android:layout_height="@dimen/local_music_play_all_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/list_icn_play" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/se_play_all"
+            android:textColor="@color/light_black"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/select"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackground"
+            android:focusable="false"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:src="@drawable/se_music_operate" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_gravity="bottom"
+        android:background="@color/split_color" />
+</FrameLayout>

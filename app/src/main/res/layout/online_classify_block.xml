@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/app_base_left_right_padding"
+    android:paddingRight="@dimen/app_base_left_right_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/classify_singer"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/online_singer_item"
+            android:drawablePadding="@dimen/classify_drawable_padding"
+            android:gravity="center_vertical"
+            android:text="@string/classify_singer"
+            android:textColor="@color/black"
+            android:textSize="@dimen/online_classify_text_size" />
+
+        <TextView
+            android:id="@+id/classify_rank"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/online_rank_item"
+            android:drawablePadding="@dimen/classify_drawable_padding"
+            android:gravity="center_vertical"
+            android:text="@string/classify_rank"
+            android:textColor="@color/black"
+            android:textSize="@dimen/online_classify_text_size" />
+
+        <TextView
+            android:id="@+id/classify_radio"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/online_radio_item"
+            android:drawablePadding="@dimen/classify_drawable_padding"
+            android:gravity="center_vertical"
+            android:text="@string/classify_radio"
+            android:textColor="@color/black"
+            android:textSize="@dimen/online_classify_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/classify_song_list"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/online_song_list_item"
+            android:drawablePadding="@dimen/classify_drawable_padding"
+            android:gravity="center_vertical"
+            android:text="@string/classify_song_list"
+            android:textColor="@color/black"
+            android:textSize="@dimen/online_classify_text_size" />
+
+        <TextView
+            android:id="@+id/classify_mv"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/online_mv_item"
+            android:drawablePadding="@dimen/classify_drawable_padding"
+            android:gravity="center_vertical"
+            android:text="@string/classify_mv"
+            android:textColor="@color/black"
+            android:textSize="@dimen/online_classify_text_size" />
+
+        <TextView
+            android:id="@+id/classify_album"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/online_album_item"
+            android:drawablePadding="@dimen/classify_drawable_padding"
+            android:gravity="center_vertical"
+            android:text="@string/classify_album"
+            android:textColor="@color/black"
+            android:textSize="@dimen/online_classify_text_size" />
+    </LinearLayout>
+
+</LinearLayout>

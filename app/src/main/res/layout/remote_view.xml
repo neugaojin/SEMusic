@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/remote_img"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder_disk" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_toLeftOf="@+id/action"
+        android:layout_toRightOf="@+id/remote_img"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fadingEdge="horizontal"
+            android:fadingEdgeLength="10dp"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:ellipsize="end"
+            android:fadingEdge="horizontal"
+            android:fadingEdgeLength="10dp"
+            android:maxLines="1"
+            android:textColor="@color/gray"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/action"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_play"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_remote_play" />
+
+        <ImageView
+            android:id="@+id/img_next_play"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_remote_next_play" />
+
+        <ImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_cancel" />
+    </LinearLayout>
+
+</RelativeLayout>

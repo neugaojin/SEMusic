@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#146e6e</color>
+    <color name="colorPrimaryDark">#31C27C</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="color_bg">#FFF8F8F8</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#FF999999</color>
+    <color name="light_gray">#efeeee</color>
+    <color name="light_black">#333333</color>
+    <color name="black2">#666666</color>
+    <color name="select_gray">#dedede</color>
+    <color name="medium_sea_green">#31C27C</color>
+    <!--灰色-->
+    <color name="background_gray">#F1F1F1</color>
+    <color name="split_color">#E3E3E3</color>
+
+    <color name="hex_33000000">#80000000</color>
+
+    <color name="lrc_normal_text_color">#9E9E9E</color>
+    <color name="lrc_current_text_color">#FF4081</color>
+    <color name="lrc_timeline_text_color">#F8BBD0</color>
+    <color name="lrc_timeline_color">#809E9E9E</color>
+    <color name="lrc_time_text_color">#809E9E9E</color>
+</resources>

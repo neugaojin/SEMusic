@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="item_view">
+        <attr name="count" format="integer" />
+        <attr name="text" format="string" />
+        <attr name="icon_view" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MultiButtonLayout">
+        <attr name="button_radius" format="dimension" />
+        <attr name="button_solid" format="color" />
+        <attr name="button_selected_color" format="color" />
+        <attr name="button_count" format="integer" />
+        <attr name="buttonMarginLeft" format="dimension" />
+        <attr name="buttonMarginRight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="LrcView">
+        <attr name="lrcTextSize" format="dimension" />
+        <attr name="lrcDividerHeight" format="dimension" />
+        <attr name="lrcNormalTextColor" format="reference|color" />
+        <attr name="lrcCurrentTextColor" format="reference|color" />
+        <attr name="lrcTimelineTextColor" format="reference|color" />
+        <attr name="lrcAnimationDuration" format="integer" />
+        <attr name="lrcLabel" format="string" />
+        <attr name="lrcPadding" format="dimension" />
+        <attr name="lrcTimelineColor" format="reference|color" />
+        <attr name="lrcTimelineHeight" format="dimension" />
+        <attr name="lrcPlayDrawable" format="reference" />
+        <attr name="lrcTimeTextColor" format="reference|color" />
+        <attr name="lrcTimeTextSize" format="dimension" />
+        <attr name="lrcTextGravity">
+            <enum name="left" value="1" />
+            <enum name="center" value="2" />
+            <enum name="right" value="3" />
+        </attr>
+    </declare-styleable>
+
+</resources>

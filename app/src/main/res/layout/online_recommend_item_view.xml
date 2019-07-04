@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.se.music.widget.AutoHeightImageView
+            android:id="@+id/recommend_item_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:aspectRatio="1:1" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom|end"
+            android:padding="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/recommend_song_list_play" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/song_list_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:padding="1dp"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+</merge>

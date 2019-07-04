@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/base_e5e5e5_divider_for_horizontal"
+        android:dividerPadding="15dp"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/tv_title_created"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:paddingBottom="15dp"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp"
+            android:text="@string/created_song_list"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_title_collected"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="25dp"
+            android:paddingTop="15dp"
+            android:text="@string/collect_song_list"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:id="@+id/song_list_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/light_black"
+            android:textSize="12sp"
+            tools:text="9个歌单" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/add_song_list"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/plus" />
+
+        <ImageView
+            android:id="@+id/manage_song_list"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/list_icn_mng" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_create_new_song_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@color/light_gray"
+            android:scaleType="centerInside"
+            android:src="@drawable/plus_40" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/create_new_song_list"
+            android:textColor="@color/light_black"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/no_collected_song_list"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="@string/no_collected_song_list"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+</LinearLayout>
