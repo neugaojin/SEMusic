@@ -70,6 +70,7 @@ android {
 
 dependencies {
     val kotlinVersion: String by project
+    val aacVersion: String by project
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", kotlinVersion))
@@ -81,12 +82,12 @@ dependencies {
 
     //****************  LifeCycle  ****************
     //For Lifecycles, LiveData, and ViewModel
-    implementation("android.arch.lifecycle:runtime:1.1.1")
-    implementation("android.arch.lifecycle:extensions:1.1.1")
-    kapt("android.arch.lifecycle:compiler:1.1.1")
+    implementation("android.arch.lifecycle:runtime:$aacVersion")
+    implementation("android.arch.lifecycle:extensions:$aacVersion")
+    kapt("android.arch.lifecycle:compiler:$aacVersion")
     //For Room
-    implementation("android.arch.persistence.room:runtime:1.1.1")
-    kapt("android.arch.persistence.room:compiler:1.1.1")
+    implementation("android.arch.persistence.room:runtime:$aacVersion")
+    kapt("android.arch.persistence.room:compiler:$aacVersion")
     //****************  LifeCycle  ****************
 
     //第三方

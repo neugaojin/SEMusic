@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.loader.content.Loader
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.base.BasePageFragment
 import com.se.music.base.picBaseUrl_300
-import com.se.music.online.model.SingerModel
+import com.se.music.databinding.FragmentOnlineSingerBinding
+import com.se.music.mvvm.Singer
+import com.se.music.mvvm.SingerEntity
 import com.se.music.retrofit.MusicRetrofit
 import com.se.music.retrofit.callback.CallLoaderCallbacks
 import com.se.music.utils.GET_SINGER_LIST
@@ -26,40 +28,37 @@ import retrofit2.Call
  */
 class OnLineSingerFragment : BasePageFragment() {
 
-    private lateinit var recycleView: RecyclerView
     private lateinit var singerAdapter: SingerAdapter
-    private var singerList: MutableList<SingerModel.Data.Singer> = ArrayList()
+    private var singerList: MutableList<Singer> = ArrayList()
+
+    private lateinit var mBinding: FragmentOnlineSingerBinding
 
     companion object {
-        fun newInstance(): OnLineSingerFragment {
-            return OnLineSingerFragment()
-        }
+        fun newInstance() = OnLineSingerFragment()
     }
 
     override fun createContentView(inflater: LayoutInflater, container: ViewGroup?): View {
-        return LayoutInflater.from(context).inflate(R.layout.fragment_online_singer, container, false)
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_online_singer, null, false)
+        return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setTitle(context!!.getString(R.string.classify_singer))
-        recycleView = view.findViewById(R.id.online_singer)
-        recycleView.layoutManager = LinearLayoutManager(activity)
-        recycleView.setHasFixedSize(true)
         singerAdapter = SingerAdapter()
-        recycleView.adapter = singerAdapter
-
+        mBinding.onlineSinger.setHasFixedSize(true)
+        mBinding.onlineSinger.adapter = singerAdapter
         mLoaderManager.initLoader(GET_SINGER_LIST, null, buildSingerCallback())
     }
 
-    private fun buildSingerCallback(): CallLoaderCallbacks<SingerModel> {
-        return object : CallLoaderCallbacks<SingerModel>(context!!) {
-            override fun onCreateCall(id: Int, args: Bundle?): Call<SingerModel> {
+    private fun buildSingerCallback(): CallLoaderCallbacks<SingerEntity> {
+        return object : CallLoaderCallbacks<SingerEntity>(context!!) {
+            override fun onCreateCall(id: Int, args: Bundle?): Call<SingerEntity> {
                 return MusicRetrofit.instance.getSinger(100, 1)
             }
 
-            override fun onSuccess(loader: Loader<*>, data: SingerModel) {
+            override fun onSuccess(loader: Loader<*>, data: SingerEntity) {
                 if (data.data?.list?.isEmpty() == false) {
-                    singerList.addAll(data.data?.list!!)
+                    singerList.addAll(data.data.list)
                 }
                 singerAdapter.notifyDataSetChanged()
             }

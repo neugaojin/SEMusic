@@ -28,7 +28,7 @@ abstract class ToolBarActivity : AppCompatActivity() {
         rootView.addView(createContentView(inflater, rootView))
         setContentView(rootView)
         setTransparentForWindow(this)
-        setSupportActionBar(mBinding.includeToolBar.baseToolbar)
+        setSupportActionBar(mBinding.baseToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
     }
@@ -36,7 +36,7 @@ abstract class ToolBarActivity : AppCompatActivity() {
     protected abstract fun createContentView(inflater: LayoutInflater, rootView: ViewGroup): View
 
     override fun setTitle(title: CharSequence) {
-        mBinding.includeToolBar.toolbarTitle.text = title
+        mBinding.toolbarTitle.text = title
     }
 
     fun setStatusBarColor(@ColorRes color: Int) {

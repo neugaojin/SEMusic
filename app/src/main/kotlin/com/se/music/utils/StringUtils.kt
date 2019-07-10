@@ -3,6 +3,7 @@ package com.se.music.utils
 import com.se.music.base.LAST_FM_IMAGE_LARGE
 import com.se.music.base.LAST_FM_IMAGE_MEDIUM
 import com.se.music.base.LAST_FM_IMAGE_MEGA
+import kotlin.math.roundToInt
 
 /**
  *Author: gaojin
@@ -38,7 +39,7 @@ fun Long.ms2Minute(): String {
     var time = ""
     val minute = this / 60000
     val seconds = this % 60000
-    val second = Math.round(seconds.toFloat() / 1000).toLong()
+    val second = (seconds.toFloat() / 1000).roundToInt().toLong()
     if (minute < 10) {
         time += "0"
     }

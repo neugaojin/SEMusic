@@ -10,46 +10,42 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.loader.app.LoaderManager
 import com.se.music.R
+import com.se.music.databinding.FragmentBaseBinding
 
 /**
  * Created by gaojin on 2018/2/28.
  */
 abstract class BasePageFragment : BaseFragment() {
-    protected lateinit var mToolBar: Toolbar
-    private lateinit var mTitle: TextView
-    private lateinit var statusBar: View
     protected lateinit var fm: FragmentManager
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val linearLayout = inflater.inflate(R.layout.fragment_base, container, false) as LinearLayout?
-        linearLayout!!.addView(createContentView(inflater, container))
+    private lateinit var mBinding: FragmentBaseBinding
 
-        mToolBar = linearLayout.findViewById(R.id.base_toolbar)
-        mTitle = linearLayout.findViewById(R.id.toolbar_title)
-        statusBar = linearLayout.findViewById(R.id.fake_status_bar)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_base, null, false)
+        (mBinding.root as ViewGroup).addView(createContentView(inflater, container))
         mLoaderManager = LoaderManager.getInstance(this)
         fm = fragmentManager!!
-
         setHasOptionsMenu(true)
-        (activity as AppCompatActivity).setSupportActionBar(mToolBar)
+        (activity as AppCompatActivity).setSupportActionBar(mBinding.baseToolbar)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false)
-        return linearLayout
+        return mBinding.root
     }
 
     fun setTitle(title: String) {
-        mTitle.text = title
+        mBinding.toolbarTitle.text = title
     }
 
     fun setStatusBarColor(@ColorRes color: Int) {
-        statusBar.setBackgroundResource(color)
+        mBinding.fakeStatusBar.setBackgroundResource(color)
     }
 
     fun hideStatStatusBar() {
-        statusBar.visibility = View.GONE
+        mBinding.fakeStatusBar.visibility = View.GONE
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

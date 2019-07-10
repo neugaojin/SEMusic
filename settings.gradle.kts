@@ -1,2 +1,2 @@
 rootProject.name = "SEMusic"
-include(":app")
+include(":app", ":senet")

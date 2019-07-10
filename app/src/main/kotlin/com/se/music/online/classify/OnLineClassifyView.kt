@@ -7,6 +7,7 @@ import com.se.music.base.mvp.BaseView
 import com.se.music.base.mvp.MvpPresenter
 import com.se.music.fragment.MainFragment
 import com.se.music.fragment.OnLineSingerFragment
+import com.se.music.mvvm.OnLineSingerListFragmentV2
 import com.se.music.utils.startFragment
 
 /**
@@ -38,7 +39,7 @@ class OnLineClassifyView(presenter: MvpPresenter, viewId: Int) : BaseView(presen
 
     override fun onClick(v: View?) {
         if (v?.id == R.id.classify_singer) {
-            startFragment(getPage(), OnLineSingerFragment.newInstance(), MainFragment.TAG)
+            startFragment(getPage(), OnLineSingerListFragmentV2.newInstance(), MainFragment.TAG)
         }
     }
 }

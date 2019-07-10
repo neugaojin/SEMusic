@@ -1,10 +1,10 @@
 package com.se.music.retrofit
 
 import com.se.music.entity.*
+import com.se.music.mvvm.SingerEntity
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.online.model.HallModel
 import com.se.music.online.model.RecommendListModel
-import com.se.music.online.model.SingerModel
 import com.se.music.online.params.CommonPostParams
 import com.se.music.online.params.ExpressPostParams
 import com.se.music.singleton.GsonFactory
@@ -49,7 +49,7 @@ class MusicRetrofit private constructor() {
                 .getRecommendList(GsonFactory.instance.toJson(params))
     }
 
-    fun getSinger(pagesize: Int, pagenum: Int): Call<SingerModel> {
+    fun getSinger(pagesize: Int, pagenum: Int): Call<SingerEntity> {
         val map = hashMapOf("channel" to "singer", "key" to "all_all_all", "page" to "list", "format" to "jsonp")
         return baseCRetrofit.create(RetrofitService.QQ::class.java).getSinger(map, pagesize, pagenum)
     }

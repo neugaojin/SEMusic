@@ -12,9 +12,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读写sdcard，storage等等 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 读写sdcard，storage等等 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
@@ -60,7 +58,6 @@
             android:name="com.se.music.provider.SongListContentProvider"
             android:authorities="com.se.music.SEContentProvider"
             android:exported="false" />
-
     </application>
 
 </manifest>
