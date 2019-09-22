@@ -12,22 +12,14 @@ import com.se.music.utils.loadUrl
 /**
  * Created by gaojin on 2017/12/31.
  */
-class RecommendItemView : LinearLayout {
+class RecommendItemView @JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
+    : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
     private lateinit var itemHeader: AutoHeightImageView
     private lateinit var descriptionView: TextView
 
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init()
-    }
-
     fun init() {
-        orientation = LinearLayout.VERTICAL
+        orientation = VERTICAL
         View.inflate(context, R.layout.online_recommend_item_view, this)
         itemHeader = findViewById(R.id.recommend_item_head)
         descriptionView = findViewById(R.id.song_list_description)

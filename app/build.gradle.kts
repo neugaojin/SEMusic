@@ -3,6 +3,8 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("com.dorongold.task-tree") version "1.4"
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC16")
 }
 
 android {
@@ -19,9 +21,9 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-    sourceSets["main"].java.srcDirs("src/main/kotlin", "src/main/aidl")
-
     dataBinding.isEnabled = true
+
+    sourceSets["main"].java.srcDirs("src/main/kotlin", "src/main/aidl")
 
     buildTypes {
         getByName("release") {
@@ -72,13 +74,16 @@ dependencies {
     val kotlinVersion: String by project
     val aacVersion: String by project
 
+    implementation(project(":senet"))
+    implementation(project(":service"))
+
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", kotlinVersion))
     implementation(kotlin("reflect", kotlinVersion))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1")
-    implementation("androidx.appcompat:appcompat:1.0.2")
-    implementation("com.google.android.material:material:1.1.0-alpha07")
-    implementation("androidx.core:core-ktx:1.0.2")
+    implementation("androidx.appcompat:appcompat:1.1.0")
+    implementation("com.google.android.material:material:1.1.0-alpha10")
+    implementation("androidx.core:core-ktx:1.1.0")
 
     //****************  LifeCycle  ****************
     //For Lifecycles, LiveData, and ViewModel
@@ -93,9 +98,6 @@ dependencies {
     //第三方
     implementation("com.github.bumptech.glide:glide:4.8.0")
     kapt("com.github.bumptech.glide:compiler:4.8.0")
-    implementation("com.squareup.retrofit2:retrofit:2.4.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.4.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.3.0")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.0")
     implementation("io.reactivex.rxjava2:rxjava:2.2.6")
     implementation("com.youth.banner:banner:1.4.10")
@@ -104,4 +106,10 @@ dependencies {
 
 androidExtensions {
     isExperimental = true
+}
+
+detekt {
+    toolVersion = "1.0.0-RC16"
+    config = files("${rootProject.projectDir}/config.yml")
+    input = files("src/main/kotlin")
 }

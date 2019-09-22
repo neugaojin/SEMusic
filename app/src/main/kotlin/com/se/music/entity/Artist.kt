@@ -2,21 +2,20 @@ package com.se.music.entity
 
 import com.google.gson.JsonElement
 import com.google.gson.annotations.SerializedName
-import com.se.music.retrofit.base.ConvertData
-import com.se.music.singleton.GsonFactory
+import com.se.senet.base.GsonFactory
 
 /**
  *Author: gaojin
  *Time: 2018/7/3 下午7:50
  */
 
-class Artist : ConvertData<Artist?> {
+class Artist : com.se.senet.base.ConvertData<Artist?> {
     override fun convertData(jsonElement: JsonElement): Artist? {
         val rootObject = jsonElement.asJsonObject
         if (!rootObject.has("artist")) {
             return null
         }
-        return GsonFactory.instance.fromJson(rootObject.get("artist"), Artist::class.java)
+        return GsonFactory.INSTANCE.fromJson(rootObject.get("artist"), Artist::class.java)
     }
 
     var name: String? = null

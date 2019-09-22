@@ -13,21 +13,14 @@ import com.se.music.R
  *Time: 2018/10/12 下午6:32
  */
 
-class ContentItemView : LinearLayout {
-    lateinit var headImg: ImageView
-    lateinit var title: TextView
-    lateinit var subTitle: TextView
+class ContentItemView @JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
+    var headImg: ImageView
+    var title: TextView
+    var subTitle: TextView
 
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context)
-    }
-
-    private fun init(context: Context) {
-        orientation = LinearLayout.HORIZONTAL
+    init {
+        orientation = HORIZONTAL
         View.inflate(context, R.layout.view_content_item_view, this)
         headImg = findViewById(R.id.content_img)
         title = findViewById(R.id.content_item_title)

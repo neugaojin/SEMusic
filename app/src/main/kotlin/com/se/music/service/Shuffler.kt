@@ -11,7 +11,7 @@ import java.util.*
 class Shuffler {
 
     companion object {
-        val instance: Shuffler by lazy { Shuffler() }
+        val INSTANCE: Shuffler by lazy { Shuffler() }
     }
 
     private val historyOfNumbers = LinkedList<Int>()

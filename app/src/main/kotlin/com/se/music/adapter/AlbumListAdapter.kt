@@ -15,7 +15,7 @@ import com.se.music.entity.Album
 import com.se.music.entity.AlbumEntity
 import com.se.music.provider.database.provider.ImageStore
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import com.se.music.utils.*
 import retrofit2.Call
 import java.util.*
@@ -51,7 +51,7 @@ class AlbumListAdapter constructor(
 
     private fun buildAlbumCallBacks(context: Context, imageView: ImageView, albumEntity: AlbumEntity) = object : CallLoaderCallbacks<Album>(context) {
         override fun onCreateCall(id: Int, args: Bundle?): Call<Album> {
-            return MusicRetrofit.instance.getAlbumInfo(albumEntity.albumArtist, albumEntity.albumName)
+            return MusicRetrofit.INSTANCE.getAlbumInfo(albumEntity.albumArtist, albumEntity.albumName)
         }
 
         override fun onSuccess(loader: Loader<*>, data: Album) {

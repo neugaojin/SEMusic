@@ -9,7 +9,7 @@ import com.se.music.base.mvp.BaseModel
 import com.se.music.base.mvp.MvpPresenter
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import retrofit2.Call
 
 /**
@@ -24,7 +24,7 @@ class OnLineNewSongModel(presenter: MvpPresenter, modelId: Int) : BaseModel<Expr
     private fun buildExpressInfoCallBack(): CallLoaderCallbacks<ExpressInfoModel> {
         return object : CallLoaderCallbacks<ExpressInfoModel>(getContext()!!) {
             override fun onCreateCall(id: Int, args: Bundle?): Call<ExpressInfoModel> {
-                return MusicRetrofit.instance.getNewSongInfo()
+                return MusicRetrofit.INSTANCE.getNewSongInfo()
             }
 
             override fun onSuccess(loader: Loader<*>, data: ExpressInfoModel) {

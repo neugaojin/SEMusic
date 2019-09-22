@@ -9,7 +9,7 @@ import com.se.music.base.mvp.BaseModel
 import com.se.music.base.mvp.MvpPresenter
 import com.se.music.online.model.RecommendListModel
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import retrofit2.Call
 
 /**
@@ -24,7 +24,7 @@ class OnLineRecommendModel(presenter: MvpPresenter, modelId: Int) : BaseModel<Re
     private fun buildRecommendListCallBack(): CallLoaderCallbacks<RecommendListModel> {
         return object : CallLoaderCallbacks<RecommendListModel>(getContext()!!) {
             override fun onCreateCall(id: Int, args: Bundle?): Call<RecommendListModel> {
-                return MusicRetrofit.instance.getRecommendList()
+                return MusicRetrofit.INSTANCE.getRecommendList()
             }
 
             override fun onSuccess(loader: Loader<*>, data: RecommendListModel) {

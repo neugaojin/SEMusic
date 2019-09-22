@@ -21,7 +21,7 @@ class MusicListAdapter constructor(private val context: Context, private val mLi
     private val mContentLayout = 0X02
 
     private var playMusic: PlayMusic? = null
-    private var handler = HandlerSingleton.instance
+    private var handler = HandlerSingleton.INSTANCE
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ListItemViewHolder) {

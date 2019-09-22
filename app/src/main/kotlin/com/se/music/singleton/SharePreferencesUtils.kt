@@ -12,18 +12,14 @@ import com.se.music.utils.SONG_A_Z
  * Author: gaojin
  * Time: 2018/5/6 下午5:11
  */
-class SharePreferencesUtils {
+object SharePreferencesUtils {
 
-    companion object {
-        const val ARTIST_SORT_ORDER = "artist_sort_order"
-        const val SONG_SORT_ORDER = "song_sort_order"
-        const val ALBUM_SORT_ORDER = "album_sort_order"
-        const val DOWNMUSIC_BIT = "DOWNMUSIC_BIT"
+    const val ARTIST_SORT_ORDER = "artist_sort_order"
+    const val SONG_SORT_ORDER = "song_sort_order"
+    const val ALBUM_SORT_ORDER = "album_sort_order"
+    const val DOWNMUSIC_BIT = "DOWNMUSIC_BIT"
 
-        private const val SHARE_PREFERENCE_NAME = "past_music_share_preference"
-
-        val instance: SharePreferencesUtils by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { SharePreferencesUtils() }
-    }
+    private const val SHARE_PREFERENCE_NAME = "past_music_share_preference"
 
     private val mPreferences: SharedPreferences = ApplicationSingleton.instance.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE)
 

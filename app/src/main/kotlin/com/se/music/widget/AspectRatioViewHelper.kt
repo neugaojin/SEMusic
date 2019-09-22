@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import com.se.music.R
 import java.util.regex.Pattern
+import kotlin.math.abs
 
 /**
  * Created by gaojin on 2017/12/31.
@@ -56,7 +57,7 @@ class AspectRatioViewHelper(private var view: View, attrs: AttributeSet?) {
     fun calculateDimension(measuredWidth: Int, measuredHeight: Int): IntArray {
         val ratio = this.ratio
 
-        if (Math.abs(ratio - 0f) >= 0.000001f) {
+        if (abs(ratio - 0f) >= 0.000001f) {
             if (widthFixed) {
                 outDimension[0] = measuredWidth
                 outDimension[1] = (measuredWidth / ratio).toInt()

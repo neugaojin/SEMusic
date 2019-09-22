@@ -1,4 +1,4 @@
-package com.se.music.retrofit.base
+package com.se.senet.base
 
 import com.google.gson.Gson
 import java.io.Reader

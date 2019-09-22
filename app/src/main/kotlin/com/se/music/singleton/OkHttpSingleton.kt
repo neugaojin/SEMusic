@@ -10,17 +10,12 @@ import java.util.concurrent.TimeUnit
  *Time: 2018/10/23 下午11:15
  */
 
-class OkHttpSingleton {
-    companion object {
-        val instance: OkHttpSingleton by
-        lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { OkHttpSingleton() }
-
-        val mOkHttpClient = OkHttpClient.Builder()
-                .readTimeout(1000, TimeUnit.MINUTES)
-                .writeTimeout(1000, TimeUnit.MINUTES)
-                .connectTimeout(1000, TimeUnit.MINUTES)
-                .build()!!
-    }
+object OkHttpSingleton {
+    private val mOkHttpClient = OkHttpClient.Builder()
+            .readTimeout(1000, TimeUnit.MINUTES)
+            .writeTimeout(1000, TimeUnit.MINUTES)
+            .connectTimeout(1000, TimeUnit.MINUTES)
+            .build()!!
 
     fun getResponseString(action: String): String {
         try {

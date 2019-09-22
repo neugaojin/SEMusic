@@ -7,7 +7,7 @@ import com.se.music.online.model.HallModel
 import com.se.music.online.model.RecommendListModel
 import com.se.music.online.params.CommonPostParams
 import com.se.music.online.params.ExpressPostParams
-import com.se.music.singleton.GsonFactory
+import com.se.senet.base.GsonFactory
 import retrofit2.Call
 import retrofit2.Retrofit
 
@@ -22,7 +22,7 @@ class MusicRetrofit private constructor() {
         const val API_LAST_FM_URL = "http://ws.audioscrobbler.com/"
         const val API_TING_BAIDU = "http://tingapi.ting.baidu.com/"
 
-        val instance: MusicRetrofit by lazy { MusicRetrofit() }
+        val INSTANCE: MusicRetrofit by lazy { MusicRetrofit() }
     }
 
     // QQ音乐
@@ -46,7 +46,7 @@ class MusicRetrofit private constructor() {
         params.recomPlaylist.param.async = 1
         params.recomPlaylist.param.cmd = 2
         return baseURetrofit.create(RetrofitService.QQ::class.java)
-                .getRecommendList(GsonFactory.instance.toJson(params))
+                .getRecommendList(GsonFactory.INSTANCE.toJson(params))
     }
 
     fun getSinger(pagesize: Int, pagenum: Int): Call<SingerEntity> {
@@ -70,7 +70,7 @@ class MusicRetrofit private constructor() {
         expressPostParams.new_song.param.end = 1
 
         return baseURetrofit.create(RetrofitService.QQ::class.java)
-                .getNewSongInfo(GsonFactory.instance.toJson(expressPostParams))
+                .getNewSongInfo(GsonFactory.INSTANCE.toJson(expressPostParams))
     }
 
     fun getSingAvatar(artist: String): Call<Artist> {

@@ -23,7 +23,9 @@ import com.se.music.utils.ms2Minute
  *Time: 2018/9/27 下午5:37
  * 播放音乐底部操作区域
  */
-class PlayingBottomView : LinearLayout, View.OnClickListener, SeekBar.OnSeekBarChangeListener, ViewBlockAction, PlayTimeListener {
+class PlayingBottomView @JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : LinearLayout(context, attrs, defStyleAttr), View.OnClickListener, SeekBar.OnSeekBarChangeListener, ViewBlockAction, PlayTimeListener {
 
     private lateinit var repeatMode: ImageView
     private lateinit var preSong: ImageView
@@ -41,11 +43,7 @@ class PlayingBottomView : LinearLayout, View.OnClickListener, SeekBar.OnSeekBarC
 
     private var duration: Long = 0
 
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    init {
         init(context)
     }
 

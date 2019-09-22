@@ -1,4 +1,4 @@
-package com.se.music.retrofit.callback
+package com.se.senet.callback
 
 /**
  * Created by gaojin on 2017/12/23.

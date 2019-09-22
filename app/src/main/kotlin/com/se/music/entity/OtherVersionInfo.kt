@@ -2,15 +2,14 @@ package com.se.music.entity
 
 import com.google.gson.JsonElement
 import com.se.music.base.Null
-import com.se.music.retrofit.base.ConvertData
-import com.se.music.singleton.GsonFactory
+import com.se.senet.base.GsonFactory
 
 /**
  *Author: gaojin
  *Time: 2018/10/14 下午9:10
  */
 
-class OtherVersionInfo : ConvertData<OtherVersionInfo?> {
+class OtherVersionInfo : com.se.senet.base.ConvertData<OtherVersionInfo?> {
 
     var track: List<OtherVersionTrackBean>? = null
 
@@ -33,6 +32,6 @@ class OtherVersionInfo : ConvertData<OtherVersionInfo?> {
         if (!trackMatch.has("trackmatches")) {
             return null
         }
-        return GsonFactory.instance.fromJson(trackMatch.get("trackmatches"), OtherVersionInfo::class.java)
+        return GsonFactory.INSTANCE.fromJson(trackMatch.get("trackmatches"), OtherVersionInfo::class.java)
     }
 }

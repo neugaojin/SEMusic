@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.loader.content.Loader
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import retrofit2.Call
 
 /**
@@ -29,7 +29,7 @@ class SingerListViewModel(application: Application) : AndroidViewModel(applicati
     private fun buildSingerCallback(): CallLoaderCallbacks<SingerEntity> {
         return object : CallLoaderCallbacks<SingerEntity>(getApplication()) {
             override fun onCreateCall(id: Int, args: Bundle?): Call<SingerEntity> {
-                return MusicRetrofit.instance.getSinger(100, 1)
+                return MusicRetrofit.INSTANCE.getSinger(100, 1)
             }
 
             override fun onSuccess(loader: Loader<*>, data: SingerEntity) {

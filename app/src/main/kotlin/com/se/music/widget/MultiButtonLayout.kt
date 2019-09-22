@@ -15,7 +15,9 @@ import com.se.music.R
  *Time: 2018/10/11 下午5:00
  */
 
-class MultiButtonLayout : LinearLayout {
+class MultiButtonLayout @JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
+    : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     companion object {
         private const val DEFAULT_BUTTON_COUNT = 0
@@ -33,13 +35,9 @@ class MultiButtonLayout : LinearLayout {
 
     private lateinit var gradientDrawable: Drawable
     private lateinit var selectedGradientDrawable: Drawable
-    private lateinit var params: LinearLayout.LayoutParams
+    private lateinit var params: LayoutParams
 
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.MultiButtonLayout, defStyleAttr, 0)
         buttonCount = a.getInt(R.styleable.MultiButtonLayout_button_count, DEFAULT_BUTTON_COUNT)
         buttonRadius = a.getDimensionPixelOffset(R.styleable.MultiButtonLayout_button_radius, DEFAULT_BUTTON_RADIUS)
@@ -55,7 +53,7 @@ class MultiButtonLayout : LinearLayout {
         gradientDrawable = generateGradientDrawable(false)
         selectedGradientDrawable = generateGradientDrawable(true)
 
-        params = LinearLayout.LayoutParams(buttonRadius * 2, buttonRadius * 2)
+        params = LayoutParams(buttonRadius * 2, buttonRadius * 2)
         params.rightMargin = buttonMarginRight
         params.leftMargin = buttonMarginLeft
 

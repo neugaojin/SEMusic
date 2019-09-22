@@ -20,8 +20,8 @@ import com.se.music.entity.MusicEntity
 import com.se.music.provider.database.provider.ImageStore
 import com.se.music.provider.database.provider.RecentStore
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.singleton.GsonFactory
 import com.se.music.singleton.OkHttpSingleton
+import com.se.senet.base.GsonFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -89,7 +89,7 @@ class MediaService : Service() {
     private lateinit var mPlayer: MultiPlayer
     private lateinit var mNotificationManager: NotificationManager
 
-    private val mShuffler = Shuffler.instance
+    private val mShuffler = Shuffler.INSTANCE
     /**
      * 历史歌单 记录播放过的音乐的位置
      */
@@ -188,7 +188,7 @@ class MediaService : Service() {
         super.onCreate()
         mGetUrlThread.start()
         mLrcThread.start()
-        mHandlerThread = HandlerThread("MusicPlayerHandler", android.os.Process.THREAD_PRIORITY_BACKGROUND)
+        mHandlerThread = HandlerThread("MusicPlayerHandler", Process.THREAD_PRIORITY_BACKGROUND)
         mHandlerThread.start()
         mPlayerHandler = MusicPlayerHandler(this, mHandlerThread.looper)
         mPlayer = MultiPlayer(this, mPlayerHandler)
@@ -791,7 +791,7 @@ class MediaService : Service() {
         val editor = mPreferences!!.edit()
         if (full) {
             if (mPlayListInfo.size > 0) {
-                val temp = GsonFactory.instance.toJson(mPlayListInfo)
+                val temp = GsonFactory.INSTANCE.toJson(mPlayListInfo)
                 try {
                     val file = File(cacheDir.absolutePath + "playlist")
                     val ra = RandomAccessFile(file, "rws")
@@ -946,7 +946,7 @@ class MediaService : Service() {
         file = File("$lrc$id.lrc")
         if (!file.exists()) {
             // 获取歌词
-            MusicRetrofit.instance
+            MusicRetrofit.INSTANCE
                     .getLrcInfo(info!!.musicName)
                     .enqueue(object : Callback<LrcInfo> {
                         override fun onResponse(call: Call<LrcInfo>, response: Response<LrcInfo>) {
@@ -975,7 +975,7 @@ class MediaService : Service() {
             if (url.isNotEmpty() && musicEntity != null) {
                 val file = File(Environment.getExternalStorageDirectory().absolutePath + LRC_PATH + musicEntity.audioId + ".lrc")
                 val storageFile = File(Environment.getExternalStorageDirectory().absolutePath + LRC_PATH)
-                val lrcInfo = OkHttpSingleton.instance.getResponseString(url)
+                val lrcInfo = OkHttpSingleton.getResponseString(url)
                 if (lrcInfo.isNotEmpty()) {
                     // 部分机型创建目录成功之后才能创建文件
                     if (!storageFile.exists()) {

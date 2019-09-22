@@ -54,8 +54,7 @@ class MainFragment : BaseFragment(), ViewPager.OnPageChangeListener, View.OnClic
     }
 
     override fun onClick(v: View) {
-        val id = v.id
-        when (id) {
+        when (v.id) {
             R.id.tool_bar_mine -> {
                 mViewPager.currentItem = 0
                 setTitleStyle(0)

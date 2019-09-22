@@ -14,229 +14,226 @@ import java.util.*
 /**
  * Created by gaojin on 2018/3/8.
  */
-class MusicPlayer {
+object MusicPlayer {
+    var mService: IMediaAidlInterface? = null
+    /**
+     *context 和 ServiceConnection的映射，便于及时释放
+     */
+    private var mConnectionMap: WeakHashMap<Context, SeServiceConnection> = WeakHashMap()
 
-    companion object {
-        var mService: IMediaAidlInterface? = null
-        /**
-         *context 和 ServiceConnection的映射，便于及时释放
-         */
-        private var mConnectionMap: WeakHashMap<Context, SeServiceConnection> = WeakHashMap()
+    fun bindToService(context: Context): ServiceToken? {
 
-        fun bindToService(context: Context): ServiceToken? {
+        context.startService(Intent(context, MediaService::class.java))
 
-            context.startService(Intent(context, MediaService::class.java))
+        val serviceConnection = SeServiceConnection()
 
-            val serviceConnection = SeServiceConnection()
+        val intent = Intent().setClass(context, MediaService::class.java)
 
-            val intent = Intent().setClass(context, MediaService::class.java)
+        if (context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)) {
+            mConnectionMap[context] = serviceConnection
+            return ServiceToken(context)
+        }
+        return null
+    }
 
-            if (context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)) {
-                mConnectionMap[context] = serviceConnection
-                return ServiceToken(context)
-            }
-            return null
+    fun unbindFromService(token: ServiceToken) {
+        val context = token.context
+        val serviceConnection = mConnectionMap.remove(context) ?: return
+
+        context.unbindService(serviceConnection)
+        if (mConnectionMap.isEmpty()) {
+            mService = null
+        }
+    }
+
+    class SeServiceConnection : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            mService = IMediaAidlInterface.Stub.asInterface(service)
         }
 
-        fun unbindFromService(token: ServiceToken) {
-            val context = token.context
-            val serviceConnection = mConnectionMap.remove(context) ?: return
-
-            context.unbindService(serviceConnection)
-            if (mConnectionMap.isEmpty()) {
-                mService = null
-            }
+        override fun onServiceDisconnected(name: ComponentName) {
+            mService = null
         }
+    }
 
-        class SeServiceConnection : ServiceConnection {
-            override fun onServiceConnected(name: ComponentName, service: IBinder) {
-                mService = IMediaAidlInterface.Stub.asInterface(service)
-            }
-
-            override fun onServiceDisconnected(name: ComponentName) {
-                mService = null
-            }
-        }
-
-        /**
-         * 播放或者暂停音乐
-         */
-        fun playOrPause() {
-            try {
-                if (mService != null) {
-                    if (mService!!.isPlaying) {
-                        mService!!.pause()
-                    } else {
-                        mService!!.play()
-                    }
-                }
-            } catch (ignored: Exception) {
-                ignored.printStackTrace()
-            }
-        }
-
-        fun isPlaying(): Boolean {
-            return mService?.isPlaying ?: false
-        }
-
-        private fun getQueuePosition(): Int {
-            return mService?.queuePosition ?: 0
-        }
-
-        /**
-         * 播放所有音乐
-         *
-         * @param info ID到音乐实体的映射
-         * @param list 音乐ID的集合
-         * @param position 当前播放的音乐的位置
-         */
-        @Synchronized
-        fun playAll(info: HashMap<Long, MusicEntity>, list: LongArray, position: Int) {
-            if (list.isEmpty() || mService == null) {
-                return
-            }
-            try {
-                val currentId = mService!!.audioId
-                val currentQueuePosition = getQueuePosition()
-                if (position != -1) {
-                    val playlist = getQueue()
-                    if (Arrays.equals(list, playlist)) {
-                        if (currentQueuePosition == position && currentId == list[position]) {
-                            mService?.play()
-                            return
-                        } else {
-                            mService?.queuePosition = position
-                            return
-                        }
-                    }
-                }
-                if (position < 0) {
-                    mService?.open(info, list, 0)
+    /**
+     * 播放或者暂停音乐
+     */
+    fun playOrPause() {
+        try {
+            if (mService != null) {
+                if (mService!!.isPlaying) {
+                    mService!!.pause()
                 } else {
-                    mService?.open(info, list, position)
+                    mService!!.play()
                 }
-                mService?.play()
-            } catch (ignored: RemoteException) {
-                ignored.printStackTrace()
             }
+        } catch (ignored: Exception) {
+            ignored.printStackTrace()
         }
+    }
 
-        /**
-         * 播放下一首音乐
-         */
-        fun nextPlay() {
-            mService?.nextPlay()
-        }
+    fun isPlaying(): Boolean {
+        return mService?.isPlaying ?: false
+    }
 
-        /**
-         * 上一首音乐
-         */
-        fun previous() {
-            mService?.previous()
-        }
+    private fun getQueuePosition(): Int {
+        return mService?.queuePosition ?: 0
+    }
 
-        /**
-         * 音乐已播放时间 (ms)
-         */
-        fun position(): Long {
-            return mService?.position() ?: 0
+    /**
+     * 播放所有音乐
+     *
+     * @param info ID到音乐实体的映射
+     * @param list 音乐ID的集合
+     * @param position 当前播放的音乐的位置
+     */
+    @Synchronized
+    fun playAll(info: HashMap<Long, MusicEntity>, list: LongArray, position: Int) {
+        if (list.isEmpty() || mService == null) {
+            return
         }
+        try {
+            val currentId = mService!!.audioId
+            val currentQueuePosition = getQueuePosition()
+            if (position != -1) {
+                val playlist = getQueue()
+                if (Arrays.equals(list, playlist)) {
+                    if (currentQueuePosition == position && currentId == list[position]) {
+                        mService?.play()
+                        return
+                    } else {
+                        mService?.queuePosition = position
+                        return
+                    }
+                }
+            }
+            if (position < 0) {
+                mService?.open(info, list, 0)
+            } else {
+                mService?.open(info, list, position)
+            }
+            mService?.play()
+        } catch (ignored: RemoteException) {
+            ignored.printStackTrace()
+        }
+    }
 
-        /**
-         * 音乐总时长 (ms)
-         */
-        fun duration(): Long {
-            return mService?.duration() ?: 0
-        }
+    /**
+     * 播放下一首音乐
+     */
+    fun nextPlay() {
+        mService?.nextPlay()
+    }
 
-        /**
-         * 指定音乐播放位置
-         */
-        fun seek(position: Long) {
-            mService?.seek(position)
-        }
+    /**
+     * 上一首音乐
+     */
+    fun previous() {
+        mService?.previous()
+    }
 
-        fun getCurrentAlbumId(): Long {
-            return mService?.albumId ?: -1
-        }
+    /**
+     * 音乐已播放时间 (ms)
+     */
+    fun position(): Long {
+        return mService?.position() ?: 0
+    }
 
-        fun isTrackLocal(): Boolean {
-            return mService?.isTrackLocal ?: false
-        }
+    /**
+     * 音乐总时长 (ms)
+     */
+    fun duration(): Long {
+        return mService?.duration() ?: 0
+    }
 
-        fun secondPosition(): Int {
-            return mService?.secondPosition() ?: 0
-        }
+    /**
+     * 指定音乐播放位置
+     */
+    fun seek(position: Long) {
+        mService?.seek(position)
+    }
 
-        fun getAudioId(): Long {
-            return mService?.audioId ?: 0
-        }
+    fun getCurrentAlbumId(): Long {
+        return mService?.albumId ?: -1
+    }
 
-        /**
-         * 获取循环状态
-         */
-        fun getRepeatMode(): Int {
-            return mService?.repeatMode ?: MediaService.REPEAT_ALL
-        }
+    fun isTrackLocal(): Boolean {
+        return mService?.isTrackLocal ?: false
+    }
 
-        fun setRepeatMode(repeatMode: Int) {
-            mService?.repeatMode = repeatMode
-        }
+    fun secondPosition(): Int {
+        return mService?.secondPosition() ?: 0
+    }
 
-        /**
-         * 获取当前播放的音乐的名字
-         *
-         * @return
-         */
-        fun getTrackName(): String {
-            return mService?.trackName ?: Null
-        }
+    fun getAudioId(): Long {
+        return mService?.audioId ?: 0
+    }
 
-        /**
-         * 获取当前音乐歌手的名字
-         *
-         * @return
-         */
-        fun getArtistName(): String {
-            return mService?.artistName ?: Null
-        }
+    /**
+     * 获取循环状态
+     */
+    fun getRepeatMode(): Int {
+        return mService?.repeatMode ?: MediaService.REPEAT_ALL
+    }
 
-        fun getAlbumPic(): String {
-            return mService?.albumPic ?: Null
-        }
+    fun setRepeatMode(repeatMode: Int) {
+        mService?.repeatMode = repeatMode
+    }
 
-        fun getAlbumName(): String {
-            return mService?.albumName ?: Null
-        }
+    /**
+     * 获取当前播放的音乐的名字
+     *
+     * @return
+     */
+    fun getTrackName(): String {
+        return mService?.trackName ?: Null
+    }
 
-        fun getAlbumId(): Long {
-            return mService?.albumId ?: 0
-        }
+    /**
+     * 获取当前音乐歌手的名字
+     *
+     * @return
+     */
+    fun getArtistName(): String {
+        return mService?.artistName ?: Null
+    }
 
-        /**
-         * 返回播放列表ID到音乐实体的映射
-         *
-         * @return
-         */
-        fun getPlayinfos(): HashMap<Long, MusicEntity>? {
-            return mService?.playlistInfo as HashMap<Long, MusicEntity>
-        }
+    fun getAlbumPic(): String {
+        return mService?.albumPic ?: Null
+    }
 
-        /**
-         * 返回播放列表的ID
-         *
-         * @return
-         */
-        private fun getQueue(): LongArray? {
-            return mService?.queue
-        }
+    fun getAlbumName(): String {
+        return mService?.albumName ?: Null
+    }
 
-        fun setQueue(index: Int) {
-            mService?.queuePosition = index
-        }
+    fun getAlbumId(): Long {
+        return mService?.albumId ?: 0
+    }
 
-        fun getCurrentAudioId(): Long {
-            return mService?.audioId ?: 0
-        }
+    /**
+     * 返回播放列表ID到音乐实体的映射
+     *
+     * @return
+     */
+    fun getPlayinfos(): HashMap<Long, MusicEntity>? {
+        return mService?.playlistInfo as HashMap<Long, MusicEntity>
+    }
+
+    /**
+     * 返回播放列表的ID
+     *
+     * @return
+     */
+    private fun getQueue(): LongArray? {
+        return mService?.queue
+    }
+
+    fun setQueue(index: Int) {
+        mService?.queuePosition = index
+    }
+
+    fun getCurrentAudioId(): Long {
+        return mService?.audioId ?: 0
     }
 }

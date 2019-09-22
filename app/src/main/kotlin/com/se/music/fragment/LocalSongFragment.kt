@@ -50,7 +50,7 @@ class LocalSongFragment : BaseFragment(), LoaderManager.LoaderCallbacks<Cursor> 
     }
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        return CursorLoader(context!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.instance.getSongSortOrder())
+        return CursorLoader(context!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getSongSortOrder())
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {

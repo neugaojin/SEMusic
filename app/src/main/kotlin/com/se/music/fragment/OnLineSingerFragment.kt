@@ -16,7 +16,7 @@ import com.se.music.databinding.FragmentOnlineSingerBinding
 import com.se.music.mvvm.Singer
 import com.se.music.mvvm.SingerEntity
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import com.se.music.utils.GET_SINGER_LIST
 import com.se.music.utils.inflate
 import com.se.music.utils.loadUrl
@@ -53,7 +53,7 @@ class OnLineSingerFragment : BasePageFragment() {
     private fun buildSingerCallback(): CallLoaderCallbacks<SingerEntity> {
         return object : CallLoaderCallbacks<SingerEntity>(context!!) {
             override fun onCreateCall(id: Int, args: Bundle?): Call<SingerEntity> {
-                return MusicRetrofit.instance.getSinger(100, 1)
+                return MusicRetrofit.INSTANCE.getSinger(100, 1)
             }
 
             override fun onSuccess(loader: Loader<*>, data: SingerEntity) {

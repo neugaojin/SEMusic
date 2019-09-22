@@ -9,11 +9,8 @@ import androidx.viewpager.widget.ViewPager
  *Time: 2018/10/10 下午8:36
  */
 
-class PlayingViewPager : ViewPager {
-
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+class PlayingViewPager @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
+    : ViewPager(context, attrs) {
 
     /**
      * 修改Child绘制顺序

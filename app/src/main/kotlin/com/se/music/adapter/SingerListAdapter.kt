@@ -16,7 +16,7 @@ import com.se.music.entity.Artist
 import com.se.music.entity.ArtistEntity
 import com.se.music.provider.database.provider.ImageStore
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import com.se.music.utils.*
 import retrofit2.Call
 
@@ -51,7 +51,7 @@ class SingerListAdapter constructor(
     private fun buildArtistCallBacks(holder: SingerViewHolder, position: Int): CallLoaderCallbacks<Artist> {
         return object : CallLoaderCallbacks<Artist>(context) {
             override fun onCreateCall(id: Int, args: Bundle?): Call<Artist> {
-                return MusicRetrofit.instance.getSingAvatar(list[position].artistName)
+                return MusicRetrofit.INSTANCE.getSingAvatar(list[position].artistName)
             }
 
             override fun onSuccess(loader: Loader<*>, data: Artist) {

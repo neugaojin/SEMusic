@@ -11,7 +11,7 @@ import com.se.music.base.BaseFragment
 import com.se.music.entity.OtherVersionInfo
 import com.se.music.entity.SimilarSongInfo
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import com.se.music.service.MusicPlayer
 import com.se.music.utils.GET_RELATED_SONG
 import com.se.music.utils.GET_SIMILAR_SONG
@@ -81,7 +81,7 @@ class SongInfoFragment : BaseFragment() {
     private fun buildRelatedSongCallback(trackName: String): CallLoaderCallbacks<OtherVersionInfo> {
         return object : CallLoaderCallbacks<OtherVersionInfo>(context!!) {
             override fun onCreateCall(id: Int, args: Bundle?): Call<OtherVersionInfo> {
-                return MusicRetrofit.instance.getRelatedSongInfo(trackName)
+                return MusicRetrofit.INSTANCE.getRelatedSongInfo(trackName)
             }
 
             override fun onSuccess(loader: Loader<*>, data: OtherVersionInfo) {
@@ -96,7 +96,7 @@ class SongInfoFragment : BaseFragment() {
     private fun buildSimilarSongCallback(trackName: String, artistName: String): CallLoaderCallbacks<SimilarSongInfo> {
         return object : CallLoaderCallbacks<SimilarSongInfo>(context!!) {
             override fun onCreateCall(id: Int, args: Bundle?): Call<SimilarSongInfo> {
-                return MusicRetrofit.instance.getSimilarSongInfo(trackName, artistName)
+                return MusicRetrofit.INSTANCE.getSimilarSongInfo(trackName, artistName)
             }
 
             override fun onSuccess(loader: Loader<*>, data: SimilarSongInfo) {

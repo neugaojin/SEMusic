@@ -35,17 +35,6 @@ data class ArtistEntity(
     var imageId: String = Null
 }
 
-/**
- * 文件夹bean
- */
-data class FolderEntity(
-    var folderName: String,
-    var folderPath: String,
-    var folderSort: String
-) {
-    var folderCount: Int = 0
-}
-
 @Parcelize
 data class MusicEntity(
     var audioId: Long = -1,

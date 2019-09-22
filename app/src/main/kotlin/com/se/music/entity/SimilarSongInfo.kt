@@ -2,22 +2,21 @@ package com.se.music.entity
 
 import com.google.gson.JsonElement
 import com.se.music.base.Null
-import com.se.music.retrofit.base.ConvertData
-import com.se.music.singleton.GsonFactory
+import com.se.senet.base.GsonFactory
 
 /**
  *Author: gaojin
  *Time: 2018/10/16 上午12:20
  */
 
-class SimilarSongInfo : ConvertData<SimilarSongInfo?> {
+class SimilarSongInfo : com.se.senet.base.ConvertData<SimilarSongInfo?> {
 
     override fun convertData(jsonElement: JsonElement): SimilarSongInfo? {
         val root = jsonElement.asJsonObject
         if (!root.has("similartracks")) {
             return null
         }
-        return GsonFactory.instance.fromJson(root.get("similartracks"), SimilarSongInfo::class.java)
+        return GsonFactory.INSTANCE.fromJson(root.get("similartracks"), SimilarSongInfo::class.java)
     }
 
     var track: List<SimilarTrackBean>? = null

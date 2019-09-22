@@ -16,7 +16,7 @@ import com.se.music.base.mvp.BaseView
 import com.se.music.base.mvp.MvpPresenter
 import com.se.music.mine.event.CollectEvent
 import com.se.music.mine.event.CreateEvent
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import retrofit2.Call
 
 /**

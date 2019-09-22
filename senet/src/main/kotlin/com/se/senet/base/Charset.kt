@@ -1,4 +1,4 @@
-package com.se.music.retrofit.base
+package com.se.senet.base
 
 import okhttp3.MediaType
 import java.nio.charset.Charset

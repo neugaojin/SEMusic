@@ -18,7 +18,9 @@ import com.se.music.widget.ContentItemView
  *Time: 2018/10/12 下午6:19
  */
 
-class PlayingSongRelatedInfoView : LinearLayout {
+class PlayingSongRelatedInfoView @JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : LinearLayout(context, attrs, defStyleAttr) {
 
     private lateinit var firstContainer: LinearLayout
     private lateinit var secondContainer: LinearLayout
@@ -28,11 +30,7 @@ class PlayingSongRelatedInfoView : LinearLayout {
     private lateinit var secondTitle: TextView
     private lateinit var thirdTitle: TextView
 
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    init {
         init(context)
     }
 

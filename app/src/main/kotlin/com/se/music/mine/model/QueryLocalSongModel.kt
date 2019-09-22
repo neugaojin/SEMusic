@@ -25,18 +25,18 @@ class QueryLocalSongModel(presenter: MvpPresenter, private var modelId: Int, pri
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return when (from) {
             START_FROM_LOCAL -> {
-                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.instance.getSongSortOrder())
+                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getSongSortOrder())
             }
             START_FROM_ARTIST -> {
                 songSelection.append(" and " + MediaStore.Audio.Media.ARTIST_ID + " = " + id)
-                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.instance.getArtistSortOrder())
+                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getArtistSortOrder())
             }
             START_FROM_ALBUM -> {
                 songSelection.append(" and " + MediaStore.Audio.Media.ALBUM_ID + " = " + id)
-                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.instance.getAlbumSortOrder())
+                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getAlbumSortOrder())
             }
             else -> {
-                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.instance.getSongSortOrder())
+                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getSongSortOrder())
             }
         }
     }

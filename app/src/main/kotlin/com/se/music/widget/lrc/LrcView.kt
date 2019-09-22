@@ -24,6 +24,8 @@ import com.se.music.base.Null
 import java.io.File
 import java.lang.ref.WeakReference
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  *Author: gaojin
@@ -31,18 +33,9 @@ import java.util.*
  *显示歌词控件
  */
 
-class LrcView : View {
-
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init(context, attrs)
-    }
-
+class LrcView @JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
+    : View(context, attrs, defStyleAttr, defStyleRes) {
     companion object {
         const val ADJUST_DURATION: Long = 100
         const val TIMELINE_KEEP_TIME = 4 * DateUtils.SECOND_IN_MILLIS
@@ -67,7 +60,7 @@ class LrcView : View {
     private var mLrcPadding: Float = 0.toFloat()
     private var mOnPlayClickListener: OnPlayClickListener? = null
     private var mAnimator: ValueAnimator? = null
-    private var mGestureDetector: GestureDetector? = null
+    private lateinit var mGestureDetector: GestureDetector
     private var mScroller: Scroller? = null
     private var mOffset: Float = 0.toFloat()
     private var mCurrentLine: Int = 0
@@ -76,6 +69,56 @@ class LrcView : View {
     private var isTouching: Boolean = false
     private var isFling: Boolean = false
     private var mTextGravity: Int = 0 // 歌词显示位置，靠左/居中/靠右
+
+    private val mSimpleOnGestureListener = object : GestureDetector.SimpleOnGestureListener() {
+        override fun onDown(e: MotionEvent): Boolean {
+            if (hasLrc() && mOnPlayClickListener != null) {
+                mScroller!!.forceFinished(true)
+                removeCallbacks(hideTimelineRunnable)
+                isTouching = true
+                isShowTimeline = true
+                invalidate()
+                return true
+            }
+            return super.onDown(e)
+        }
+
+        override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
+            if (hasLrc()) {
+                mOffset += -distanceY
+                mOffset = min(mOffset, getOffset(0))
+                mOffset = max(mOffset, getOffset(mLrcEntryList.size - 1))
+                invalidate()
+                return true
+            }
+            return super.onScroll(e1, e2, distanceX, distanceY)
+        }
+
+        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+            if (hasLrc()) {
+                mScroller!!.fling(0, mOffset.toInt(), 0, velocityY.toInt(), 0, 0, getOffset(mLrcEntryList.size - 1).toInt(), getOffset(0).toInt())
+                isFling = true
+                return true
+            }
+            return super.onFling(e1, e2, velocityX, velocityY)
+        }
+
+        override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+            if (hasLrc() && isShowTimeline && mPlayDrawable!!.bounds.contains(e.x.toInt(), e.y.toInt())) {
+                val centerLine = getCenterLine()
+                val centerLineTime = mLrcEntryList[centerLine].time
+                // onPlayClick 消费了才更新 UI
+                if (mOnPlayClickListener != null && mOnPlayClickListener!!.onPlayClick(centerLineTime)) {
+                    isShowTimeline = false
+                    removeCallbacks(hideTimelineRunnable)
+                    mCurrentLine = centerLine
+                    invalidate()
+                    return true
+                }
+            }
+            return super.onSingleTapConfirmed(e)
+        }
+    }
 
     /**
      * 播放按钮点击监听器，点击后应该跳转到指定播放位置
@@ -87,6 +130,10 @@ class LrcView : View {
          * @return 是否成功消费该事件，如果成功消费，则会更新UI
          */
         fun onPlayClick(time: Long): Boolean
+    }
+
+    init {
+        init(context, attrs)
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
@@ -126,7 +173,7 @@ class LrcView : View {
         mTimeFontMetrics = mTimePaint.fontMetrics
 
         mGestureDetector = GestureDetector(context, mSimpleOnGestureListener)
-        mGestureDetector!!.setIsLongpressEnabled(false)
+        mGestureDetector.setIsLongpressEnabled(false)
         mScroller = Scroller(context)
     }
 
@@ -322,57 +369,7 @@ class LrcView : View {
                 postDelayed(hideTimelineRunnable, TIMELINE_KEEP_TIME)
             }
         }
-        return mGestureDetector!!.onTouchEvent(event)
-    }
-
-    private val mSimpleOnGestureListener = object : GestureDetector.SimpleOnGestureListener() {
-        override fun onDown(e: MotionEvent): Boolean {
-            if (hasLrc() && mOnPlayClickListener != null) {
-                mScroller!!.forceFinished(true)
-                removeCallbacks(hideTimelineRunnable)
-                isTouching = true
-                isShowTimeline = true
-                invalidate()
-                return true
-            }
-            return super.onDown(e)
-        }
-
-        override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
-            if (hasLrc()) {
-                mOffset += -distanceY
-                mOffset = Math.min(mOffset, getOffset(0))
-                mOffset = Math.max(mOffset, getOffset(mLrcEntryList.size - 1))
-                invalidate()
-                return true
-            }
-            return super.onScroll(e1, e2, distanceX, distanceY)
-        }
-
-        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
-            if (hasLrc()) {
-                mScroller!!.fling(0, mOffset.toInt(), 0, velocityY.toInt(), 0, 0, getOffset(mLrcEntryList.size - 1).toInt(), getOffset(0).toInt())
-                isFling = true
-                return true
-            }
-            return super.onFling(e1, e2, velocityX, velocityY)
-        }
-
-        override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-            if (hasLrc() && isShowTimeline && mPlayDrawable!!.bounds.contains(e.x.toInt(), e.y.toInt())) {
-                val centerLine = getCenterLine()
-                val centerLineTime = mLrcEntryList.get(centerLine).time
-                // onPlayClick 消费了才更新 UI
-                if (mOnPlayClickListener != null && mOnPlayClickListener!!.onPlayClick(centerLineTime)) {
-                    isShowTimeline = false
-                    removeCallbacks(hideTimelineRunnable)
-                    mCurrentLine = centerLine
-                    invalidate()
-                    return true
-                }
-            }
-            return super.onSingleTapConfirmed(e)
-        }
+        return mGestureDetector.onTouchEvent(event)
     }
 
     private val hideTimelineRunnable = Runnable {

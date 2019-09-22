@@ -88,7 +88,7 @@ open class SongLoader {
 
         fun makeSongCursor(context: Context, selection: String?, paramArrayOfString: Array<String>?): Cursor? {
             var selectionStatement = "is_music=1 AND title != ''"
-            val songSortOrder = SharePreferencesUtils.instance.getSongSortOrder()
+            val songSortOrder = SharePreferencesUtils.getSongSortOrder()
 
             if (!TextUtils.isEmpty(selection)) {
                 selectionStatement = "$selectionStatement AND $selection"

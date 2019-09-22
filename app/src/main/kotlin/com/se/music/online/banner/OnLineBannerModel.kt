@@ -9,7 +9,7 @@ import com.se.music.base.mvp.BaseModel
 import com.se.music.base.mvp.MvpPresenter
 import com.se.music.online.model.HallModel
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.callback.CallLoaderCallbacks
+import com.se.senet.callback.CallLoaderCallbacks
 import retrofit2.Call
 
 /**
@@ -27,7 +27,7 @@ class OnLineBannerModel(presenter: MvpPresenter, modelId: Int) : BaseModel<HallM
     private fun buildHallCallBack(): CallLoaderCallbacks<HallModel> {
         return object : CallLoaderCallbacks<HallModel>(getContext()!!) {
             override fun onCreateCall(id: Int, args: Bundle?): Call<HallModel> {
-                return MusicRetrofit.instance.getMusicHall()
+                return MusicRetrofit.INSTANCE.getMusicHall()
             }
 
             override fun onSuccess(loader: Loader<*>, data: HallModel) {

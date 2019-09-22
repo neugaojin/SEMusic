@@ -1,4 +1,4 @@
-package com.se.music.retrofit.base
+package com.se.senet.base
 
 import com.google.gson.Gson
 import com.google.gson.internal.`$Gson$Types`
@@ -12,7 +12,7 @@ import java.io.StringReader
  *Time: 2018/6/12 上午11:50
  */
 
-class SeGsonResponseBodyConverter(private val gson: Gson, dataTypeToken: TypeToken<*>, list: List<ConvertIntercepter>) : Converter<ResponseBody, Any> {
+class GsonResponseBodyConverter(private val gson: Gson, dataTypeToken: TypeToken<*>, list: List<ConvertIntercepter>) : Converter<ResponseBody, Any> {
 
     private val mDataTypeToken: TypeToken<*> = dataTypeToken
     private val mConvertIntercepters: List<ConvertIntercepter> = list
