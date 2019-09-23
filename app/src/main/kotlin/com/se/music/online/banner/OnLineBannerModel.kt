@@ -9,6 +9,7 @@ import com.se.music.base.mvp.BaseModel
 import com.se.music.base.mvp.MvpPresenter
 import com.se.music.online.model.HallModel
 import com.se.music.retrofit.MusicRetrofit
+import com.se.music.utils.logger
 import com.se.senet.callback.CallLoaderCallbacks
 import retrofit2.Call
 

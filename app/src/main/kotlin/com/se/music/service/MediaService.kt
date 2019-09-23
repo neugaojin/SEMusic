@@ -215,9 +215,6 @@ class MediaService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         mServiceStartId = startId
-        if (intent != null) {
-            val action = intent.action
-        }
         return START_STICKY
     }
 
@@ -404,7 +401,7 @@ class MediaService : Service() {
                 pos = getNextPosition()
             }
             if (pos < 0) {
-                setIsPlaying(false, false)
+                setIsPlaying(value = false, notify = false)
                 return
             }
             stop(false)
@@ -495,7 +492,7 @@ class MediaService : Service() {
         synchronized(this) {
             mPlayerHandler.removeMessages(FADE_UP)
             mPlayer.pause()
-            setIsPlaying(false, true)
+            setIsPlaying(value = false, notify = true)
             notifyChange(META_CHANGED)
         }
     }
@@ -616,7 +613,7 @@ class MediaService : Service() {
         mPlayer.start()
         mPlayerHandler.removeMessages(FADE_DOWN)
         mPlayerHandler.sendEmptyMessage(FADE_UP)
-        setIsPlaying(true, true)
+        setIsPlaying(value = true, notify = true)
         updateNotification()
         notifyChange(META_CHANGED)
     }
@@ -728,7 +725,7 @@ class MediaService : Service() {
 
     private fun getMusicEntity(): MusicEntity? {
         var entity: MusicEntity? = null
-        if (mPlayPos in 0..(mPlaylist.size - 1)) {
+        if (mPlayPos in 0 until mPlaylist.size) {
             entity = mPlayListInfo[getAudioId()]
         }
         return entity
@@ -746,7 +743,7 @@ class MediaService : Service() {
             val intent = Intent(what)
             intent.putExtra("position", position())
             intent.putExtra("duration", duration())
-            sendStickyBroadcast(intent)
+            sendBroadcast(intent)
             return
         }
         if (what == POSITION_CHANGED) {
@@ -760,10 +757,10 @@ class MediaService : Service() {
         intent.putExtra("playing", isPlaying)
         intent.putExtra("albumuri", getAlbumPath())
         intent.putExtra("islocal", isTrackLocal())
-        sendStickyBroadcast(intent)
+        sendBroadcast(intent)
         val musicIntent = Intent(intent)
         musicIntent.action = what.replace(TIMBER_PACKAGE_NAME, MUSIC_PACKAGE_NAME)
-        sendStickyBroadcast(musicIntent)
+        sendBroadcast(musicIntent)
         if (what == META_CHANGED) {
             mRecentStore!!.addSongId(getAudioId())
             currentMusicEntity = getMusicEntity()

@@ -18,6 +18,10 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private lateinit var itemHeader: AutoHeightImageView
     private lateinit var descriptionView: TextView
 
+    init {
+        init()
+    }
+
     fun init() {
         orientation = VERTICAL
         View.inflate(context, R.layout.online_recommend_item_view, this)

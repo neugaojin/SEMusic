@@ -12,7 +12,7 @@ import retrofit2.Call
 abstract class CallLoaderCallbacks<E> constructor(private val context: Context) : LoaderManager.LoaderCallbacks<Try<E>> {
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Try<E>> {
-        return CallLoader(context, onCreateCall(id, args), errorResume(id, args))
+        return CallLoader(context, onCreateCall(id, args))
     }
 
     override fun onLoadFinished(loader: Loader<Try<E>>, data: Try<E>?) {
@@ -24,15 +24,6 @@ abstract class CallLoaderCallbacks<E> constructor(private val context: Context) 
     }
 
     override fun onLoaderReset(loader: Loader<Try<E>>) {
-    }
-
-    /**
-     * 如果请求失败，是否在下次onStartLoading时重试
-     *
-     * @return
-     */
-    private fun errorResume(id: Int, args: Bundle?): Boolean {
-        return true
     }
 
     abstract fun onCreateCall(id: Int, args: Bundle?): Call<E>
