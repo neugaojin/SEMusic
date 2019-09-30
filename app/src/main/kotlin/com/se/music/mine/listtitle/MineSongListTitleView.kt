@@ -12,8 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.loader.content.Loader
 import com.se.music.R
 import com.se.music.activity.CreateSongListActivity
-import com.se.music.base.mvp.BaseView
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.mine.event.CollectEvent
 import com.se.music.mine.event.CreateEvent
 import com.se.senet.callback.CallLoaderCallbacks
@@ -24,10 +22,10 @@ import retrofit2.Call
  * Time: 2018/5/7 下午9:22
  */
 class MineSongListTitleView(
-    presenter: MvpPresenter,
-    viewId: Int,
-    view: View
-) : BaseView(presenter, viewId), View.OnClickListener {
+        presenter: com.se.router.mvp.MvpPresenter,
+        viewId: Int,
+        view: View
+) : com.se.router.mvp.BaseView(presenter, viewId), View.OnClickListener {
 
     private lateinit var titleCreated: TextView
     private lateinit var titleCollected: TextView

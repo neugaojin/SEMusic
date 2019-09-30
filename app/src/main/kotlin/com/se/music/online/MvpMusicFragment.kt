@@ -8,9 +8,6 @@ import androidx.annotation.Keep
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import com.se.music.R
-import com.se.music.base.mvp.BasePresenter
-import com.se.music.base.mvp.MvpPage
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.online.banner.OnLineBannerModel
 import com.se.music.online.banner.OnLineBannerView
 import com.se.music.online.classify.OnLineClassifyView
@@ -30,9 +27,9 @@ import com.se.music.utils.GET_RECOMMEND_LIST
  * Created by gaojin on 2018/2/4.
  * 音乐馆Fragment
  */
-class MvpMusicFragment : Fragment(), MvpPage, NestedScrollView.OnScrollChangeListener {
+class MvpMusicFragment : Fragment(), com.se.router.mvp.MvpPage, NestedScrollView.OnScrollChangeListener {
 
-    private val presenter: MvpPresenter = BasePresenter(this)
+    private val presenter: com.se.router.mvp.MvpPresenter = com.se.router.mvp.BasePresenter(this)
     private val scrollEvent: ScrollEvent = ScrollEvent()
 
     private lateinit var rootView: NestedScrollView

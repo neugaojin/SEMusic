@@ -5,18 +5,15 @@ import android.util.Log
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import com.se.music.base.BaseActivity
-import com.se.music.base.mvp.BaseModel
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.online.model.HallModel
 import com.se.music.retrofit.MusicRetrofit
-import com.se.music.utils.logger
 import com.se.senet.callback.CallLoaderCallbacks
 import retrofit2.Call
 
 /**
  * Created by gaojin on 2018/2/4.
  */
-class OnLineBannerModel(presenter: MvpPresenter, modelId: Int) : BaseModel<HallModel>(presenter, modelId) {
+class OnLineBannerModel(presenter: com.se.router.mvp.MvpPresenter, modelId: Int) : com.se.router.mvp.BaseModel<HallModel>(presenter, modelId) {
 
     override fun load() {
         LoaderManager.getInstance(getActivity() as BaseActivity).initLoader(getId(), null, buildHallCallBack())

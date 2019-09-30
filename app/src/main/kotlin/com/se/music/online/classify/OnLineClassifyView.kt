@@ -3,17 +3,14 @@ package com.se.music.online.classify
 import android.view.LayoutInflater
 import android.view.View
 import com.se.music.R
-import com.se.music.base.mvp.BaseView
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.fragment.MainFragment
-import com.se.music.fragment.OnLineSingerFragment
 import com.se.music.mvvm.OnLineSingerListFragmentV2
 import com.se.music.utils.startFragment
 
 /**
  * Created by gaojin on 2018/3/6.
  */
-class OnLineClassifyView(presenter: MvpPresenter, viewId: Int) : BaseView(presenter, viewId), View.OnClickListener {
+class OnLineClassifyView(presenter: com.se.router.mvp.MvpPresenter, viewId: Int) : com.se.router.mvp.BaseView(presenter, viewId), View.OnClickListener {
 
     init {
         initView()

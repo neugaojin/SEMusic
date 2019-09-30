@@ -5,8 +5,6 @@ import android.util.Log
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import com.se.music.base.BaseActivity
-import com.se.music.base.mvp.BaseModel
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.online.model.RecommendListModel
 import com.se.music.retrofit.MusicRetrofit
 import com.se.senet.callback.CallLoaderCallbacks
@@ -15,7 +13,7 @@ import retrofit2.Call
 /**
  * Created by gaojin on 2018/3/6.
  */
-class OnLineRecommendModel(presenter: MvpPresenter, modelId: Int) : BaseModel<RecommendListModel>(presenter, modelId) {
+class OnLineRecommendModel(presenter: com.se.router.mvp.MvpPresenter, modelId: Int) : com.se.router.mvp.BaseModel<RecommendListModel>(presenter, modelId) {
 
     override fun load() {
         LoaderManager.getInstance(getActivity() as BaseActivity).initLoader(getId(), null, buildRecommendListCallBack())

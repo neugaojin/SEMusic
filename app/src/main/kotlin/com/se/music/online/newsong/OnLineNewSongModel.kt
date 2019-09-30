@@ -5,8 +5,6 @@ import android.util.Log
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import com.se.music.base.BaseActivity
-import com.se.music.base.mvp.BaseModel
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.retrofit.MusicRetrofit
 import com.se.senet.callback.CallLoaderCallbacks
@@ -15,7 +13,7 @@ import retrofit2.Call
 /**
  * Created by gaojin on 2018/3/7.
  */
-class OnLineNewSongModel(presenter: MvpPresenter, modelId: Int) : BaseModel<ExpressInfoModel>(presenter, modelId) {
+class OnLineNewSongModel(presenter: com.se.router.mvp.MvpPresenter, modelId: Int) : com.se.router.mvp.BaseModel<ExpressInfoModel>(presenter, modelId) {
 
     override fun load() {
         LoaderManager.getInstance(getActivity() as BaseActivity).initLoader(getId(), null, buildExpressInfoCallBack())

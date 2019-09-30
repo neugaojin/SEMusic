@@ -6,8 +6,6 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.se.music.base.BaseActivity
-import com.se.music.base.mvp.BaseModel
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.provider.metadata.SONG_LIST_CONTENT_URI
 
 /**
@@ -16,7 +14,7 @@ import com.se.music.provider.metadata.SONG_LIST_CONTENT_URI
  * 查询歌单Model
  */
 
-class QuerySongListModel(presenter: MvpPresenter, private val modelId: Int) : BaseModel<Cursor>(presenter, modelId), LoaderManager.LoaderCallbacks<Cursor> {
+class QuerySongListModel(presenter: com.se.router.mvp.MvpPresenter, private val modelId: Int) : com.se.router.mvp.BaseModel<Cursor>(presenter, modelId), LoaderManager.LoaderCallbacks<Cursor> {
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return CursorLoader(getContext()!!, SONG_LIST_CONTENT_URI, null, null, null, null)

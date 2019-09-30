@@ -12,8 +12,6 @@ import android.widget.Toast
 import androidx.annotation.Keep
 import com.se.music.R
 import com.se.music.base.BaseConfig
-import com.se.music.base.mvp.BaseView
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.fragment.*
 import com.se.music.utils.startFragment
 
@@ -21,7 +19,7 @@ import com.se.music.utils.startFragment
  * Author: gaojin
  * Time: 2018/5/7 下午4:22
  */
-class MineOperationView(presenter: MvpPresenter, viewId: Int, view: View) : BaseView(presenter, viewId), View.OnClickListener {
+class MineOperationView(presenter: com.se.router.mvp.MvpPresenter, viewId: Int, view: View) : com.se.router.mvp.BaseView(presenter, viewId), View.OnClickListener {
 
     private lateinit var rootView: GridLayout
 

@@ -3,7 +3,6 @@ package com.se.music.utils
 import androidx.fragment.app.Fragment
 import com.se.music.R
 import com.se.music.base.BaseActivity
-import com.se.music.base.mvp.MvpPage
 
 /**
  *Author: gaojin
@@ -21,7 +20,7 @@ fun startFragment(current: Fragment, target: Fragment, tag: String) {
     }
 }
 
-fun startFragment(current: MvpPage, target: Fragment, tag: String) {
+fun startFragment(current: com.se.router.mvp.MvpPage, target: Fragment, tag: String) {
     if (current is Fragment) {
         startFragment(current as Fragment, target, tag)
     }

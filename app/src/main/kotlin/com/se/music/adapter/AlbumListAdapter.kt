@@ -55,7 +55,6 @@ class AlbumListAdapter constructor(
         }
 
         override fun onSuccess(loader: Loader<*>, data: Album) {
-
             imageView.setImageResource(R.drawable.default_album_avatar)
             data.image?.run {
                 val imageId = get(0).imgUrl.getImageId()

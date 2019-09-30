@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.activity.CreateSongListActivity
-import com.se.music.base.mvp.BasePresenter
-import com.se.music.base.mvp.MvpPage
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.entity.SongListEntity
 import com.se.music.mine.event.CollectEvent
 import com.se.music.mine.event.CreateEvent
@@ -34,8 +31,8 @@ import com.se.music.utils.parseCursorToSongList
  * Time: 2018/4/22 下午9:35
  * 首页【我的】Tab页面
  */
-class MvpMineFragment : Fragment(), MvpPage {
-    private val presenter: MvpPresenter = BasePresenter(this)
+class MvpMineFragment : Fragment(), com.se.router.mvp.MvpPage {
+    private val presenter: com.se.router.mvp.MvpPresenter = com.se.router.mvp.BasePresenter(this)
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MineAdapter
     private val list = mutableListOf<SongListEntity>()

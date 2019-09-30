@@ -9,8 +9,6 @@ import androidx.annotation.Keep
 import androidx.core.view.ViewCompat
 import com.se.music.R
 import com.se.music.base.BaseActivity
-import com.se.music.base.mvp.BaseView
-import com.se.music.base.mvp.MvpPresenter
 import com.se.music.fragment.SEWebViewFragment
 import com.se.music.online.event.ScrollEvent
 import com.se.music.online.model.HallModel
@@ -22,7 +20,7 @@ import com.youth.banner.listener.OnBannerListener
  * Created by gaojin on 2018/2/4.
  * Banner模块
  */
-class OnLineBannerView(presenter: MvpPresenter, viewId: Int) : BaseView(presenter, viewId), OnBannerListener {
+class OnLineBannerView(presenter: com.se.router.mvp.MvpPresenter, viewId: Int) : com.se.router.mvp.BaseView(presenter, viewId), OnBannerListener {
 
     private lateinit var banner: Banner
     private lateinit var container: FrameLayout

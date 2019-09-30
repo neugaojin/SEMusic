@@ -76,11 +76,11 @@ dependencies {
 
     implementation(project(":senet"))
     implementation(project(":service"))
+    implementation(project(":router"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", kotlinVersion))
     implementation(kotlin("reflect", kotlinVersion))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1")
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("com.google.android.material:material:1.1.0-alpha10")
     implementation("androidx.core:core-ktx:1.1.0")
