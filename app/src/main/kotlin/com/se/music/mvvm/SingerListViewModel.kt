@@ -7,7 +7,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.loader.content.Loader
 import com.se.music.retrofit.MusicRetrofit
+import com.se.music.retrofit.Repository
 import com.se.senet.callback.CallLoaderCallbacks
+import kotlinx.coroutines.*
 import retrofit2.Call
 
 /**
@@ -19,34 +21,21 @@ class SingerListViewModel(application: Application) : AndroidViewModel(applicati
 
     val mObservableSingers: MediatorLiveData<List<Singer>?> = MediatorLiveData()
 
-    init {
-        mObservableSingers.value = null
-        //TODO 网络请求还得适配
-        buildSingerCallback()
+    private val presenterScope: CoroutineScope by lazy {
+        CoroutineScope(Dispatchers.Main + Job())
     }
 
-    //相当于Model
-    private fun buildSingerCallback(): CallLoaderCallbacks<SingerEntity> {
-        return object : CallLoaderCallbacks<SingerEntity>(getApplication()) {
-            override fun onCreateCall(id: Int, args: Bundle?): Call<SingerEntity> {
-                return MusicRetrofit.INSTANCE.getSinger(100, 1)
-            }
-
-            override fun onSuccess(loader: Loader<*>, data: SingerEntity) {
-                if (data.data?.list?.isEmpty() == false) {
-                    mObservableSingers.value = data.data.list
-                }
-            }
-
-            override fun onFailure(loader: Loader<*>, throwable: Throwable) {
-                Log.e("OnLineSingerFragment", throwable.toString())
+    init {
+        presenterScope.launch {
+            val result = Repository.getSinger()
+            if (result.data?.list?.isEmpty() == false) {
+                mObservableSingers.value = result.data.list
             }
         }
     }
 
     override fun onCleared() {
-        //This method will be called when this ViewModel is no longer used and will be destroyed
-        super.onCleared()
+        presenterScope.cancel()
     }
 
 }

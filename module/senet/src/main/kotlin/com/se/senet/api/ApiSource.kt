@@ -25,7 +25,7 @@ suspend fun <T> Call<T>.await(): T {
 
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 if (response.isSuccessful) {
-                    it.resume<T>(response.body()!!)
+                    it.resume(response.body()!!)
                 } else {
                     it.resumeWithException(Throwable(response.toString()))
                 }

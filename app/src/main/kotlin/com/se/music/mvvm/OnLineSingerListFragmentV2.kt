@@ -1,6 +1,7 @@
 package com.se.music.mvvm
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class OnLineSingerListFragmentV2 : BasePageFragment() {
         val viewModel = ViewModelProviders.of(this).get(SingerListViewModel::class.java)
         viewModel.mObservableSingers.observe(this, Observer {
             if (it != null) {
+                mBinding.isLoading = false
                 mBinding.onlineSinger.adapter = SingerAdapter(it)
             } else {
                 mBinding.isLoading = true
