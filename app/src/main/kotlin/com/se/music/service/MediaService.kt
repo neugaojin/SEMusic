@@ -1136,7 +1136,7 @@ class MediaService : Service() {
         if (mNotification == null) {
             val builder = NotificationCompat.Builder(this, APP_NAME)
                     .setContent(remoteViews)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_launcher)
                     .setContentIntent(mainIntent)
                     .setWhen(mNotificationPostTime)
             mNotification = builder.build()

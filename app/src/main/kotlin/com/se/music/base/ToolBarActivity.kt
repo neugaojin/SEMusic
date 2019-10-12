@@ -6,12 +6,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.se.music.R
 import com.se.music.databinding.FragmentBaseBinding
-import com.se.music.utils.setTransparentForWindow
 
 /**
  * Creator：gaojin
@@ -27,7 +25,6 @@ abstract class ToolBarActivity : AppCompatActivity() {
         val rootView = mBinding.root as LinearLayout
         rootView.addView(createContentView(inflater, rootView))
         setContentView(rootView)
-        setTransparentForWindow(this)
         setSupportActionBar(mBinding.baseToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -37,10 +34,6 @@ abstract class ToolBarActivity : AppCompatActivity() {
 
     override fun setTitle(title: CharSequence) {
         mBinding.toolbarTitle.text = title
-    }
-
-    fun setStatusBarColor(@ColorRes color: Int) {
-        mBinding.fakeStatusBar.setBackgroundResource(color)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

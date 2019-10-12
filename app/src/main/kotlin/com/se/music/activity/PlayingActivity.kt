@@ -1,7 +1,9 @@
 package com.se.music.activity
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -45,6 +47,7 @@ class PlayingActivity : BaseActivity(), ViewPager.OnPageChangeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_music)
+        setTransparentForWindow(this)
         showQuickControl(false)
         toolbarInit()
         initView()
@@ -148,5 +151,14 @@ class PlayingActivity : BaseActivity(), ViewPager.OnPageChangeListener {
         canvas.save()
         canvas.restore()
         return BitmapDrawable(resources, newBitmap)
+    }
+
+    /**
+     * 设置状态栏透明
+     * 5.0以上系统
+     */
+    fun setTransparentForWindow(activity: Activity) {
+        activity.window.statusBarColor = Color.TRANSPARENT
+        activity.window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 }

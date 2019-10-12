@@ -40,14 +40,6 @@ abstract class BasePageFragment : BaseFragment() {
         mBinding.toolbarTitle.text = title
     }
 
-    fun setStatusBarColor(@ColorRes color: Int) {
-        mBinding.fakeStatusBar.setBackgroundResource(color)
-    }
-
-    fun hideStatStatusBar() {
-        mBinding.fakeStatusBar.visibility = View.GONE
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {

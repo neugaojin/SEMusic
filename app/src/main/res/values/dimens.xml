@@ -3,7 +3,6 @@
 
 
     <dimen name="tool_bar_height">42dp</dimen>
-    <dimen name="statusbar_view_height">22dp</dimen>
     <dimen name="bottom_control_bar_height">50dp</dimen>
     <dimen name="online_banner_height">150dp</dimen>
 

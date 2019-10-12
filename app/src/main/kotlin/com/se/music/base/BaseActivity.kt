@@ -12,7 +12,6 @@ import com.se.music.base.listener.MusicStateListener
 import com.se.music.fragment.QuickControlsFragment
 import com.se.music.service.*
 import com.se.music.utils.manager.GlobalPlayTimeManager
-import com.se.music.utils.setTransparentForWindow
 import java.lang.ref.WeakReference
 
 /**
@@ -46,7 +45,6 @@ open class BaseActivity : AppCompatActivity() {
             addAction(MUSIC_COUNT_CHANGED)
         }
         registerReceiver(mPlaybackStatus, intentFilter)
-        setTransparentForWindow(this)
     }
 
     /**
