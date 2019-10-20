@@ -22,9 +22,11 @@ import com.bumptech.glide.request.transition.Transition
 import com.se.music.R
 import com.se.music.adapter.PlayerPagerAdapter
 import com.se.music.base.BaseActivity
+import com.se.music.scene.MainScene
 import com.se.music.service.MusicPlayer
 import com.se.music.utils.blurBitmap
 import com.se.music.utils.getMegaImageUrl
+import com.se.music.utils.setTransparentForWindow
 import com.se.music.view.PlayingBottomView
 import com.se.music.widget.MultiButtonLayout
 import com.se.music.widget.PlayingAlbumPageTransformer
@@ -151,14 +153,5 @@ class PlayingActivity : BaseActivity(), ViewPager.OnPageChangeListener {
         canvas.save()
         canvas.restore()
         return BitmapDrawable(resources, newBitmap)
-    }
-
-    /**
-     * 设置状态栏透明
-     * 5.0以上系统
-     */
-    fun setTransparentForWindow(activity: Activity) {
-        activity.window.statusBarColor = Color.TRANSPARENT
-        activity.window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 }

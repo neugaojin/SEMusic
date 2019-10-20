@@ -47,6 +47,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.se.music.activity.MainActivityV2"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
         <activity android:name="com.se.music.activity.PlayingActivity" />
         <activity android:name="com.se.music.activity.CreateSongListActivity" />
 

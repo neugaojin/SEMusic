@@ -844,12 +844,12 @@ class MediaService : Service() {
         val songNumPlays = IntArray(songNumber)
 
         mHistory.forEach {
-            if (it in 0..(songNumber - 1)) {
+            if (it in 0 until songNumber) {
                 songNumPlays[it] += 1
             }
         }
 
-        if (mPlayPos in 0..(songNumber - 1)) {
+        if (mPlayPos in 0 until songNumber) {
             songNumPlays[mPlayPos] += 1
         }
 

@@ -28,9 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:background="@android:color/holo_blue_bright"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
         <include layout="@layout/main_slide_item_layout" />
     </LinearLayout>

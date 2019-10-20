@@ -73,6 +73,7 @@ android {
 dependencies {
     val kotlinVersion: String by project
     val aacVersion: String by project
+    val sceneVersion: String by project
 
     implementation(project(":senet"))
     implementation(project(":service"))
@@ -94,6 +95,12 @@ dependencies {
     implementation("android.arch.persistence.room:runtime:$aacVersion")
     kapt("android.arch.persistence.room:compiler:$aacVersion")
     //****************  LifeCycle  ****************
+
+    //****************  scene  ****************
+    implementation("com.bytedance.scene:scene:$sceneVersion")
+    implementation("com.bytedance.scene:scene-ui:$sceneVersion")
+    implementation("com.bytedance.scene:scene-shared-element-animation:$sceneVersion")
+    implementation("com.bytedance.scene:scene-ktx:$sceneVersion")
 
     //第三方
     implementation("com.github.bumptech.glide:glide:4.8.0")

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.se.music.R
@@ -26,8 +27,8 @@ open class BaseActivity : AppCompatActivity() {
     private val mMusicListener = mutableListOf<MusicStateListener>()
     private lateinit var mPlaybackStatus: PlaybackStatus
 
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mToken = MusicPlayer.bindToService(this)
         mPlaybackStatus = PlaybackStatus(this)
         val intentFilter = IntentFilter().apply {

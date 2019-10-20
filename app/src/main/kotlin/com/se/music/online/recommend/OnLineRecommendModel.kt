@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
+import com.bytedance.scene.ui.SceneActivity
 import com.se.music.base.BaseActivity
 import com.se.music.online.model.RecommendListModel
 import com.se.music.retrofit.MusicRetrofit
