@@ -11,24 +11,24 @@
         android:descendantFocusability="blocksDescendants"
         android:orientation="vertical">
 
-        <View
+        <FrameLayout
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="150dp" />
 
-        <View
+        <FrameLayout
             android:id="@+id/classify_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/app_base_top_bottom_padding" />
 
-        <View
+        <FrameLayout
             android:id="@+id/online_recommend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/app_base_top_bottom_padding" />
 
-        <View
+        <FrameLayout
             android:id="@+id/online_express"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

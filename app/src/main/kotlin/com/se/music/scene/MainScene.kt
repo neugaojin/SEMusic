@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.bytedance.scene.group.GroupScene
+import com.bytedance.scene.ui.GroupSceneUtility
 import com.se.music.R
-import com.se.music.adapter.MainFragmentAdapter
 import com.se.music.fragment.MainFragment
+import com.se.music.scene.hall.HomeHallScene
+import com.se.music.scene.mine.HomeFindScene
+import com.se.music.scene.mine.HomeMineScene
+import com.se.music.utils.setupWithViewPager
 
 /**
  *Author: gaojin
@@ -24,12 +27,13 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
     private lateinit var musicRoomView: TextView
     private lateinit var findView: TextView
 
-    private lateinit var mViewPager: ViewPager
-    private lateinit var mAdapter: MainFragmentAdapter
+    private lateinit var viewPager: ViewPager
+
+    private val childScene = listOf(HomeMineScene(), HomeHallScene(), HomeFindScene())
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         val rootGroup = inflater.inflate(R.layout.fragment_app_main, container, false) as ViewGroup
-        mViewPager = rootGroup.findViewById(R.id.view_pager)
+        viewPager = rootGroup.findViewById(R.id.view_pager)
         mineView = rootGroup.findViewById(R.id.tool_bar_mine)
         musicRoomView = rootGroup.findViewById(R.id.tool_bar_music_room)
         findView = rootGroup.findViewById(R.id.tool_bar_find)
@@ -37,32 +41,31 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
         mineView.setOnClickListener(this)
         musicRoomView.setOnClickListener(this)
         findView.setOnClickListener(this)
+        viewPager.addOnPageChangeListener(this)
         return rootGroup
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewPager.offscreenPageLimit = 2
-        mAdapter = MainFragmentAdapter((activity as AppCompatActivity).supportFragmentManager)
-        mViewPager.adapter = mAdapter
-        mViewPager.currentItem = 1
+        setupWithViewPager(viewPager, this, childScene)
         setTitleStyle(MainFragment.MUSIC)
-        mViewPager.addOnPageChangeListener(this)
+        viewPager.offscreenPageLimit = 2
+        viewPager.currentItem = 1
     }
 
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tool_bar_mine -> {
-                mViewPager.currentItem = 0
+                viewPager.currentItem = 0
                 setTitleStyle(0)
             }
             R.id.tool_bar_music_room -> {
-                mViewPager.currentItem = 1
+                viewPager.currentItem = 1
                 setTitleStyle(1)
             }
             R.id.tool_bar_find -> {
-                mViewPager.currentItem = 2
+                viewPager.currentItem = 2
                 setTitleStyle(2)
             }
         }

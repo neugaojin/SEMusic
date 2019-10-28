@@ -5,7 +5,4 @@ package com.se.music.online.event
  *Time: 2018/12/17 3:16 PM
  */
 
-class ScrollEvent {
-    var dx = 0f
-    var dy = 0f
-}
+class ScrollEvent(var dx: Float, var dy: Float)

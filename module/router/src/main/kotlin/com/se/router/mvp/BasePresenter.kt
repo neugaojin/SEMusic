@@ -20,15 +20,11 @@ class BasePresenter(private var page: MvpPage) : MvpPresenter {
     private val modelTypeMap = SparseArray<KType>()
 
     init {
-        if (page !is Fragment && page !is Activity) {
-            throw IllegalArgumentException("FoodMvpPage must be implemented by Activity or Fragment")
-        }
+        require(!(page !is Fragment && page !is Activity)) { "FoodMvpPage must be implemented by Activity or Fragment" }
     }
 
     override fun <D : Any> onViewChanged(id: Int, data: D) {
-        if (data::class == Any::class) {
-            throw IllegalArgumentException("Please don't dispatch data whose Class type is Any !!!")
-        }
+        require(data::class != Any::class) { "Please don't dispatch data whose Class type is Any !!!" }
 
         val declaredMemberFunctions = page::class.declaredMemberFunctions
         for (item: KFunction<*> in declaredMemberFunctions) {

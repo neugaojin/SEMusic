@@ -4,7 +4,6 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("com.dorongold.task-tree") version "1.4"
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC16")
 }
 
 android {
@@ -113,10 +112,4 @@ dependencies {
 
 androidExtensions {
     isExperimental = true
-}
-
-detekt {
-    toolVersion = "1.0.0-RC16"
-    config = files("${rootProject.projectDir}/config.yml")
-    input = files("src/main/kotlin")
 }

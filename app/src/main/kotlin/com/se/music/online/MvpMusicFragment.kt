@@ -22,15 +22,19 @@ import com.se.music.online.recommend.OnLineRecommendView
 import com.se.music.utils.GET_EXPRESS_SONG
 import com.se.music.utils.GET_MUSIC_HALL
 import com.se.music.utils.GET_RECOMMEND_LIST
+import com.se.router.mvp.BasePresenter
+import com.se.router.mvp.MvpPage
+import com.se.router.mvp.MvpPresenter
 
 /**
  * Created by gaojin on 2018/2/4.
  * 音乐馆Fragment
  */
-class MvpMusicFragment : Fragment(), com.se.router.mvp.MvpPage, NestedScrollView.OnScrollChangeListener {
+class MvpMusicFragment : Fragment(), MvpPage, NestedScrollView.OnScrollChangeListener {
+    override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
+    }
 
-    private val presenter: com.se.router.mvp.MvpPresenter = com.se.router.mvp.BasePresenter(this)
-    private val scrollEvent: ScrollEvent = ScrollEvent()
+    private val presenter: MvpPresenter = BasePresenter(this)
 
     private lateinit var rootView: NestedScrollView
 
@@ -64,11 +68,6 @@ class MvpMusicFragment : Fragment(), com.se.router.mvp.MvpPage, NestedScrollView
 
     private fun loadData() {
         presenter.start(GET_MUSIC_HALL, GET_RECOMMEND_LIST, GET_EXPRESS_SONG)
-    }
-
-    override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
-        scrollEvent.dy = scrollY.toFloat()
-        presenter.dispatchViewDataToView(0, scrollEvent, R.id.banner)
     }
 
     @Keep

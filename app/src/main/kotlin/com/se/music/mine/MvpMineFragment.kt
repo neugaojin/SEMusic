@@ -25,14 +25,17 @@ import com.se.music.provider.metadata.START_FROM_LOCAL
 import com.se.music.utils.QUERY_LOCAL_SONG
 import com.se.music.utils.QUERY_SONG_LIST
 import com.se.music.utils.parseCursorToSongList
+import com.se.router.mvp.BasePresenter
+import com.se.router.mvp.MvpPage
+import com.se.router.mvp.MvpPresenter
 
 /**
  * Author: gaojin
  * Time: 2018/4/22 下午9:35
  * 首页【我的】Tab页面
  */
-class MvpMineFragment : Fragment(), com.se.router.mvp.MvpPage {
-    private val presenter: com.se.router.mvp.MvpPresenter = com.se.router.mvp.BasePresenter(this)
+class MvpMineFragment : Fragment(), MvpPage {
+    private val presenter: MvpPresenter = BasePresenter(this)
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MineAdapter
     private val list = mutableListOf<SongListEntity>()

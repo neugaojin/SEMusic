@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bytedance.scene.group.GroupScene
 import com.se.music.R
+import com.se.music.scene.hall.HomeHallScene
 
 /**
  *Author: gaojin
@@ -12,6 +13,7 @@ import com.se.music.R
  */
 
 class RootScene : GroupScene() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         return inflater.inflate(R.layout.activity_main, container, false) as ViewGroup
     }

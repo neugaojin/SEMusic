@@ -88,34 +88,6 @@ class MineOperationView(presenter: com.se.router.mvp.MvpPresenter, viewId: Int, 
         }
     }
 
-    fun test(a: Int): String {
-        return when (a) {
-            1 -> {
-                "1"
-            }
-            2 -> {
-                "2"
-            }
-            3 -> {
-                "3"
-            }
-            4 -> {
-                "4"
-            }
-            else -> {
-                "5"
-            }
-        }
-    }
-
-    fun foo(i: Int): String {
-        when (i) {
-            1 -> return "one"
-            2 -> return "two"
-            else -> return "other"
-        }
-    }
-
     private fun localMusic() {
         startFragment(getPage(), LocalMusicContainerFragment.newInstance(0), preFragmentTag)
     }

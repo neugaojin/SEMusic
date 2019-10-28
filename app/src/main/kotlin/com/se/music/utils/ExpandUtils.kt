@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import com.bytedance.scene.Scene
 import com.se.music.GlideApp
 
 /**

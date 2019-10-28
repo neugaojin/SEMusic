@@ -31,8 +31,7 @@ class OnLineBannerView(presenter: com.se.router.mvp.MvpPresenter, viewId: Int) :
     @SuppressLint("InflateParams")
     override fun createView(): View {
         banner = Banner(getContext())
-        height = getContext()?.resources?.getDimensionPixelOffset(R.dimen.online_banner_height)
-                ?: 0
+        height = getContext()?.resources?.getDimensionPixelOffset(R.dimen.online_banner_height) ?: 0
         val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
         banner.layoutParams = params
 
@@ -53,7 +52,7 @@ class OnLineBannerView(presenter: com.se.router.mvp.MvpPresenter, viewId: Int) :
     fun onDataChanged(event: ScrollEvent) {
         if (event.dy < height) {
             val radio = (1 - event.dy / (height - 20))
-            container.translationY = event.dy / 2
+            container.translationY = (event.dy / 2)
             banner.alpha = radio
         }
     }
