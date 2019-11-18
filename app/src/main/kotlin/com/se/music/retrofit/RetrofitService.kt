@@ -5,6 +5,7 @@ import com.se.music.mvvm.SingerEntity
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.online.model.HallModel
 import com.se.music.online.model.RecommendListModel
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -18,6 +19,12 @@ interface RetrofitService {
     interface QQ {
         @GET("musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg")
         fun getMusicHallService(): Call<HallModel>
+
+        @GET("musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg")
+        fun getMusicHallServiceV1(): Observable<HallModel>
+
+        @GET("musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg")
+        fun getMusicHallServiceV2(): Observable<HallModel>
 
         @GET("cgi-bin/musicu.fcg")
         fun getRecommendList(@Query("data") data: String): Call<RecommendListModel>

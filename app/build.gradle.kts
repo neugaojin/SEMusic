@@ -4,6 +4,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("com.dorongold.task-tree") version "1.4"
+//    id("viti")
 }
 
 android {
@@ -89,6 +90,7 @@ dependencies {
     //For Lifecycles, LiveData, and ViewModel
     implementation("android.arch.lifecycle:runtime:$aacVersion")
     implementation("android.arch.lifecycle:extensions:$aacVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-beta01")
     kapt("android.arch.lifecycle:compiler:$aacVersion")
     //For Room
     implementation("android.arch.persistence.room:runtime:$aacVersion")

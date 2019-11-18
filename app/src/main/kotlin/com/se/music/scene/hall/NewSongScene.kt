@@ -27,8 +27,13 @@ class NewSongScene : Scene() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = initViewModel()
-        viewModel.expressInfo.observe(this, Observer {
-            expressView.dataChanged(it)
+        viewModel.expressInfo.observe(this, Observer { data ->
+            if (data != null) {
+                view.visibility = View.VISIBLE
+                expressView.dataChanged(data)
+            } else {
+                view.visibility = View.GONE
+            }
         })
     }
 }

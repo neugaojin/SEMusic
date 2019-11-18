@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.bytedance.scene.group.GroupScene
-import com.bytedance.scene.ui.GroupSceneUtility
 import com.se.music.R
 import com.se.music.fragment.MainFragment
 import com.se.music.scene.hall.HomeHallScene

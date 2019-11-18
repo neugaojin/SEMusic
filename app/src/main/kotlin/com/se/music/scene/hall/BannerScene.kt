@@ -1,7 +1,9 @@
 package com.se.music.scene.hall
 
 import android.graphics.Color
+import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,7 @@ import com.se.music.scene.extend.initViewModel
 import com.se.music.utils.manager.GlideImageLoader
 import com.youth.banner.Banner
 import com.youth.banner.listener.OnBannerListener
+import kotlinx.coroutines.delay
 
 /**
  *Author: gaojin
@@ -55,10 +58,14 @@ class BannerScene : Scene(), OnBannerListener {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = initViewModel()
-
         viewModel.hall.observe(this, Observer { data ->
-            data.data?.slider?.forEach { slider -> slider.picUrl?.let { image -> images.add(image) } }
-            banner.update(images)
+            if (data != null) {
+                view.visibility = View.VISIBLE
+                data.data?.slider?.forEach { slider -> slider.picUrl?.let { image -> images.add(image) } }
+                banner.update(images)
+            } else {
+                view.visibility = View.GONE
+            }
         })
         viewModel.scrollEvent.observe(this, Observer { event ->
             if (event.dy < height) {

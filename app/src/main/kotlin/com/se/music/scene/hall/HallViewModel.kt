@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.se.music.online.event.ScrollEvent
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.online.model.HallModel
@@ -19,20 +20,16 @@ import kotlin.system.measureTimeMillis
 
 class HallViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val presenterScope: CoroutineScope by lazy {
-        CoroutineScope(Dispatchers.Main + Job())
+    val hall: MutableLiveData<HallModel?> by lazy {
+        MutableLiveData<HallModel?>()
     }
 
-    val hall: MutableLiveData<HallModel> by lazy {
-        MutableLiveData<HallModel>()
+    val recommendList: MutableLiveData<RecommendListModel?> by lazy {
+        MutableLiveData<RecommendListModel?>()
     }
 
-    val recommendList: MutableLiveData<RecommendListModel> by lazy {
-        MutableLiveData<RecommendListModel>()
-    }
-
-    val expressInfo: MutableLiveData<ExpressInfoModel> by lazy {
-        MutableLiveData<ExpressInfoModel>()
+    val expressInfo: MutableLiveData<ExpressInfoModel?> by lazy {
+        MutableLiveData<ExpressInfoModel?>()
     }
 
     val scrollEvent: MutableLiveData<ScrollEvent> by lazy {
@@ -40,21 +37,16 @@ class HallViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     init {
-        presenterScope.launch {
+        viewModelScope.launch {
             val time = measureTimeMillis {
                 val hallResult = async { Repository.getMusicHall() }
                 val recommendListResult = async { Repository.getRecommendList() }
                 val expressInfoResult = async { Repository.getNewSongInfo() }
-
                 hall.value = hallResult.await()
                 recommendList.value = recommendListResult.await()
                 expressInfo.value = expressInfoResult.await()
             }
             Log.e("HallViewModel", "$time")
         }
-    }
-
-    override fun onCleared() {
-        presenterScope.cancel()
     }
 }

@@ -27,8 +27,13 @@ class RecommendScene : Scene() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = initViewModel()
-        viewModel.recommendList.observe(this, Observer {
-            recommendView.dataChanged(it)
+        viewModel.recommendList.observe(this, Observer { data ->
+            if (data != null) {
+                view.visibility = View.VISIBLE
+                recommendView.dataChanged(data)
+            } else {
+                view.visibility = View.GONE
+            }
         })
     }
 }

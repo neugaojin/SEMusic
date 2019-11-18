@@ -3,12 +3,10 @@ package com.se.music.activity
 import android.os.Bundle
 import android.os.RemoteException
 import android.view.KeyEvent
-import android.view.View
 import android.widget.Toast
 import com.bytedance.scene.NavigationSceneUtility
 import com.se.music.base.BaseActivity
 import com.se.music.base.TOAST_SHOW_DURATION
-import com.se.music.scene.MainScene
 import com.se.music.scene.RootScene
 import com.se.music.utils.setTransparentForWindow
 

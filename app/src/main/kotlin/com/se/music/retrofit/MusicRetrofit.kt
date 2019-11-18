@@ -8,6 +8,7 @@ import com.se.music.online.model.RecommendListModel
 import com.se.music.online.params.CommonPostParams
 import com.se.music.online.params.ExpressPostParams
 import com.se.senet.base.GsonFactory
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.Retrofit
 
@@ -28,6 +29,7 @@ class MusicRetrofit private constructor() {
     // QQ音乐
     private val baseCRetrofit: Retrofit = QQRetrofitFactory.getInstance(API_BASE_C_URL)
     private val baseURetrofit: Retrofit = QQRetrofitFactory.getInstance(API_BASE_U_URL)
+    private val rxRetrofit: Retrofit = RxRetrofitFactory.getInstance(API_BASE_C_URL)
 
     // lastFm
     private val baseLastFmRetrofit: Retrofit = LastFmRetrofitFactory.getInstance(API_LAST_FM_URL)
@@ -37,6 +39,14 @@ class MusicRetrofit private constructor() {
 
     fun getMusicHall(): Call<HallModel> {
         return baseCRetrofit.create(RetrofitService.QQ::class.java).getMusicHallService()
+    }
+
+    fun getMusicHallV1(): Observable<HallModel> {
+        return rxRetrofit.create(RetrofitService.QQ::class.java).getMusicHallServiceV1()
+    }
+
+    fun getMusicHallV2(): Observable<HallModel> {
+        return rxRetrofit.create(RetrofitService.QQ::class.java).getMusicHallServiceV2()
     }
 
     fun getRecommendList(): Call<RecommendListModel> {

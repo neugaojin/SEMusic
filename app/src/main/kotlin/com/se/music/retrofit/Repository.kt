@@ -22,21 +22,36 @@ object Repository {
         }
     }
 
-    suspend fun getMusicHall(): HallModel {
+    suspend fun getMusicHall(): HallModel? {
         return withContext(Dispatchers.Main) {
-            MusicRetrofit.INSTANCE.getMusicHall().await()
+            try {
+                MusicRetrofit.INSTANCE.getMusicHall().await()
+            } catch (e: Throwable) {
+                e.printStackTrace()
+                null
+            }
         }
     }
 
-    suspend fun getRecommendList(): RecommendListModel {
+    suspend fun getRecommendList(): RecommendListModel? {
         return withContext(Dispatchers.Main) {
-            MusicRetrofit.INSTANCE.getRecommendList().await()
+            try {
+                MusicRetrofit.INSTANCE.getRecommendList().await()
+            } catch (e: Throwable) {
+                e.printStackTrace()
+                null
+            }
         }
     }
 
-    suspend fun getNewSongInfo(): ExpressInfoModel {
+    suspend fun getNewSongInfo(): ExpressInfoModel? {
         return withContext(Dispatchers.Main) {
-            MusicRetrofit.INSTANCE.getNewSongInfo().await()
+            try {
+                MusicRetrofit.INSTANCE.getNewSongInfo().await()
+            } catch (e: Throwable) {
+                e.printStackTrace()
+                null
+            }
         }
     }
 }
