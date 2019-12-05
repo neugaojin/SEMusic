@@ -14,12 +14,12 @@ import com.se.music.utils.SONG_A_Z
  */
 object SharePreferencesUtils {
 
-    const val ARTIST_SORT_ORDER = "artist_sort_order"
-    const val SONG_SORT_ORDER = "song_sort_order"
-    const val ALBUM_SORT_ORDER = "album_sort_order"
-    const val DOWNMUSIC_BIT = "DOWNMUSIC_BIT"
+    private const val ARTIST_SORT_ORDER = "artist_sort_order"
+    private const val SONG_SORT_ORDER = "song_sort_order"
+    private const val ALBUM_SORT_ORDER = "album_sort_order"
+    private const val DOWN_MUSIC_BIT = "DOWN_MUSIC_BIT"
 
-    private const val SHARE_PREFERENCE_NAME = "past_music_share_preference"
+    private const val SHARE_PREFERENCE_NAME = "se_music_share_preference"
 
     private val mPreferences: SharedPreferences = ApplicationSingleton.instance.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE)
 
@@ -46,6 +46,6 @@ object SharePreferencesUtils {
     }
 
     fun getDownMusicBit(): Int {
-        return mPreferences.getInt(DOWNMUSIC_BIT, 192)
+        return mPreferences.getInt(DOWN_MUSIC_BIT, 192)
     }
 }

@@ -6,8 +6,8 @@ import com.se.music.entity.AlbumEntity
 import com.se.music.entity.ArtistEntity
 import com.se.music.entity.MusicEntity
 import com.se.music.entity.SongListEntity
-import com.se.music.provider.database.provider.ImageStore
-import com.se.music.provider.metadata.*
+import com.se.music.database.database.provider.ImageStore
+import com.se.music.database.metadata.*
 
 /**
  *Author: gaojin

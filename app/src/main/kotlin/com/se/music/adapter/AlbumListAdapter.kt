@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.entity.Album
 import com.se.music.entity.AlbumEntity
-import com.se.music.provider.database.provider.ImageStore
+import com.se.music.database.database.provider.ImageStore
 import com.se.music.retrofit.MusicRetrofit
 import com.se.senet.callback.CallLoaderCallbacks
 import com.se.music.utils.*

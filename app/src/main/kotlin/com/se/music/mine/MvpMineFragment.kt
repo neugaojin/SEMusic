@@ -21,7 +21,7 @@ import com.se.music.mine.model.QuerySongListModel
 import com.se.music.mine.operation.MineOperationView
 import com.se.music.mine.personal.MinePersonalInfoView
 import com.se.music.mine.root.MineAdapter
-import com.se.music.provider.metadata.START_FROM_LOCAL
+import com.se.music.database.metadata.START_FROM_LOCAL
 import com.se.music.utils.QUERY_LOCAL_SONG
 import com.se.music.utils.QUERY_SONG_LIST
 import com.se.music.utils.parseCursorToSongList

@@ -14,9 +14,9 @@ import com.se.music.R
 import com.se.music.adapter.AlbumListAdapter
 import com.se.music.base.BaseFragment
 import com.se.music.entity.AlbumEntity
-import com.se.music.provider.metadata.albumSelection
-import com.se.music.provider.metadata.info_album
-import com.se.music.provider.metadata.localAlbumUri
+import com.se.music.database.metadata.albumSelection
+import com.se.music.database.metadata.info_album
+import com.se.music.database.metadata.localAlbumUri
 import com.se.music.utils.QUERY_LOCAL_ALBUM
 import com.se.music.utils.parseCursorToAlbumEntityList
 

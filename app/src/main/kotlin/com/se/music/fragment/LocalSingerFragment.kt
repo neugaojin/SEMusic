@@ -14,9 +14,9 @@ import com.se.music.R
 import com.se.music.adapter.SingerListAdapter
 import com.se.music.base.BaseFragment
 import com.se.music.entity.ArtistEntity
-import com.se.music.provider.metadata.info_artist
-import com.se.music.provider.metadata.localSingerUri
-import com.se.music.provider.metadata.singerSelection
+import com.se.music.database.metadata.info_artist
+import com.se.music.database.metadata.localSingerUri
+import com.se.music.database.metadata.singerSelection
 import com.se.music.utils.QUERY_LOCAL_SINGER
 import com.se.music.utils.parseCursorToArtistEntityList
 

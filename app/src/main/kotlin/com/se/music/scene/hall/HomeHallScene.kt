@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
+import com.bytedance.scene.group.ScenePlaceHolderView
 import com.se.music.R
 import com.se.music.online.event.ScrollEvent
-import com.se.music.scene.extend.add
 import com.se.music.scene.extend.initViewModel
 import com.se.music.scene.fixed.UserVisibleHintGroupScene
 
@@ -30,6 +30,26 @@ class HomeHallScene : UserVisibleHintGroupScene(), NestedScrollView.OnScrollChan
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = initViewModel()
+//
+//        requireViewById<ScenePlaceHolderView>(R.id.banner).apply {
+//            sceneName = BannerScene::class.java.name
+//            sceneTag = BannerScene::class.java.simpleName
+//        }
+//
+//        requireViewById<ScenePlaceHolderView>(R.id.classify_view).apply {
+//            sceneName = COTScene::class.java.name
+//            sceneTag = COTScene::class.java.simpleName
+//        }
+//
+//        requireViewById<ScenePlaceHolderView>(R.id.online_recommend).apply {
+//            sceneName = RecommendScene::class.java.name
+//            sceneTag = RecommendScene::class.java.simpleName
+//        }
+//
+//        requireViewById<ScenePlaceHolderView>(R.id.online_express).apply {
+//            sceneName = RecommendScene::class.java.name
+//            sceneTag = RecommendScene::class.java.simpleName
+//        }
     }
 
     override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {

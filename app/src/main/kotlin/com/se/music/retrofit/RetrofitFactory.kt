@@ -19,7 +19,7 @@ object LastFmRetrofitFactory {
     fun getInstance(baseUrl: String): Retrofit {
         return Retrofit.Builder().run {
             baseUrl(baseUrl)
-            addConverterFactory(com.se.senet.base.GsonConverterFactory.create()
+            addConverterFactory(GsonConverterFactory.create()
                     .addConvertIntercepter(ConverterDataInterceptor())) // 设置数据解析器
             client(okHttpClient)
             build()

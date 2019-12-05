@@ -38,7 +38,6 @@ class HomeFindScene : UserVisibleHintGroupScene() {
         apiList.add(MusicRetrofit.INSTANCE.getMusicHallV1().subscribeOn(Schedulers.io()))
 
         val hallModelList = mutableListOf<HallModel>()
-        Log.e("gaojin", "start------------------>")
         Observable.zip(apiList) { response ->
             Log.e("gaojin", Thread.currentThread().name)
             response.forEach {
@@ -61,6 +60,4 @@ class HomeFindScene : UserVisibleHintGroupScene() {
                     Log.e("gaojin", "onComplete")
                 })
     }
-
-
 }

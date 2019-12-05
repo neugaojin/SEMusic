@@ -41,19 +41,6 @@ class MineSongListTitleView(
 
     init {
         initView(view)
-        val value = object : CallLoaderCallbacks<String>(getContext()!!) {
-            override fun onCreateCall(id: Int, args: Bundle?): Call<String> {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onSuccess(loader: Loader<*>, data: String) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onFailure(loader: Loader<*>, throwable: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        }
     }
 
     @SuppressLint("InflateParams")

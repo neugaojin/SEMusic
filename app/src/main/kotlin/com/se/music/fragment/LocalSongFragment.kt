@@ -14,9 +14,9 @@ import com.se.music.R
 import com.se.music.adapter.MusicListAdapter
 import com.se.music.base.BaseFragment
 import com.se.music.entity.MusicEntity
-import com.se.music.provider.metadata.infoMusic
-import com.se.music.provider.metadata.localMusicUri
-import com.se.music.provider.metadata.songSelection
+import com.se.music.database.metadata.infoMusic
+import com.se.music.database.metadata.localMusicUri
+import com.se.music.database.metadata.songSelection
 import com.se.music.singleton.SharePreferencesUtils
 import com.se.music.utils.QUERY_LOCAL_SONG
 import com.se.music.utils.parseCursorToMusicEntityList

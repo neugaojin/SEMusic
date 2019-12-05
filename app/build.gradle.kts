@@ -19,6 +19,8 @@ android {
         versionName = "1.0"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
+
+        buildConfigField("String", "commitId", "\"123\"")
     }
 
     dataBinding.isEnabled = true
@@ -32,6 +34,7 @@ android {
             ndk {
                 abiFilters("armeabi-v7a")
             }
+            buildConfigField("String", "type", "\"release\"")
         }
 
         getByName("debug") {
@@ -40,6 +43,7 @@ android {
             ndk {
                 abiFilters("armeabi-v7a", "arm64-v8a", "x86")
             }
+            buildConfigField("String", "type", "\"debug\"")
         }
     }
 

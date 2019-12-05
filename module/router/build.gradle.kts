@@ -30,6 +30,7 @@ android {
 
 dependencies {
     val kotlinVersion: String by project
+    implementation(project(":sebase"))
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
     implementation(kotlin("reflect", kotlinVersion))

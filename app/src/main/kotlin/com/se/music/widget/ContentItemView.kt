@@ -14,7 +14,9 @@ import com.se.music.R
  */
 
 class ContentItemView @JvmOverloads
-constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : LinearLayout(context, attrs, defStyleAttr) {
+
     var headImg: ImageView
     var title: TextView
     var subTitle: TextView

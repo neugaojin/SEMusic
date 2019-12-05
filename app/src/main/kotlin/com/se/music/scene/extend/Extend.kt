@@ -1,5 +1,6 @@
 package com.se.music.scene.extend
 
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.NonNull
 import androidx.fragment.app.FragmentActivity

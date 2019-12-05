@@ -7,7 +7,7 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.se.music.base.BaseActivity
-import com.se.music.provider.metadata.*
+import com.se.music.database.metadata.*
 import com.se.music.singleton.SharePreferencesUtils
 
 /**
@@ -23,18 +23,18 @@ class QueryLocalSongModel(presenter: com.se.router.mvp.MvpPresenter, private var
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return when (from) {
             START_FROM_LOCAL -> {
-                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getSongSortOrder())
+                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection, null, SharePreferencesUtils.getSongSortOrder())
             }
             START_FROM_ARTIST -> {
-                songSelection.append(" and " + MediaStore.Audio.Media.ARTIST_ID + " = " + id)
-                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getArtistSortOrder())
+                val songSelectionAppend = "$songSelection and ${MediaStore.Audio.Media.ARTIST_ID} = $id"
+                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelectionAppend, null, SharePreferencesUtils.getArtistSortOrder())
             }
             START_FROM_ALBUM -> {
-                songSelection.append(" and " + MediaStore.Audio.Media.ALBUM_ID + " = " + id)
-                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getAlbumSortOrder())
+                val songSelectionAppend = "$songSelection and ${MediaStore.Audio.Media.ALBUM_ID} = $id"
+                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelectionAppend, null, SharePreferencesUtils.getAlbumSortOrder())
             }
             else -> {
-                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection.toString(), null, SharePreferencesUtils.getSongSortOrder())
+                CursorLoader(getContext()!!, localMusicUri, infoMusic, songSelection, null, SharePreferencesUtils.getSongSortOrder())
             }
         }
     }
