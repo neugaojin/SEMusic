@@ -82,6 +82,7 @@ dependencies {
     implementation(project(":senet"))
     implementation(project(":service"))
     implementation(project(":router"))
+    implementation(project(":sebase"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", kotlinVersion))

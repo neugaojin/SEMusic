@@ -1,7 +1,6 @@
 package com.se.senet.api
 
-import android.util.Log
-import kotlinx.coroutines.delay
+import com.se.music.base.log.Loger
 import kotlinx.coroutines.suspendCancellableCoroutine
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,6 +18,10 @@ suspend fun <T> Call<T>.await(): T {
         it.invokeOnCancellation {
             it?.printStackTrace()
             cancel()
+        }
+        Loger.e("ApiSource") {
+            this.request().url().host() +
+                    this.request().url().encodedPath()
         }
         enqueue(object : Callback<T> {
             override fun onFailure(call: Call<T>, t: Throwable) {

@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.se.music.base.log.Loger
+import com.se.music.init.GlobalFirstData
 import com.se.music.online.event.ScrollEvent
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.online.model.HallModel
@@ -38,15 +40,38 @@ class HallViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            val time = measureTimeMillis {
-                val hallResult = async { Repository.getMusicHall() }
-                val recommendListResult = async { Repository.getRecommendList() }
-                val expressInfoResult = async { Repository.getNewSongInfo() }
-                hall.value = hallResult.await()
-                recommendList.value = recommendListResult.await()
-                expressInfo.value = expressInfoResult.await()
+            getFirstData()
+            Loger.e("HallViewModel") { "notification" }
+        }
+    }
+
+    private suspend fun getFirstData() {
+        return withContext(Dispatchers.Main) {
+            val hallResult = async { Repository.getMusicHall() }
+            val recommendListResult = async { Repository.getRecommendList() }
+            val expressInfoResult = async { Repository.getNewSongInfo() }
+
+            val result1 = if (GlobalFirstData.ghHall == null) {
+                hallResult.await()
+            } else {
+                GlobalFirstData.ghHall
             }
-            Log.e("HallViewModel", "$time")
+            hall.value = result1
+
+
+            val result2 = if (GlobalFirstData.gfRecommendData == null) {
+                recommendListResult.await()
+            } else {
+                GlobalFirstData.gfRecommendData
+            }
+            recommendList.value = result2
+
+            val result3 = if (GlobalFirstData.gfExpressInfo == null) {
+                expressInfoResult.await()
+            } else {
+                GlobalFirstData.gfExpressInfo
+            }
+            expressInfo.value = result3
         }
     }
 }

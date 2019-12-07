@@ -1,16 +1,14 @@
-package com.se.music.activity
+package com.se.music.init
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.RemoteException
 import android.view.KeyEvent
 import android.widget.Toast
-import com.bytedance.scene.Scene
 import com.se.music.R
 import com.se.music.base.BaseActivity
 import com.se.music.base.TOAST_SHOW_DURATION
 import com.se.music.fragment.MainFragment
-import com.se.music.scene.MainScene
 
 class MainActivity : BaseActivity() {
     private var boo: Long = 0

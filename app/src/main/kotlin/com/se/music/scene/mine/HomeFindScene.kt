@@ -26,38 +26,6 @@ class HomeFindScene : UserVisibleHintGroupScene() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<View>(R.id.text_view).setOnClickListener {
-            test()
         }
-    }
-
-    private fun test() {
-        val apiList = mutableListOf<Observable<HallModel>>()
-        apiList.add(MusicRetrofit.INSTANCE.getMusicHallV1().subscribeOn(Schedulers.io()))
-        apiList.add(MusicRetrofit.INSTANCE.getMusicHallV2().subscribeOn(Schedulers.io()))
-        apiList.add(MusicRetrofit.INSTANCE.getMusicHallV1().subscribeOn(Schedulers.io()))
-        apiList.add(MusicRetrofit.INSTANCE.getMusicHallV1().subscribeOn(Schedulers.io()))
-
-        val hallModelList = mutableListOf<HallModel>()
-        Observable.zip(apiList) { response ->
-            Log.e("gaojin", Thread.currentThread().name)
-            response.forEach {
-                Log.e("gaojin_test", "$it")
-                if (it is HallModel) {
-                    hallModelList.add(it)
-                }
-            }
-            return@zip hallModelList
-        }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Log.e("gaojin", Thread.currentThread().name)
-                    Log.e("gaojin", "${it.size}")
-                }, {
-                    Log.e("gaojin", Thread.currentThread().name)
-                    Log.e("gaojin", "error了")
-                }, {
-                    Log.e("gaojin", Thread.currentThread().name)
-                    Log.e("gaojin", "onComplete")
-                })
     }
 }

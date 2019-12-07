@@ -12,7 +12,7 @@ import android.text.TextUtils
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.se.music.R
-import com.se.music.activity.MainActivity
+import com.se.music.init.MainActivity
 import com.se.music.base.APP_NAME
 import com.se.music.base.Null
 import com.se.music.entity.LrcInfo

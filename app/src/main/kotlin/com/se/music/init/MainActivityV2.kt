@@ -1,4 +1,4 @@
-package com.se.music.activity
+package com.se.music.init
 
 import android.os.Bundle
 import android.os.RemoteException

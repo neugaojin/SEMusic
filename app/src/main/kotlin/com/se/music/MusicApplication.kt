@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import com.se.music.base.BaseConfig
 import com.se.music.base.Null
+import com.se.music.base.log.Loger
 import com.se.music.singleton.ApplicationSingleton
 
 /**
@@ -13,6 +14,9 @@ import com.se.music.singleton.ApplicationSingleton
  * 两个独立的进程，所以MyApplication被初始化了两次
  */
 class MusicApplication : Application() {
+    companion object {
+        const val APP_NAME = "SeMusic"
+    }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
@@ -29,6 +33,7 @@ class MusicApplication : Application() {
 
     private fun onCreateInit() {
         BaseConfig.init(this)
+        Loger.init(APP_NAME)
     }
 
     private fun getProcessName(cxt: Context, pid: Int): String {

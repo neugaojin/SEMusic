@@ -30,7 +30,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.se.music.activity.Welcome"
+            android:name="com.se.music.init.Welcome"
             android:configChanges="orientation|keyboardHidden"
             android:noHistory="false"
             android:screenOrientation="portrait"
@@ -43,12 +43,12 @@
         </activity>
 
         <activity
-            android:name="com.se.music.activity.MainActivity"
+            android:name="com.se.music.init.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.se.music.activity.MainActivityV2"
+            android:name="com.se.music.init.MainActivityV2"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
