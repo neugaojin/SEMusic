@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.bytedance.scene.group.GroupScene
+import com.bytedance.scene.navigation.NavigationScene
+import com.bytedance.scene.navigation.NavigationSceneOptions
 import com.se.music.R
 import com.se.music.fragment.MainFragment
 import com.se.music.scene.hall.HomeHallScene
@@ -21,6 +23,10 @@ import com.se.music.utils.setupWithViewPager
  */
 
 class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeListener {
+
+    companion object {
+        const val TAG = "MainScene"
+    }
 
     private lateinit var mineView: TextView
     private lateinit var musicRoomView: TextView
@@ -51,7 +57,6 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
         viewPager.offscreenPageLimit = 2
         viewPager.currentItem = 1
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {

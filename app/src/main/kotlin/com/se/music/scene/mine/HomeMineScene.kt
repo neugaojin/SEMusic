@@ -7,17 +7,20 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bytedance.scene.navigation.OnBackPressedListener
 import com.se.music.R
 import com.se.music.entity.SongListEntity
+import com.se.music.scene.MainScene
 import com.se.music.scene.extend.initViewModel
 import com.se.music.scene.fixed.UserVisibleHintGroupScene
+import com.se.music.scene.local.LocalMainScene
 
 /**
  *Author: gaojin
  *Time: 2019-10-21 15:44
  */
 
-class HomeMineScene : UserVisibleHintGroupScene() {
+class HomeMineScene : UserVisibleHintGroupScene(), HeaderViewOperation {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapterV2: MineAdapterV2
@@ -29,6 +32,7 @@ class HomeMineScene : UserVisibleHintGroupScene() {
         val rootView: View = inflater.inflate(R.layout.fragment_mine_mvp, container, false)
         recyclerView = rootView.findViewById(R.id.mine_recycler_view)
         headerView = MineHeaderView(sceneContext!!)
+        headerView.headerViewOperation = this
         //init adapter
         repeat(30) {
             list.add(SongListEntity("1", "周杰伦", "00000000"))
@@ -49,5 +53,21 @@ class HomeMineScene : UserVisibleHintGroupScene() {
             val infoList = listOf(it.toString(), "2", "3", "4", "5")
             headerView.update(infoList)
         })
+    }
+
+    override fun startLocalMusic() {
+        (parentScene as MainScene).navigationScene?.push(LocalMainScene::class.java)
+    }
+
+    override fun startDownLoadMusic() {
+    }
+
+    override fun startRecentMusic() {
+    }
+
+    override fun startLoveMusic() {
+    }
+
+    override fun startRunningRadio() {
     }
 }

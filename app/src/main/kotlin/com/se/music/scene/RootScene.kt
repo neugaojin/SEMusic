@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bytedance.scene.group.GroupScene
+import com.bytedance.scene.navigation.NavigationScene
+import com.bytedance.scene.navigation.NavigationSceneOptions
 import com.se.music.R
-import com.se.music.scene.hall.HomeHallScene
 
 /**
  *Author: gaojin
@@ -20,7 +21,13 @@ class RootScene : GroupScene() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        add(R.id.se_main_content, MainScene(), MainScene::class.java.simpleName)
+        add(R.id.se_main_content, MainScene(), MainScene.TAG)
         add(R.id.bottom_container, BottomFixedScene(), BottomFixedScene::class.java.simpleName)
+
+        val mainNavigationScene = NavigationScene()
+        val options = NavigationSceneOptions(MainScene::class.java, null)
+        mainNavigationScene.setArguments(options.toBundle())
+        add(R.id.se_main_content, mainNavigationScene, "mainNavigationScene")
+
     }
 }

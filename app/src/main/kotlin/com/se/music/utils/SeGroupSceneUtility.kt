@@ -23,3 +23,24 @@ fun setupWithViewPager(viewPager: ViewPager, groupScene: GroupScene, children: L
     }
     viewPager.adapter = scenePageAdapter
 }
+
+fun setupWithViewPagerWithTitle(viewPager: ViewPager
+                                , groupScene: GroupScene
+                                , children: List<UserVisibleHintGroupScene>
+                                , title: List<String>) {
+    require(viewPager.adapter == null) { "ViewPager already have a adapter" }
+    val scenePageAdapter = object : ScenePageAdapter(groupScene) {
+        override fun getCount(): Int {
+            return children.size
+        }
+
+        override fun getItem(position: Int): UserVisibleHintGroupScene {
+            return children[position]
+        }
+
+        override fun setPageTitle(list: List<String>) {
+            super.setPageTitle(title)
+        }
+    }
+    viewPager.adapter = scenePageAdapter
+}

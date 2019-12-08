@@ -91,7 +91,7 @@ class LocalMusicContainerFragment : BasePageFragment() {
     private fun buildLocalSingerCallBack(): LoaderManager.LoaderCallbacks<Cursor> {
         return object : LoaderManager.LoaderCallbacks<Cursor> {
             override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-                return CursorLoader(context!!, localSingerUri, info_artist, singerSelection.toString(), null, SharePreferencesUtils.getArtistSortOrder())
+                return CursorLoader(context!!, localSingerUri, info_artist, artistSelection, null, SharePreferencesUtils.getArtistSortOrder())
             }
 
             override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
@@ -106,7 +106,7 @@ class LocalMusicContainerFragment : BasePageFragment() {
     private fun buildLocalAlbumCallBack(): LoaderManager.LoaderCallbacks<Cursor> {
         return object : LoaderManager.LoaderCallbacks<Cursor> {
             override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-                return CursorLoader(context!!, localAlbumUri, info_album, albumSelection.toString(), null, SharePreferencesUtils.getAlbumSortOrder())
+                return CursorLoader(context!!, localAlbumUri, info_album, albumSelection, null, SharePreferencesUtils.getAlbumSortOrder())
             }
 
             override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {

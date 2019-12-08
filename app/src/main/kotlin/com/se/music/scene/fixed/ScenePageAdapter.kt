@@ -16,6 +16,7 @@ abstract class ScenePageAdapter(scene: GroupScene) : PagerAdapter() {
 
     private val mGroupScene: GroupScene = scene
     private var mCurrentScene: UserVisibleHintGroupScene? = null
+    private var pageTitle: List<String>? = null
 
     abstract fun getItem(position: Int): UserVisibleHintGroupScene
 
@@ -72,8 +73,20 @@ abstract class ScenePageAdapter(scene: GroupScene) : PagerAdapter() {
         return (`object` as Scene).view === view
     }
 
-    fun getItemId(position: Int): Long {
+    private fun getItemId(position: Int): Long {
         return position.toLong()
+    }
+
+    open fun setPageTitle(list: List<String>) {
+        pageTitle = list
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return if (pageTitle?.isNotEmpty() == true) {
+            pageTitle!![position]
+        } else {
+            super.getPageTitle(position)
+        }
     }
 
     private fun makeFragmentName(id: Long): String {
