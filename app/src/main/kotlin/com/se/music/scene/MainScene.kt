@@ -8,6 +8,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.bytedance.scene.group.GroupScene
+import com.bytedance.scene.navigation.NavigationScene
+import com.bytedance.scene.navigation.NavigationSceneOptions
+import com.bytedance.scene.ui.view.StatusBarView
 import com.se.music.R
 import com.se.music.fragment.MainFragment
 import com.se.music.scene.hall.HomeHallScene
@@ -22,6 +25,10 @@ import com.se.music.utils.setupWithViewPager
 
 class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeListener {
 
+    companion object {
+        const val TAG = "MainScene"
+    }
+
     private lateinit var mineView: TextView
     private lateinit var musicRoomView: TextView
     private lateinit var findView: TextView
@@ -31,11 +38,13 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
     private val childScene = listOf(HomeMineScene(), HomeHallScene(), HomeFindScene())
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
+
         val rootGroup = inflater.inflate(R.layout.fragment_app_main, container, false) as ViewGroup
         viewPager = rootGroup.findViewById(R.id.view_pager)
         mineView = rootGroup.findViewById(R.id.tool_bar_mine)
         musicRoomView = rootGroup.findViewById(R.id.tool_bar_music_room)
         findView = rootGroup.findViewById(R.id.tool_bar_find)
+
 
         mineView.setOnClickListener(this)
         musicRoomView.setOnClickListener(this)
@@ -51,7 +60,6 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
         viewPager.offscreenPageLimit = 2
         viewPager.currentItem = 1
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {

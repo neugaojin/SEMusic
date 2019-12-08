@@ -42,7 +42,7 @@ class LocalAlbumFragment : BaseFragment(), LoaderManager.LoaderCallbacks<Cursor>
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        albumListAdapter = AlbumListAdapter(context!!, list, mLoaderManager)
+        albumListAdapter = AlbumListAdapter(context!!, list)
         mRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
@@ -53,11 +53,11 @@ class LocalAlbumFragment : BaseFragment(), LoaderManager.LoaderCallbacks<Cursor>
     }
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        return CursorLoader(context!!, localAlbumUri, info_album, albumSelection.toString(), null, null)
+        return CursorLoader(context!!, localAlbumUri, info_album, albumSelection, null, null)
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
-        parseCursorToAlbumEntityList(QUERY_LOCAL_ALBUM, data, list)
+        parseCursorToAlbumEntityList(data, list)
         albumListAdapter.notifyDataSetChanged()
     }
 

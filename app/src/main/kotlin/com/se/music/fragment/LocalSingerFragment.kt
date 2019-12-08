@@ -16,7 +16,7 @@ import com.se.music.base.BaseFragment
 import com.se.music.entity.ArtistEntity
 import com.se.music.database.metadata.info_artist
 import com.se.music.database.metadata.localSingerUri
-import com.se.music.database.metadata.singerSelection
+import com.se.music.database.metadata.artistSelection
 import com.se.music.utils.QUERY_LOCAL_SINGER
 import com.se.music.utils.parseCursorToArtistEntityList
 
@@ -42,7 +42,7 @@ class LocalSingerFragment : BaseFragment(), LoaderManager.LoaderCallbacks<Cursor
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = SingerListAdapter(context!!, list, mLoaderManager)
+        adapter = SingerListAdapter(context!!, list)
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.adapter = adapter
@@ -50,11 +50,11 @@ class LocalSingerFragment : BaseFragment(), LoaderManager.LoaderCallbacks<Cursor
     }
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        return CursorLoader(context!!, localSingerUri, info_artist, singerSelection.toString(), null, null)
+        return CursorLoader(context!!, localSingerUri, info_artist, artistSelection, null, null)
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
-        parseCursorToArtistEntityList(QUERY_LOCAL_SINGER, data, list)
+        parseCursorToArtistEntityList(data, list)
         adapter.notifyDataSetChanged()
     }
 

@@ -24,6 +24,10 @@ import com.se.music.utils.loadUrl
 
 class BottomFixedScene : Scene(), View.OnClickListener {
 
+    companion object{
+        const val TAG = "BottomFixedScene"
+    }
+
     private lateinit var album: ImageView
     private lateinit var playBarSongName: TextView
     private lateinit var playBarSinger: TextView

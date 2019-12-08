@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.bytedance.scene.Scene
+import com.bytedance.scene.ktx.viewModels
 import com.se.music.online.recommend.RecommendSongListBlock
-import com.se.music.scene.extend.initViewModel
 
 /**
  *Author: gaojin
@@ -15,8 +15,7 @@ import com.se.music.scene.extend.initViewModel
  */
 
 class RecommendScene : Scene() {
-
-    private lateinit var viewModel: HallViewModel
+    private val viewModel: HallViewModel by viewModels()
     private lateinit var recommendView: RecommendSongListBlock
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
@@ -26,7 +25,6 @@ class RecommendScene : Scene() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = initViewModel()
         viewModel.recommendList.observe(this, Observer { data ->
             if (data != null) {
                 view.visibility = View.VISIBLE

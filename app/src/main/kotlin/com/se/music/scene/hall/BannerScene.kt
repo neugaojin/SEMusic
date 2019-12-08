@@ -1,25 +1,20 @@
 package com.se.music.scene.hall
 
 import android.graphics.Color
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.bytedance.scene.Scene
+import com.bytedance.scene.ktx.viewModels
 import com.se.music.R
-import com.se.music.scene.extend.initViewModel
 import com.se.music.utils.manager.GlideImageLoader
 import com.youth.banner.Banner
 import com.youth.banner.listener.OnBannerListener
-import kotlinx.coroutines.delay
 
 /**
  *Author: gaojin
@@ -27,11 +22,12 @@ import kotlinx.coroutines.delay
  */
 
 class BannerScene : Scene(), OnBannerListener {
+
     private lateinit var banner: Banner
     private lateinit var rootContainer: FrameLayout
     private val images = ArrayList<String>()
     private var height = 0
-    private lateinit var viewModel: HallViewModel
+    private val viewModel: HallViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
         banner = Banner(sceneContext)
@@ -45,10 +41,6 @@ class BannerScene : Scene(), OnBannerListener {
         return rootContainer
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         banner.run {
@@ -60,8 +52,6 @@ class BannerScene : Scene(), OnBannerListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        viewModel = initViewModel()
         viewModel.hall.observe(this, Observer { data ->
             if (data != null) {
                 view.visibility = View.VISIBLE

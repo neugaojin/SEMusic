@@ -5,16 +5,16 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:windowActionBar">false</item>
-        <item name="windowActionBar">false</item>
         <item name="colorControlNormal">@color/white</item>
-        <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/color_bg</item>
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme" />
+
+    <style name="BaseSceneTheme" parent="AppBaseTheme" />
 
     <style name="toolbarStyle.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="actionMenuTextColor">@color/white</item>
@@ -22,7 +22,7 @@
         <item name="contentInsetStart">0dp</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="android:elevation">0dp</item>
-        <item name="android:background">@color/medium_sea_green</item>
+        <item name="android:background">@color/colorPrimary</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="android:minHeight">@dimen/tool_bar_height</item>
         <item name="toolbarNavigationButtonStyle">@style/toolbarNavigationButtonStyle</item>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="card_flip_time_full">400</integer>
+    <integer name="card_flip_time_full">250</integer>
     <fraction name="shadow_big_alpha">1</fraction>
-    <fraction name="shadow_small_alpha">0.7</fraction>
+    <fraction name="shadow_small_alpha">0.4</fraction>
 </resources>

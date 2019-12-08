@@ -22,6 +22,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     : LinearLayout(context, attrs, defStyleAttr, defStyleRes), LifecycleOwner, View.OnClickListener {
 
     private lateinit var gridLayout: GridLayout
+    var headerViewOperation: HeaderViewOperation? = null
 
     init {
         init()
@@ -87,6 +88,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     }
 
     private fun localMusic() {
+        headerViewOperation?.startLocalMusic()
     }
 
     private fun downloadMusic() {
