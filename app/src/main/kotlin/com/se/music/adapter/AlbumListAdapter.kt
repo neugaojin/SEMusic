@@ -2,22 +2,15 @@ package com.se.music.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.loader.app.LoaderManager
-import androidx.loader.content.Loader
 import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
-import com.se.music.entity.Album
 import com.se.music.entity.AlbumEntity
-import com.se.music.database.database.provider.ImageStore
-import com.se.music.retrofit.MusicRetrofit
-import com.se.senet.callback.CallLoaderCallbacks
-import com.se.music.utils.*
-import retrofit2.Call
+import com.se.music.support.database.database.provider.ImageStore
+import com.se.music.support.utils.*
 import java.util.*
 
 /**

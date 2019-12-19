@@ -10,9 +10,9 @@ import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import com.bytedance.scene.Scene
-import com.bytedance.scene.ktx.viewModels
+import com.bytedance.scene.ktx.activityViewModels
 import com.se.music.R
-import com.se.music.utils.manager.GlideImageLoader
+import com.se.music.support.utils.manager.GlideImageLoader
 import com.youth.banner.Banner
 import com.youth.banner.listener.OnBannerListener
 
@@ -27,7 +27,7 @@ class BannerScene : Scene(), OnBannerListener {
     private lateinit var rootContainer: FrameLayout
     private val images = ArrayList<String>()
     private var height = 0
-    private val viewModel: HallViewModel by viewModels()
+    private val viewModel: HallViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
         banner = Banner(sceneContext)

@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.Nullable
 import com.se.music.R
-import com.se.music.utils.loadUrl
+import com.se.music.support.utils.loadUrl
 
 /**
  * Created by gaojin on 2017/12/31.

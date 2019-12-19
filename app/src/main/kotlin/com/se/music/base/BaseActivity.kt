@@ -12,7 +12,7 @@ import com.se.music.R
 import com.se.music.base.listener.MusicStateListener
 import com.se.music.fragment.QuickControlsFragment
 import com.se.music.service.*
-import com.se.music.utils.manager.GlobalPlayTimeManager
+import com.se.music.support.utils.manager.GlobalPlayTimeManager
 import java.lang.ref.WeakReference
 
 /**

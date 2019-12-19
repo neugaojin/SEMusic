@@ -5,7 +5,7 @@ import android.view.View
 import com.se.music.R
 import com.se.music.fragment.MainFragment
 import com.se.music.mvvm.OnLineSingerListFragmentV2
-import com.se.music.utils.startFragment
+import com.se.music.support.utils.startFragment
 
 /**
  * Created by gaojin on 2018/3/6.

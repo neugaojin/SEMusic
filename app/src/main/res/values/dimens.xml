@@ -11,6 +11,9 @@
     <dimen name="app_base_top_bottom_padding">10dp</dimen>
     <dimen name="classify_drawable_padding">5dp</dimen>
 
+    <!--    loadingView-->
+    <dimen name="loading_dot_radius">5dp</dimen>
+    <dimen name="loading_load_radius">32dp</dimen>
 
     <dimen name="mine_list_image_size">60dp</dimen>
     <dimen name="local_music_play_all_size">20dp</dimen>

@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bytedance.scene.ktx.viewModels
+import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.se.music.R
 import com.se.music.adapter.SingerListAdapter
 import com.se.music.entity.ArtistEntity
-import com.se.music.scene.fixed.UserVisibleHintGroupScene
+import com.se.music.support.coroutine.SeCoroutineScope
+import com.se.music.support.database.DataBase
+import com.se.music.support.singleton.ApplicationSingleton
+import com.se.music.widget.loading.LoadingView
+import kotlinx.coroutines.launch
 
 /**
  *Author: gaojin
@@ -20,27 +23,38 @@ import com.se.music.scene.fixed.UserVisibleHintGroupScene
 
 class LocalArtistScene : UserVisibleHintGroupScene() {
 
-    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SingerListAdapter
+    private lateinit var loadingView: LoadingView
     private val artistList = mutableListOf<ArtistEntity>()
+    private val scope: SeCoroutineScope by lazy {
+        SeCoroutineScope()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
-        mRecyclerView = inflater.inflate(R.layout.fragment_local_recycler_view, container, false) as RecyclerView
-        return mRecyclerView
+        return inflater.inflate(R.layout.fragment_local_recycler_view_v1, container, false) as ViewGroup
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val localViewModel: LocalViewModel by viewModels()
-        localViewModel.loadSinger()
-        adapter = SingerListAdapter(sceneContext!!, artistList)
-        mRecyclerView.layoutManager = LinearLayoutManager(activity)
-        mRecyclerView.setHasFixedSize(true)
-        mRecyclerView.adapter = adapter
-        localViewModel.localSingerInfo.observe(this, Observer {
-            artistList.addAll(it)
-            adapter.notifyDataSetChanged()
-        })
 
+        loadingView = requireViewById(R.id.loading_view)
+        recyclerView = requireViewById(R.id.recycler_view)
+
+        adapter = SingerListAdapter(sceneContext!!, artistList)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = adapter
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (artistList.isEmpty() && isVisibleToUser) {
+            scope.launch {
+                artistList.addAll(DataBase.queryLocalArtist(ApplicationSingleton.instance))
+                adapter.notifyDataSetChanged()
+                loadingView.visibility = View.GONE
+            }
+        }
     }
 }

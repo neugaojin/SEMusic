@@ -11,7 +11,6 @@ import com.se.music.R
 import com.se.music.online.banner.OnLineBannerModel
 import com.se.music.online.banner.OnLineBannerView
 import com.se.music.online.classify.OnLineClassifyView
-import com.se.music.online.event.ScrollEvent
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.online.model.HallModel
 import com.se.music.online.model.RecommendListModel
@@ -19,9 +18,9 @@ import com.se.music.online.newsong.OnLineNewSongModel
 import com.se.music.online.newsong.OnLineNewSongView
 import com.se.music.online.recommend.OnLineRecommendModel
 import com.se.music.online.recommend.OnLineRecommendView
-import com.se.music.utils.GET_EXPRESS_SONG
-import com.se.music.utils.GET_MUSIC_HALL
-import com.se.music.utils.GET_RECOMMEND_LIST
+import com.se.music.support.utils.GET_EXPRESS_SONG
+import com.se.music.support.utils.GET_MUSIC_HALL
+import com.se.music.support.utils.GET_RECOMMEND_LIST
 import com.se.router.mvp.BasePresenter
 import com.se.router.mvp.MvpPage
 import com.se.router.mvp.MvpPresenter

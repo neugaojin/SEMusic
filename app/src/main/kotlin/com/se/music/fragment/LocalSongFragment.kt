@@ -14,12 +14,12 @@ import com.se.music.R
 import com.se.music.adapter.MusicListAdapter
 import com.se.music.base.BaseFragment
 import com.se.music.entity.MusicEntity
-import com.se.music.database.metadata.infoMusic
-import com.se.music.database.metadata.localMusicUri
-import com.se.music.database.metadata.songSelection
-import com.se.music.singleton.SharePreferencesUtils
-import com.se.music.utils.QUERY_LOCAL_SONG
-import com.se.music.utils.parseCursorToMusicEntityList
+import com.se.music.support.database.metadata.infoMusic
+import com.se.music.support.database.metadata.localMusicUri
+import com.se.music.support.database.metadata.songSelection
+import com.se.music.support.singleton.SharePreferencesUtils
+import com.se.music.support.utils.QUERY_LOCAL_SONG
+import com.se.music.support.utils.parseCursorToMusicEntityList
 
 /**
  * Created by gaojin on 2018/2/28.

@@ -54,5 +54,11 @@
         <attr name="aspectRatio" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="SpinKitViewStyle">
+        <attr name="dot_color" format="color" />
+        <attr name="dot_radius" format="dimension" />
+        <attr name="load_radius" format="dimension" />
+    </declare-styleable>
+
 
 </resources>

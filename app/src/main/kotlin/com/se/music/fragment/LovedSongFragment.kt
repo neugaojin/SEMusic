@@ -14,9 +14,9 @@ import com.se.music.R
 import com.se.music.adapter.MusicListAdapter
 import com.se.music.base.BasePageFragment
 import com.se.music.entity.MusicEntity
-import com.se.music.database.metadata.LOVE_SONG_CONTENT_URI
-import com.se.music.utils.QUERY_LOVE_SONG
-import com.se.music.utils.parseLoveSongCursorToMusicEntityList
+import com.se.music.support.database.metadata.LOVE_SONG_CONTENT_URI
+import com.se.music.support.utils.QUERY_LOVE_SONG
+import com.se.music.support.utils.parseLoveSongCursorToMusicEntityList
 
 /**
  *Author: gaojin

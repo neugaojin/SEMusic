@@ -9,8 +9,8 @@ import com.se.music.R
 import com.se.music.base.BaseFragment
 import com.se.music.service.MediaService
 import com.se.music.service.MusicPlayer
-import com.se.music.utils.manager.GlobalPlayTimeManager
-import com.se.music.utils.manager.PlayTimeListener
+import com.se.music.support.utils.manager.GlobalPlayTimeManager
+import com.se.music.support.utils.manager.PlayTimeListener
 import com.se.music.widget.lrc.LrcView
 import java.io.File
 

@@ -8,9 +8,9 @@ import android.widget.TextView
 import com.se.music.R
 import com.se.music.entity.OtherVersionInfo
 import com.se.music.entity.SimilarSongInfo
-import com.se.music.utils.getImageId
-import com.se.music.utils.getLargeImageUrl
-import com.se.music.utils.loadUrl
+import com.se.music.support.utils.getImageId
+import com.se.music.support.utils.getLargeImageUrl
+import com.se.music.support.utils.loadUrl
 import com.se.music.widget.ContentItemView
 
 /**

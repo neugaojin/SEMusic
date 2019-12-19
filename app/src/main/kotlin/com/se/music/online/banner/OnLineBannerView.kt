@@ -12,7 +12,7 @@ import com.se.music.base.BaseActivity
 import com.se.music.fragment.SEWebViewFragment
 import com.se.music.online.event.ScrollEvent
 import com.se.music.online.model.HallModel
-import com.se.music.utils.manager.GlideImageLoader
+import com.se.music.support.utils.manager.GlideImageLoader
 import com.youth.banner.Banner
 import com.youth.banner.listener.OnBannerListener
 

@@ -10,8 +10,8 @@ import android.widget.TextView
 import com.se.music.R
 import com.se.music.base.BaseFragment
 import com.se.music.service.MusicPlayer
-import com.se.music.utils.getMegaImageUrl
-import com.se.music.utils.loadUrl
+import com.se.music.support.utils.getMegaImageUrl
+import com.se.music.support.utils.loadUrl
 import com.se.music.widget.CircleImageView
 
 /**

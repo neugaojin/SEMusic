@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.bytedance.scene.group.GroupScene
-import com.bytedance.scene.navigation.NavigationScene
-import com.bytedance.scene.navigation.NavigationSceneOptions
-import com.bytedance.scene.ui.view.StatusBarView
+import com.bytedance.scene.ktx.activityViewModels
 import com.se.music.R
 import com.se.music.fragment.MainFragment
+import com.se.music.scene.hall.HallViewModel
 import com.se.music.scene.hall.HomeHallScene
 import com.se.music.scene.mine.HomeFindScene
 import com.se.music.scene.mine.HomeMineScene
-import com.se.music.utils.setupWithViewPager
+import com.se.music.support.utils.setupWithViewPager
+import com.se.music.widget.loading.LoadingView
 
 /**
  *Author: gaojin
@@ -35,30 +36,38 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
 
     private lateinit var viewPager: ViewPager
 
-    private val childScene = listOf(HomeMineScene(), HomeHallScene(), HomeFindScene())
+    private lateinit var loadingView: LoadingView
+
+    private val viewModel: HallViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
+        return inflater.inflate(R.layout.fragment_app_main, container, false) as ViewGroup
+    }
 
-        val rootGroup = inflater.inflate(R.layout.fragment_app_main, container, false) as ViewGroup
-        viewPager = rootGroup.findViewById(R.id.view_pager)
-        mineView = rootGroup.findViewById(R.id.tool_bar_mine)
-        musicRoomView = rootGroup.findViewById(R.id.tool_bar_music_room)
-        findView = rootGroup.findViewById(R.id.tool_bar_find)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewPager = requireViewById(R.id.view_pager)
+        mineView = requireViewById(R.id.tool_bar_mine)
+        musicRoomView = requireViewById(R.id.tool_bar_music_room)
+        findView = requireViewById(R.id.tool_bar_find)
+        loadingView = requireViewById(R.id.loading_view)
 
         mineView.setOnClickListener(this)
         musicRoomView.setOnClickListener(this)
         findView.setOnClickListener(this)
         viewPager.addOnPageChangeListener(this)
-        return rootGroup
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupWithViewPager(viewPager, this, childScene)
-        setTitleStyle(MainFragment.MUSIC)
-        viewPager.offscreenPageLimit = 2
-        viewPager.currentItem = 1
+        viewModel.fetchData()
+        viewModel.notification.observe(this, Observer {
+            if (it) {
+                loadingView.visibility = View.GONE
+                val childScene = listOf(HomeMineScene(), HomeHallScene(), HomeFindScene())
+                setupWithViewPager(viewPager, this, childScene)
+                setTitleStyle(MainFragment.MUSIC)
+                viewPager.offscreenPageLimit = 2
+                viewPager.currentItem = 1
+            }
+        })
     }
 
     override fun onClick(v: View) {

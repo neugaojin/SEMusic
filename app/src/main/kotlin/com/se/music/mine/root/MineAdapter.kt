@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.entity.SongListEntity
-import com.se.music.utils.inflate
-import com.se.music.utils.loadUrl
+import com.se.music.support.utils.inflate
+import com.se.music.support.utils.loadUrl
 
 /**
  * Author: gaojin

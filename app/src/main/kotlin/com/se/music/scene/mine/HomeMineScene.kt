@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.bytedance.scene.interfaces.PushOptions
 import com.bytedance.scene.ktx.viewModels
 import com.se.music.R
 import com.se.music.entity.SongListEntity
-import com.se.music.scene.fixed.UserVisibleHintGroupScene
 import com.se.music.scene.local.LocalMainScene
 
 /**
@@ -39,7 +39,6 @@ class HomeMineScene : UserVisibleHintGroupScene(), HeaderViewOperation {
         adapterV2 = MineAdapterV2(sceneContext!!, list)
         adapterV2.addHeader(headerView)
 
-        //init recyclerView
         recyclerView.layoutManager = LinearLayoutManager(sceneContext)
         recyclerView.adapter = adapterV2
         return rootView as ViewGroup

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.base.BasePageFragment
-import com.se.music.database.database.provider.RecentStore
-import com.se.music.database.database.recent.Song
-import com.se.music.utils.inflate
+import com.se.music.support.database.database.provider.RecentStore
+import com.se.music.support.database.database.recent.Song
+import com.se.music.support.utils.inflate
 
 /**
  * Created by gaojin on 2017/12/14.

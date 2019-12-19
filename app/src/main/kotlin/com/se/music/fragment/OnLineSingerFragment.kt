@@ -15,11 +15,11 @@ import com.se.music.base.picBaseUrl_300
 import com.se.music.databinding.FragmentOnlineSingerBinding
 import com.se.music.mvvm.Singer
 import com.se.music.mvvm.SingerEntity
-import com.se.music.retrofit.MusicRetrofit
+import com.se.music.support.retrofit.MusicRetrofit
 import com.se.senet.callback.CallLoaderCallbacks
-import com.se.music.utils.GET_SINGER_LIST
-import com.se.music.utils.inflate
-import com.se.music.utils.loadUrl
+import com.se.music.support.utils.GET_SINGER_LIST
+import com.se.music.support.utils.inflate
+import com.se.music.support.utils.loadUrl
 import com.se.music.widget.CircleImageView
 import retrofit2.Call
 

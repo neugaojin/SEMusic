@@ -56,7 +56,7 @@
         <activity android:name="com.se.music.activity.CreateSongListActivity" />
 
         <provider
-            android:name="com.se.music.database.SongListContentProvider"
+            android:name="com.se.music.support.database.SongListContentProvider"
             android:authorities="com.se.music.SEContentProvider"
             android:exported="false" />
 

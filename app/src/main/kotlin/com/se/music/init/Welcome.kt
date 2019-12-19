@@ -8,15 +8,9 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.se.music.R
-import com.se.music.base.log.Loger
-import com.se.music.retrofit.Repository
-import com.se.music.scene.hall.HallViewModel
-import com.se.music.utils.lacksPermissions
+import com.se.music.support.utils.lacksPermissions
 import kotlinx.coroutines.*
-import java.lang.Exception
 
 /**
  *Author: gaojin
@@ -26,7 +20,6 @@ import java.lang.Exception
 class Welcome : AppCompatActivity() {
 
     companion object {
-        const val WEL_MAX_TIME = 1500L
         const val PERMISSION_REQUEST_CODE = 0x00
         const val PACKAGE_URL_SCHEME = "package:"
         val permissions = Array(1) { Manifest.permission.READ_EXTERNAL_STORAGE }
@@ -50,7 +43,6 @@ class Welcome : AppCompatActivity() {
      */
     private fun jump() {
         presenterScope.launch {
-//            InitData.init()
             toMainActivity()
         }
     }

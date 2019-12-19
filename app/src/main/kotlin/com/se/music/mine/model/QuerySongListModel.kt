@@ -6,7 +6,7 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.se.music.base.BaseActivity
-import com.se.music.database.metadata.SONG_LIST_CONTENT_URI
+import com.se.music.support.database.metadata.SONG_LIST_CONTENT_URI
 
 /**
  *Author: gaojin

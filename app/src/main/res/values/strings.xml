@@ -18,6 +18,8 @@
     <string name="music_room">音乐馆</string>
     <string name="find">发现</string>
 
+    <string name="loading_text">数据加载中...</string>
+
     <string name="mine_local_music">本地歌曲</string>
     <string name="mine_down_music">下载歌曲</string>
     <string name="mine_recent_music">最近播放</string>

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
+import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.bytedance.scene.ktx.viewModels
 import com.se.music.R
 import com.se.music.online.event.ScrollEvent
-import com.se.music.scene.fixed.UserVisibleHintGroupScene
 
 /**
  *Author: gaojin

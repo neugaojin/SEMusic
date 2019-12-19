@@ -13,12 +13,12 @@ import com.google.android.material.tabs.TabLayout
 import com.se.music.R
 import com.se.music.adapter.LocalFragmentAdapter
 import com.se.music.base.BasePageFragment
-import com.se.music.database.metadata.*
-import com.se.music.singleton.SharePreferencesUtils
-import com.se.music.utils.QUERY_FOLDER
-import com.se.music.utils.QUERY_LOCAL_ALBUM
-import com.se.music.utils.QUERY_LOCAL_SINGER
-import com.se.music.utils.QUERY_LOCAL_SONG
+import com.se.music.support.database.metadata.*
+import com.se.music.support.singleton.SharePreferencesUtils
+import com.se.music.support.utils.QUERY_FOLDER
+import com.se.music.support.utils.QUERY_LOCAL_ALBUM
+import com.se.music.support.utils.QUERY_LOCAL_SINGER
+import com.se.music.support.utils.QUERY_LOCAL_SONG
 
 /**
  * Author: gaojin

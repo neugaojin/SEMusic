@@ -7,7 +7,6 @@
     tools:context="com.se.music.fragment.MainFragment">
 
     <com.bytedance.scene.ui.view.StatusBarView
-        android:id="@+id/scene_status_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -31,7 +30,9 @@
                 android:gravity="center"
                 android:paddingLeft="@dimen/main_tool_bar_title_padding"
                 android:paddingRight="@dimen/main_tool_bar_title_padding"
-                android:text="@string/mine" />
+                android:text="@string/mine"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tool_bar_music_room"
@@ -41,7 +42,9 @@
                 android:gravity="center"
                 android:paddingLeft="@dimen/main_tool_bar_title_padding"
                 android:paddingRight="@dimen/main_tool_bar_title_padding"
-                android:text="@string/music_room" />
+                android:text="@string/music_room"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tool_bar_find"
@@ -51,16 +54,28 @@
                 android:gravity="center"
                 android:paddingLeft="@dimen/main_tool_bar_title_padding"
                 android:paddingRight="@dimen/main_tool_bar_title_padding"
-                android:text="@string/find" />
+                android:text="@string/find"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/white" />
+        android:background="@color/white">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.se.music.widget.loading.LoadingView
+            android:id="@+id/loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
 </LinearLayout>
