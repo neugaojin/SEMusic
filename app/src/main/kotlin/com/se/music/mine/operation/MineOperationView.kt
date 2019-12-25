@@ -13,7 +13,7 @@ import androidx.annotation.Keep
 import com.se.music.R
 import com.se.music.base.BaseConfig
 import com.se.music.fragment.*
-import com.se.music.utils.startFragment
+import com.se.music.support.utils.startFragment
 
 /**
  * Author: gaojin

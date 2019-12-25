@@ -13,9 +13,9 @@ import com.bytedance.scene.Scene
 import com.se.music.R
 import com.se.music.activity.PlayingActivity
 import com.se.music.service.MusicPlayer
-import com.se.music.utils.getLargeImageUrl
-import com.se.music.utils.isContentEmpty
-import com.se.music.utils.loadUrl
+import com.se.music.support.utils.getLargeImageUrl
+import com.se.music.support.utils.isContentEmpty
+import com.se.music.support.utils.loadUrl
 
 /**
  *Author: gaojin
@@ -23,6 +23,10 @@ import com.se.music.utils.loadUrl
  */
 
 class BottomFixedScene : Scene(), View.OnClickListener {
+
+    companion object{
+        const val TAG = "BottomFixedScene"
+    }
 
     private lateinit var album: ImageView
     private lateinit var playBarSongName: TextView

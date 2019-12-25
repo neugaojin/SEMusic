@@ -1,19 +1,18 @@
 package com.se.music.scene.hall
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.se.music.base.log.Loger
-import com.se.music.init.GlobalFirstData
 import com.se.music.online.event.ScrollEvent
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.online.model.HallModel
 import com.se.music.online.model.RecommendListModel
-import com.se.music.retrofit.Repository
-import kotlinx.coroutines.*
-import kotlin.system.measureTimeMillis
+import com.se.music.support.retrofit.Repository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  *Author: gaojin
@@ -21,6 +20,10 @@ import kotlin.system.measureTimeMillis
  */
 
 class HallViewModel(application: Application) : AndroidViewModel(application) {
+
+    val notification: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
 
     val hall: MutableLiveData<HallModel?> by lazy {
         MutableLiveData<HallModel?>()
@@ -38,10 +41,9 @@ class HallViewModel(application: Application) : AndroidViewModel(application) {
         MutableLiveData<ScrollEvent>()
     }
 
-    init {
+    fun fetchData() {
         viewModelScope.launch {
             getFirstData()
-            Loger.e("HallViewModel") { "notification" }
         }
     }
 
@@ -50,28 +52,10 @@ class HallViewModel(application: Application) : AndroidViewModel(application) {
             val hallResult = async { Repository.getMusicHall() }
             val recommendListResult = async { Repository.getRecommendList() }
             val expressInfoResult = async { Repository.getNewSongInfo() }
-
-            val result1 = if (GlobalFirstData.ghHall == null) {
-                hallResult.await()
-            } else {
-                GlobalFirstData.ghHall
-            }
-            hall.value = result1
-
-
-            val result2 = if (GlobalFirstData.gfRecommendData == null) {
-                recommendListResult.await()
-            } else {
-                GlobalFirstData.gfRecommendData
-            }
-            recommendList.value = result2
-
-            val result3 = if (GlobalFirstData.gfExpressInfo == null) {
-                expressInfoResult.await()
-            } else {
-                GlobalFirstData.gfExpressInfo
-            }
-            expressInfo.value = result3
+            hall.value = hallResult.await()
+            recommendList.value = recommendListResult.await()
+            expressInfo.value = expressInfoResult.await()
+            notification.value = true
         }
     }
 }

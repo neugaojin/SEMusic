@@ -7,28 +7,31 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bytedance.scene.group.UserVisibleHintGroupScene
+import com.bytedance.scene.interfaces.PushOptions
+import com.bytedance.scene.ktx.viewModels
 import com.se.music.R
 import com.se.music.entity.SongListEntity
-import com.se.music.scene.extend.initViewModel
-import com.se.music.scene.fixed.UserVisibleHintGroupScene
+import com.se.music.scene.local.LocalMainScene
 
 /**
  *Author: gaojin
  *Time: 2019-10-21 15:44
  */
 
-class HomeMineScene : UserVisibleHintGroupScene() {
+class HomeMineScene : UserVisibleHintGroupScene(), HeaderViewOperation {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapterV2: MineAdapterV2
     private lateinit var headerView: MineHeaderView
-    private lateinit var mineViewModel: HomeMineViewModel
+    private val mineViewModel: HomeMineViewModel by viewModels()
     private val list = mutableListOf<SongListEntity>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         val rootView: View = inflater.inflate(R.layout.fragment_mine_mvp, container, false)
         recyclerView = rootView.findViewById(R.id.mine_recycler_view)
         headerView = MineHeaderView(sceneContext!!)
+        headerView.headerViewOperation = this
         //init adapter
         repeat(30) {
             list.add(SongListEntity("1", "周杰伦", "00000000"))
@@ -36,7 +39,6 @@ class HomeMineScene : UserVisibleHintGroupScene() {
         adapterV2 = MineAdapterV2(sceneContext!!, list)
         adapterV2.addHeader(headerView)
 
-        //init recyclerView
         recyclerView.layoutManager = LinearLayoutManager(sceneContext)
         recyclerView.adapter = adapterV2
         return rootView as ViewGroup
@@ -44,10 +46,26 @@ class HomeMineScene : UserVisibleHintGroupScene() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mineViewModel = initViewModel()
         mineViewModel.musicCount.observe(this, Observer {
             val infoList = listOf(it.toString(), "2", "3", "4", "5")
             headerView.update(infoList)
         })
+    }
+
+    override fun startLocalMusic() {
+        val options = PushOptions.Builder().setAnimation(requireActivity(), R.anim.slide_right_in, R.anim.slide_left_out).build()
+        requireNavigationScene().push(LocalMainScene::class.java, null, options)
+    }
+
+    override fun startDownLoadMusic() {
+    }
+
+    override fun startRecentMusic() {
+    }
+
+    override fun startLoveMusic() {
+    }
+
+    override fun startRunningRadio() {
     }
 }

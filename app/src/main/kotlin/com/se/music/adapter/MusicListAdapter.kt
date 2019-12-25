@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.entity.MusicEntity
 import com.se.music.service.MusicPlayer
-import com.se.music.singleton.HandlerSingleton
-import com.se.music.utils.inflate
+import com.se.music.support.singleton.HandlerSingleton
+import com.se.music.support.utils.inflate
 
 /**
  * Created by gaojin on 2017/12/8.

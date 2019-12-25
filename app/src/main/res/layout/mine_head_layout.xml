@@ -19,7 +19,8 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="52分钟" />
+            android:text="52分钟"
+            android:textColor="@color/hex_33000000" />
 
         <com.se.music.widget.CircleImageView
             android:layout_width="45dp"
@@ -33,15 +34,17 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="文案待定" />
+            android:text="文案待定"
+            android:textColor="@color/hex_33000000" />
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
-        android:text="---  60e分之一  ---" />
+        android:text="---  60e分之一  ---"
+        android:textColor="@color/hex_33000000" />
 
 </LinearLayout>

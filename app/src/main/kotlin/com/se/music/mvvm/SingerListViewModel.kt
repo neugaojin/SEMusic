@@ -1,16 +1,10 @@
 package com.se.music.mvvm
 
 import android.app.Application
-import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
-import androidx.loader.content.Loader
-import com.se.music.retrofit.MusicRetrofit
-import com.se.music.retrofit.Repository
-import com.se.senet.callback.CallLoaderCallbacks
+import com.se.music.support.retrofit.Repository
 import kotlinx.coroutines.*
-import retrofit2.Call
 
 /**
  *Author: gaojin

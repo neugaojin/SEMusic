@@ -10,11 +10,11 @@ import com.se.music.R
 import com.se.music.base.BaseFragment
 import com.se.music.entity.OtherVersionInfo
 import com.se.music.entity.SimilarSongInfo
-import com.se.music.retrofit.MusicRetrofit
+import com.se.music.support.retrofit.MusicRetrofit
 import com.se.senet.callback.CallLoaderCallbacks
 import com.se.music.service.MusicPlayer
-import com.se.music.utils.GET_RELATED_SONG
-import com.se.music.utils.GET_SIMILAR_SONG
+import com.se.music.support.utils.GET_RELATED_SONG
+import com.se.music.support.utils.GET_SIMILAR_SONG
 import com.se.music.view.PlayingSongRelatedInfoView
 import retrofit2.Call
 

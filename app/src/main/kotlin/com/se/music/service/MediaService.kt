@@ -17,10 +17,10 @@ import com.se.music.base.APP_NAME
 import com.se.music.base.Null
 import com.se.music.entity.LrcInfo
 import com.se.music.entity.MusicEntity
-import com.se.music.database.database.provider.ImageStore
-import com.se.music.database.database.provider.RecentStore
-import com.se.music.retrofit.MusicRetrofit
-import com.se.music.singleton.OkHttpSingleton
+import com.se.music.support.database.database.provider.ImageStore
+import com.se.music.support.database.database.provider.RecentStore
+import com.se.music.support.retrofit.MusicRetrofit
+import com.se.music.support.singleton.OkHttpSingleton
 import com.se.senet.base.GsonFactory
 import retrofit2.Call
 import retrofit2.Callback

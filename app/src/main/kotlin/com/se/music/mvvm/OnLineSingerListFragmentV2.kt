@@ -1,22 +1,15 @@
 package com.se.music.mvvm
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.base.BasePageFragment
-import com.se.music.base.picBaseUrl_300
 import com.se.music.databinding.FragmentOnlineSingerBinding
-import com.se.music.utils.inflate
-import com.se.music.utils.loadUrl
-import com.se.music.widget.CircleImageView
 
 /**
  *Author: gaojin

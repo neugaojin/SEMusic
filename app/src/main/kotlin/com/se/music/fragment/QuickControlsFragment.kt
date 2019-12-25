@@ -13,9 +13,9 @@ import com.se.music.R
 import com.se.music.activity.PlayingActivity
 import com.se.music.base.BaseFragment
 import com.se.music.service.MusicPlayer
-import com.se.music.utils.getLargeImageUrl
-import com.se.music.utils.isContentEmpty
-import com.se.music.utils.loadUrl
+import com.se.music.support.utils.getLargeImageUrl
+import com.se.music.support.utils.isContentEmpty
+import com.se.music.support.utils.loadUrl
 
 /**
  *Author: gaojin

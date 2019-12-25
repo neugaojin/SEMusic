@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
-import com.bytedance.scene.group.ScenePlaceHolderView
+import com.bytedance.scene.group.UserVisibleHintGroupScene
+import com.bytedance.scene.ktx.viewModels
 import com.se.music.R
 import com.se.music.online.event.ScrollEvent
-import com.se.music.scene.extend.initViewModel
-import com.se.music.scene.fixed.UserVisibleHintGroupScene
 
 /**
  *Author: gaojin
@@ -17,7 +16,7 @@ import com.se.music.scene.fixed.UserVisibleHintGroupScene
 
 class HomeHallScene : UserVisibleHintGroupScene(), NestedScrollView.OnScrollChangeListener {
 
-    private lateinit var viewModel: HallViewModel
+    private val viewModel: HallViewModel by viewModels()
 
     private val scrollEvent = ScrollEvent(0f, 0f)
 
@@ -29,8 +28,7 @@ class HomeHallScene : UserVisibleHintGroupScene(), NestedScrollView.OnScrollChan
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = initViewModel()
-//
+
 //        requireViewById<ScenePlaceHolderView>(R.id.banner).apply {
 //            sceneName = BannerScene::class.java.name
 //            sceneTag = BannerScene::class.java.simpleName

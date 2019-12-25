@@ -1,9 +1,7 @@
 package com.se.music.activity
 
-import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -22,11 +20,10 @@ import com.bumptech.glide.request.transition.Transition
 import com.se.music.R
 import com.se.music.adapter.PlayerPagerAdapter
 import com.se.music.base.BaseActivity
-import com.se.music.scene.MainScene
 import com.se.music.service.MusicPlayer
-import com.se.music.utils.blurBitmap
-import com.se.music.utils.getMegaImageUrl
-import com.se.music.utils.setTransparentForWindow
+import com.se.music.support.utils.blurBitmap
+import com.se.music.support.utils.getMegaImageUrl
+import com.se.music.support.utils.setTransparentForWindow
 import com.se.music.view.PlayingBottomView
 import com.se.music.widget.MultiButtonLayout
 import com.se.music.widget.PlayingAlbumPageTransformer

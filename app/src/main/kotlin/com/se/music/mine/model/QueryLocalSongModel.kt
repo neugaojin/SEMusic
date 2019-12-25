@@ -7,8 +7,8 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.se.music.base.BaseActivity
-import com.se.music.database.metadata.*
-import com.se.music.singleton.SharePreferencesUtils
+import com.se.music.support.database.metadata.*
+import com.se.music.support.singleton.SharePreferencesUtils
 
 /**
  *Author: gaojin
