@@ -17,22 +17,14 @@ import com.se.music.widget.RecommendItemView
 /**
  * Created by gaojin on 2017/12/31.
  */
-class RecommendSongListBlock : LinearLayout {
+class RecommendSongListBlock @JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
+    : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private lateinit var recommendRecycleView: RecyclerView
     private lateinit var iconEnter: View
 
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init()
-    }
-
-    fun init() {
+    init {
         orientation = LinearLayout.VERTICAL
         setBackgroundColor(resources.getColor(R.color.white))
         View.inflate(context, R.layout.online_day_recommend_song_block, this)

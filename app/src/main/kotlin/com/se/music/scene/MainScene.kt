@@ -11,7 +11,6 @@ import androidx.viewpager.widget.ViewPager
 import com.bytedance.scene.group.GroupScene
 import com.bytedance.scene.ktx.activityViewModels
 import com.se.music.R
-import com.se.music.fragment.MainFragment
 import com.se.music.scene.hall.HallViewModel
 import com.se.music.scene.hall.HomeHallScene
 import com.se.music.scene.mine.HomeFindScene
@@ -28,6 +27,9 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
 
     companion object {
         const val TAG = "MainScene"
+        const val MINE = 0
+        const val MUSIC = 1
+        const val FIND = 2
     }
 
     private lateinit var mineView: TextView
@@ -63,7 +65,7 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
                 loadingView.visibility = View.GONE
                 val childScene = listOf(HomeMineScene(), HomeHallScene(), HomeFindScene())
                 setupWithViewPager(viewPager, this, childScene)
-                setTitleStyle(MainFragment.MUSIC)
+                setTitleStyle(MUSIC)
                 viewPager.offscreenPageLimit = 2
                 viewPager.currentItem = 1
             }
@@ -89,7 +91,7 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
 
     private fun setTitleStyle(position: Int) {
         when (position) {
-            MainFragment.MINE -> {
+            MINE -> {
                 mineView.textSize = 19f
                 mineView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.white))
 
@@ -99,7 +101,7 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
                 findView.textSize = 18f
                 findView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.light_gray))
             }
-            MainFragment.MUSIC -> {
+            MUSIC -> {
                 musicRoomView.textSize = 19f
                 musicRoomView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.white))
 
@@ -109,7 +111,7 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
                 findView.textSize = 18f
                 findView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.light_gray))
             }
-            MainFragment.FIND -> {
+            FIND -> {
                 findView.textSize = 19f
                 findView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.white))
 

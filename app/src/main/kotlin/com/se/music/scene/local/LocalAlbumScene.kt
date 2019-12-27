@@ -52,7 +52,7 @@ class LocalAlbumScene : UserVisibleHintGroupScene() {
         super.setUserVisibleHint(isVisibleToUser)
         if (albumList.isEmpty() && isVisibleToUser) {
             scope.launch {
-                albumList.addAll(DataBase.queryLocalAlbum(ApplicationSingleton.instance))
+                albumList.addAll(DataBase.queryLocalAlbum())
                 adapter.notifyDataSetChanged()
                 loadingView.visibility = View.GONE
             }

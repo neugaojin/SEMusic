@@ -51,7 +51,7 @@ class LocalArtistScene : UserVisibleHintGroupScene() {
         super.setUserVisibleHint(isVisibleToUser)
         if (artistList.isEmpty() && isVisibleToUser) {
             scope.launch {
-                artistList.addAll(DataBase.queryLocalArtist(ApplicationSingleton.instance))
+                artistList.addAll(DataBase.queryLocalArtist())
                 adapter.notifyDataSetChanged()
                 loadingView.visibility = View.GONE
             }

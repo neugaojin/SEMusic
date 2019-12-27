@@ -1,10 +1,10 @@
 package com.se.music.support.database
 
-import android.content.Context
-import com.se.music.support.database.metadata.*
 import com.se.music.entity.AlbumEntity
 import com.se.music.entity.ArtistEntity
 import com.se.music.entity.MusicEntity
+import com.se.music.support.database.metadata.*
+import com.se.music.support.singleton.ApplicationSingleton
 import com.se.music.support.singleton.SharePreferencesUtils
 import com.se.music.support.utils.parseCursorToAlbumEntityList
 import com.se.music.support.utils.parseCursorToArtistEntityList
@@ -22,9 +22,41 @@ object DataBase {
     /**
      * 获取本地音乐的数量
      */
-    suspend fun queryLocalSongCount(context: Context): Int {
+    suspend fun queryLocalSongCount(): Int {
         return withContext(Dispatchers.IO) {
-            val cursor = context.contentResolver.query(localMusicUri, infoMusic, songSelection, null, SharePreferencesUtils.getSongSortOrder())
+            val cursor = ApplicationSingleton.instance.contentResolver.query(localMusicUri
+                    , infoMusic
+                    , songSelection,
+                    null
+                    , SharePreferencesUtils.getSongSortOrder())
+            cursor?.count ?: 0
+        }
+    }
+
+    /**
+     * 获取本地专辑数量
+     */
+    suspend fun queryLocalAlbumCount(): Int {
+        return withContext(Dispatchers.IO) {
+            val cursor = ApplicationSingleton.instance.contentResolver.query(localAlbumUri
+                    , info_album
+                    , albumSelection
+                    , null
+                    , SharePreferencesUtils.getAlbumSortOrder())
+            cursor?.count ?: 0
+        }
+    }
+
+    /**
+     * 获取本地歌手数据
+     */
+    suspend fun queryLocalArtistCount(): Int {
+        return withContext(Dispatchers.IO) {
+            val cursor = ApplicationSingleton.instance.contentResolver.query(localSingerUri
+                    , info_artist
+                    , artistSelection
+                    , null
+                    , SharePreferencesUtils.getArtistSortOrder())
             cursor?.count ?: 0
         }
     }
@@ -32,10 +64,10 @@ object DataBase {
     /**
      * 获取本地音乐数据
      */
-    suspend fun queryLocalSong(context: Context): List<MusicEntity> {
+    suspend fun queryLocalSong(): List<MusicEntity> {
         return withContext(Dispatchers.IO) {
             val musicList = mutableListOf<MusicEntity>()
-            val cursor = context.contentResolver.query(localMusicUri
+            val cursor = ApplicationSingleton.instance.contentResolver.query(localMusicUri
                     , infoMusic
                     , songSelection
                     , null
@@ -46,12 +78,12 @@ object DataBase {
     }
 
     /**
-     * 获取本地专辑信息
+     * 获取本地专辑数据
      */
-    suspend fun queryLocalAlbum(context: Context): List<AlbumEntity> {
+    suspend fun queryLocalAlbum(): List<AlbumEntity> {
         return withContext(Dispatchers.IO) {
             val musicList = mutableListOf<AlbumEntity>()
-            val cursor = context.contentResolver.query(localAlbumUri
+            val cursor = ApplicationSingleton.instance.contentResolver.query(localAlbumUri
                     , info_album
                     , albumSelection
                     , null
@@ -62,12 +94,12 @@ object DataBase {
     }
 
     /**
-     * 获取本地歌手信息
+     * 获取本地歌手数据
      */
-    suspend fun queryLocalArtist(context: Context): List<ArtistEntity> {
+    suspend fun queryLocalArtist(): List<ArtistEntity> {
         return withContext(Dispatchers.IO) {
             val musicList = mutableListOf<ArtistEntity>()
-            val cursor = context.contentResolver.query(localSingerUri
+            val cursor = ApplicationSingleton.instance.contentResolver.query(localSingerUri
                     , info_artist
                     , artistSelection
                     , null

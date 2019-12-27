@@ -38,9 +38,9 @@ fun setupWithViewPagerWithTitle(viewPager: ViewPager
             return children[position]
         }
 
-//        override fun setPageTitle(list: List<String>) {
-//            super.setPageTitle(title)
-//        }
+        override fun getPageTitle(position: Int): CharSequence? {
+            return title[position % title.size]
+        }
     }
     viewPager.adapter = scenePageAdapter
 }

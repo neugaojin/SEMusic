@@ -55,7 +55,7 @@ class LocalSongScene : UserVisibleHintGroupScene() {
         if (musicList.isEmpty()) {
             scope.launch {
                 delay(DELAY_LOAD_TIME)
-                musicList.addAll(DataBase.queryLocalSong(ApplicationSingleton.instance))
+                musicList.addAll(DataBase.queryLocalSong())
                 adapter.notifyDataSetChanged()
                 loadingView.visibility = View.GONE
             }

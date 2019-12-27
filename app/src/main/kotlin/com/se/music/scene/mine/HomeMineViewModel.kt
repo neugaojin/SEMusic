@@ -19,7 +19,7 @@ class HomeMineViewModel(application: Application) : AndroidViewModel(application
 
     init {
         viewModelScope.launch {
-            val count = DataBase.queryLocalSongCount(application)
+            val count = DataBase.queryLocalSongCount()
             musicCount.value = count
         }
     }

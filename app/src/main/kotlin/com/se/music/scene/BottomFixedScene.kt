@@ -73,11 +73,11 @@ class BottomFixedScene : Scene(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        when {
-            v.id == R.id.play_list -> {
+        when (v.id) {
+            R.id.play_list -> {
             }
-            v.id == R.id.control -> MusicPlayer.playOrPause()
-            v.id == R.id.play_next -> MusicPlayer.nextPlay()
+            R.id.control -> MusicPlayer.playOrPause()
+            R.id.play_next -> MusicPlayer.nextPlay()
             else -> {
                 val intent = Intent(activity, PlayingActivity::class.java)
                 navigationScene?.startActivity(intent)
