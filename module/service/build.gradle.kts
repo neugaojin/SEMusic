@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 apply("$rootDir/gradle/common.kts")
@@ -29,10 +30,18 @@ android {
 }
 
 dependencies {
-    val kotlinVersion: String by project
+    val androidxMediaVersion: String by project
+    val glideVersion: String by project
+    val gsonVersion: String by project
+    val exoplayerVersion: String by project
     implementation(project(":sebase"))
-    implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    kapt("com.github.bumptech.glide:compiler:$glideVersion")
+    api("androidx.media:media:$androidxMediaVersion")
+    api("com.google.code.gson:gson:$gsonVersion")
+    api("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
+    api("com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion")
+    api("com.google.android.exoplayer:extension-mediasession:$exoplayerVersion")
 }
 
 repositories {

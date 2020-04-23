@@ -15,7 +15,7 @@ object OkHttpSingleton {
             .readTimeout(1000, TimeUnit.MINUTES)
             .writeTimeout(1000, TimeUnit.MINUTES)
             .connectTimeout(1000, TimeUnit.MINUTES)
-            .build()!!
+            .build()
 
     fun getResponseString(action: String): String {
         try {

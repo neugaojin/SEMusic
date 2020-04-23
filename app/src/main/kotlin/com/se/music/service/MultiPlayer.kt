@@ -8,7 +8,7 @@ import android.os.Handler
 import android.os.PowerManager
 import android.util.Log
 import com.se.music.base.Null
-import com.se.music.support.singleton.ApplicationSingleton
+import com.se.music.base.singleton.ApplicationSingleton
 import java.io.IOException
 import java.lang.ref.WeakReference
 

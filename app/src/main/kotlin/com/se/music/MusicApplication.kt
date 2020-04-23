@@ -6,7 +6,7 @@ import android.content.Context
 import com.se.music.base.BaseConfig
 import com.se.music.base.Null
 import com.se.music.base.log.Loger
-import com.se.music.support.singleton.ApplicationSingleton
+import com.se.music.base.singleton.ApplicationSingleton
 
 /**
  * Author: gaojin

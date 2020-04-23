@@ -11,7 +11,7 @@ import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.bytedance.scene.interfaces.PushOptions
 import com.bytedance.scene.ktx.viewModels
 import com.se.music.R
-import com.se.music.entity.SongListEntity
+import com.se.music.base.data.database.entity.SongListEntity
 import com.se.music.scene.local.LocalMainScene
 
 /**

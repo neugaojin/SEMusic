@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.RemoteException
 import com.se.music.IMediaAidlInterface
 import com.se.music.base.Null
-import com.se.music.entity.MusicEntity
+import com.se.music.base.data.database.entity.MusicEntity
 import java.io.File
 import java.io.PrintWriter
 import java.lang.ref.WeakReference
@@ -47,6 +47,7 @@ class ServiceStub constructor(service: MediaService) : IMediaAidlInterface.Stub(
         mService.get()?.openFile(path)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun open(infos: Map<*, *>, list: LongArray, position: Int) {
         mService.get()?.open(infos as HashMap<Long, MusicEntity>, list, position)
     }

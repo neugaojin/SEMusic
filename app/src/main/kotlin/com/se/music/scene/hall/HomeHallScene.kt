@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
+import com.bytedance.scene.group.ScenePlaceHolderView
 import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.bytedance.scene.ktx.viewModels
 import com.se.music.R
@@ -31,7 +32,7 @@ class HomeHallScene : UserVisibleHintGroupScene(), NestedScrollView.OnScrollChan
 
 //        requireViewById<ScenePlaceHolderView>(R.id.banner).apply {
 //            sceneName = BannerScene::class.java.name
-//            sceneTag = BannerScene::class.java.simpleName
+//            sceneTag = BannerSc    ene::class.java.simpleName
 //        }
 //
 //        requireViewById<ScenePlaceHolderView>(R.id.classify_view).apply {

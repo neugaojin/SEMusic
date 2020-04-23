@@ -8,12 +8,6 @@ package com.se.music.base
 const val APP_NAME = "SE_MUSIC"
 const val TOAST_SHOW_DURATION = 2000L
 
-// 数据库
-const val DATABASE_NAME = "SEMusic.db"
-const val DATABASE_VERSION = 1
-
-const val Null = ""
-
 // 腾讯图片地址
 const val picBaseUrl_300 = "http://y.gtimg.cn/music/photo_new/T001R300x300M000%1\$s.jpg"
 const val picBaseUrl_150 = "http://y.gtimg.cn/music/photo_new/T002R150x150M000%1\$s.jpg"

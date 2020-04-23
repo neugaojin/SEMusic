@@ -34,7 +34,8 @@
             android:configChanges="orientation|keyboardHidden"
             android:noHistory="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Welcome">
+            android:theme="@style/AppTheme.Welcome"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,20 +46,17 @@
         <activity
             android:name="com.se.music.init.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name="com.se.music.init.MainActivityV2"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity android:name="com.se.music.activity.PlayingActivity" />
         <activity android:name="com.se.music.activity.CreateSongListActivity" />
-
-        <provider
-            android:name="com.se.music.support.database.SongListContentProvider"
-            android:authorities="com.se.music.SEContentProvider"
-            android:exported="false" />
 
         <service
             android:name="com.se.music.service.MediaService"

@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
-import com.se.music.entity.AlbumEntity
-import com.se.music.support.database.database.provider.ImageStore
+import com.se.music.base.data.database.entity.AlbumEntity
+import com.se.music.base.data.database.provider.ImageStore
 import com.se.music.support.utils.*
 import java.util.*
 

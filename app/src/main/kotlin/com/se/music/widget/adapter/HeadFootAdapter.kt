@@ -1,6 +1,5 @@
 package com.se.music.widget.adapter
 
-import android.content.ClipData
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
  *Author: gaojin
  *Time: 2019-12-02 16:19
  */
+interface ListItemClickListener<T> {
+    fun itemClick(t: T, position: Int)
+}
 
-abstract class HeadFootAdapter<T, in VH : RecyclerView.ViewHolder>(val context: Context, val data: MutableList<T>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class HeadFootAdapter<T, in VH : RecyclerView.ViewHolder>(val context: Context, val data: MutableList<T>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     companion object {
         private const val HEADER = 0x01
@@ -22,9 +25,10 @@ abstract class HeadFootAdapter<T, in VH : RecyclerView.ViewHolder>(val context: 
 
     private var header: View? = null
     private var footer: View? = null
+    private var listener: ListItemClickListener<T>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
+        val holder = when (viewType) {
             HEADER -> {
                 if (header == null) {
                     header = Space(context)
@@ -39,14 +43,18 @@ abstract class HeadFootAdapter<T, in VH : RecyclerView.ViewHolder>(val context: 
             }
             else -> createItem(parent, viewType)
         }
+        holder.itemView.setOnClickListener(this)
+        return holder
     }
 
-    override fun getItemCount() = data.size.plus(2) ?: 0
+    override fun getItemCount() = data.size.plus(2)
 
+    @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position in firstIndex() + 1 until lastIndex()) {
             bindItem(holder as VH, position - 1)
         }
+        holder.itemView.tag = position
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -79,4 +87,11 @@ abstract class HeadFootAdapter<T, in VH : RecyclerView.ViewHolder>(val context: 
     open fun lastIndex() = itemCount - 1
 
     internal class HeadFootHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    override fun onClick(v: View) {
+        val position = v.tag as Int
+        if (position in firstIndex() + 1 until lastIndex()) {
+            listener?.itemClick(data[position - 1], position)
+        }
+    }
 }

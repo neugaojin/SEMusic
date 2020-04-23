@@ -75,9 +75,15 @@ android {
 }
 
 dependencies {
+    val androidxVersion: String by project
     val kotlinVersion: String by project
     val aacVersion: String by project
     val sceneVersion: String by project
+    val corcoutinesVersion: String by project
+    val androidxMediaVersion: String by project
+    val glideVersion: String by project
+    val gsonVersion: String by project
+    val exoplayerVersion: String by project
 
     implementation(project(":senet"))
     implementation(project(":service"))
@@ -86,9 +92,13 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib", kotlinVersion))
     implementation(kotlin("reflect", kotlinVersion))
-    implementation("androidx.appcompat:appcompat:1.1.0")
+    implementation("androidx.appcompat:appcompat:$androidxVersion")
+    implementation("androidx.core:core-ktx:$androidxVersion")
     implementation("com.google.android.material:material:1.1.0-alpha10")
-    implementation("androidx.core:core-ktx:1.1.0")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corcoutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$corcoutinesVersion")
 
     //****************  LifeCycle  ****************
     //For Lifecycles, LiveData, and ViewModel
@@ -108,12 +118,18 @@ dependencies {
     implementation("com.bytedance.scene:scene-ktx:$sceneVersion")
 
     //第三方
-    implementation("com.github.bumptech.glide:glide:4.8.0")
-    kapt("com.github.bumptech.glide:compiler:4.8.0")
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    kapt("com.github.bumptech.glide:compiler:$glideVersion")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.0")
     implementation("io.reactivex.rxjava2:rxjava:2.2.6")
     implementation("com.youth.banner:banner:1.4.10")
     implementation("io.github.microutils:kotlin-logging:1.6.24")
+    implementation("com.google.code.gson:gson:$gsonVersion")
+
+    implementation("androidx.media:media:$androidxMediaVersion")
+    implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
+    implementation("com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion")
+    implementation("com.google.android.exoplayer:extension-mediasession:$exoplayerVersion")
 }
 
 androidExtensions {

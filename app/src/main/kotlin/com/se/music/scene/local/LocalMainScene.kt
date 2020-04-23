@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.se.music.R
 import com.se.music.scene.base.SeCompatScene
 import com.se.music.support.coroutine.SeCoroutineScope
-import com.se.music.support.database.DataBase
+import com.se.music.base.data.DataBase
 import com.se.music.support.utils.setupWithViewPagerWithTitle
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

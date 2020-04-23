@@ -15,16 +15,11 @@ import com.se.music.R
 import com.se.music.init.MainActivity
 import com.se.music.base.APP_NAME
 import com.se.music.base.Null
-import com.se.music.entity.LrcInfo
-import com.se.music.entity.MusicEntity
-import com.se.music.support.database.database.provider.ImageStore
-import com.se.music.support.database.database.provider.RecentStore
-import com.se.music.support.retrofit.MusicRetrofit
+import com.se.music.base.data.database.entity.MusicEntity
+import com.se.music.base.data.database.provider.ImageStore
+import com.se.music.base.data.database.provider.RecentStore
 import com.se.music.support.singleton.OkHttpSingleton
 import com.se.senet.base.GsonFactory
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 import java.io.RandomAccessFile
 import java.lang.ref.WeakReference
@@ -943,25 +938,25 @@ class MediaService : Service() {
         file = File("$lrc$id.lrc")
         if (!file.exists()) {
             // 获取歌词
-            MusicRetrofit.INSTANCE
-                    .getLrcInfo(info!!.musicName)
-                    .enqueue(object : Callback<LrcInfo> {
-                        override fun onResponse(call: Call<LrcInfo>, response: Response<LrcInfo>) {
-                            val responseLrc = response.body()
-                            val lrcUrl: String
-                            if (responseLrc != null) {
-                                lrcUrl = responseLrc.lrcys_list?.get(0)?.lrclink ?: Null
-                                if (mRequestLrc != null) {
-                                    mLrcHandler.removeCallbacks(mRequestLrc)
-                                }
-                                mRequestLrc = RequestLrc(lrcUrl, getMusicEntity())
-                                mLrcHandler.postDelayed(mRequestLrc, 70)
-                            }
-                        }
-
-                        override fun onFailure(call: Call<LrcInfo>, t: Throwable) {
-                        }
-                    })
+//            MusicRetrofit.INSTANCE
+//                    .getLrcInfo(info!!.musicName)
+//                    .enqueue(object : Callback<LrcInfo> {
+//                        override fun onResponse(call: Call<LrcInfo>, response: Response<LrcInfo>) {
+//                            val responseLrc = response.body()
+//                            val lrcUrl: String
+//                            if (responseLrc != null) {
+//                                lrcUrl = responseLrc.lrcys_list?.get(0)?.lrclink ?: Null
+//                                if (mRequestLrc != null) {
+//                                    mLrcHandler.removeCallbacks(mRequestLrc)
+//                                }
+//                                mRequestLrc = RequestLrc(lrcUrl, getMusicEntity())
+//                                mLrcHandler.postDelayed(mRequestLrc, 70)
+//                            }
+//                        }
+//
+//                        override fun onFailure(call: Call<LrcInfo>, t: Throwable) {
+//                        }
+//                    })
         } else {
             mPlayerHandler.sendEmptyMessage(LRC_DOWNLOADED)
         }
@@ -1012,7 +1007,7 @@ class MediaService : Service() {
             mNotificationManager.notify(mNotificationId, getNotification())
         } else {
             if (notifyMode == NOTIFY_MODE_FOREGROUND) {
-                startForeground(mNotificationId, getNotification())
+//                startForeground(mNotificationId, getNotification())
             } else {
                 mNotificationManager.notify(mNotificationId, getNotification())
             }

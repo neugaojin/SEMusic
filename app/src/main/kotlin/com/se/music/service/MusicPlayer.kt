@@ -5,30 +5,24 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import android.os.RemoteException
 import com.se.music.IMediaAidlInterface
 import com.se.music.base.Null
-import com.se.music.entity.MusicEntity
+import com.se.music.base.data.database.entity.MusicEntity
 import java.util.*
 
 /**
  * Created by gaojin on 2018/3/8.
  */
 object MusicPlayer {
+
+
     var mService: IMediaAidlInterface? = null
-    /**
-     *context 和 ServiceConnection的映射，便于及时释放
-     */
     private var mConnectionMap: WeakHashMap<Context, SeServiceConnection> = WeakHashMap()
 
     fun bindToService(context: Context): ServiceToken? {
-
         context.startService(Intent(context, MediaService::class.java))
-
         val serviceConnection = SeServiceConnection()
-
         val intent = Intent().setClass(context, MediaService::class.java)
-
         if (context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)) {
             mConnectionMap[context] = serviceConnection
             return ServiceToken(context)
@@ -39,7 +33,6 @@ object MusicPlayer {
     fun unbindFromService(token: ServiceToken) {
         val context = token.context
         val serviceConnection = mConnectionMap.remove(context) ?: return
-
         context.unbindService(serviceConnection)
         if (mConnectionMap.isEmpty()) {
             mService = null
@@ -93,30 +86,31 @@ object MusicPlayer {
         if (list.isEmpty() || mService == null) {
             return
         }
+        val currentId = mService!!.audioId
+        val currentQueuePosition = getQueuePosition()
+//        if (position != -1) {
+//            val playlist = getQueue()
+//            if (Arrays.equals(list, playlist)) {
+//                if (currentQueuePosition == position && currentId == list[position]) {
+//                    mService?.play()
+//                    return
+//                } else {
+//                    mService?.queuePosition = position
+//                    return
+//                }
+//            }
+//        }
         try {
-            val currentId = mService!!.audioId
-            val currentQueuePosition = getQueuePosition()
-            if (position != -1) {
-                val playlist = getQueue()
-                if (Arrays.equals(list, playlist)) {
-                    if (currentQueuePosition == position && currentId == list[position]) {
-                        mService?.play()
-                        return
-                    } else {
-                        mService?.queuePosition = position
-                        return
-                    }
-                }
-            }
             if (position < 0) {
                 mService?.open(info, list, 0)
             } else {
                 mService?.open(info, list, position)
             }
-            mService?.play()
-        } catch (ignored: RemoteException) {
-            ignored.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+
+        mService?.play()
     }
 
     /**

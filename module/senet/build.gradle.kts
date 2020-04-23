@@ -32,8 +32,6 @@ dependencies {
     val kotlinVersion: String by project
     val corcoutinesVersion: String by project
     implementation(project(":sebase"))
-    implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
     api("com.squareup.retrofit2:retrofit:2.4.0")
     api("com.squareup.retrofit2:converter-gson:2.4.0")
     api("com.squareup.retrofit2:adapter-rxjava2:2.4.0")

@@ -1,2 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.se.music.base" />
+    package="com.se.music.base">
+
+    <application>
+        <provider
+            android:name="com.se.music.base.data.SongListContentProvider"
+            android:authorities="com.se.music.SEContentProvider"
+            android:exported="false" />
+    </application>
+</manifest>

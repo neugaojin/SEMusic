@@ -1,2 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.se.service" />
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.se.service">
+
+    <application>
+        <service
+            android:name=".SeMusicService"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.se.service.SeMusicService" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

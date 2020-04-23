@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.se.music.R
 import com.se.music.adapter.AlbumListAdapter
-import com.se.music.entity.AlbumEntity
+import com.se.music.base.data.database.entity.AlbumEntity
 import com.se.music.support.coroutine.SeCoroutineScope
-import com.se.music.support.database.DataBase
-import com.se.music.support.singleton.ApplicationSingleton
+import com.se.music.base.data.DataBase
 import com.se.music.widget.loading.LoadingView
 import kotlinx.coroutines.launch
 
@@ -33,7 +32,7 @@ class LocalAlbumScene : UserVisibleHintGroupScene() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
-        return inflater.inflate(R.layout.fragment_local_recycler_view_v1, container, false) as ViewGroup
+        return inflater.inflate(R.layout.fragment_local_recycler_view, container, false) as ViewGroup
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

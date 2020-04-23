@@ -25,12 +25,12 @@ open class BaseActivity : AppCompatActivity() {
     private var mToken: ServiceToken? = null
     private var fragment: QuickControlsFragment? = null // 底部播放控制栏
     private val mMusicListener = mutableListOf<MusicStateListener>()
-    private lateinit var mPlaybackStatus: PlaybackStatus
+//    private lateinit var mPlaybackStatus: PlaybackStatus
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mToken = MusicPlayer.bindToService(this)
-        mPlaybackStatus = PlaybackStatus(this)
+//        mPlaybackStatus = PlaybackStatus(this)
         val intentFilter = IntentFilter().apply {
             addAction(PLAY_STATE_CHANGED)
             addAction(META_CHANGED)
@@ -45,7 +45,7 @@ open class BaseActivity : AppCompatActivity() {
             addAction(PLAYLIST_COUNT_CHANGED)
             addAction(MUSIC_COUNT_CHANGED)
         }
-        registerReceiver(mPlaybackStatus, intentFilter)
+//        registerReceiver(mPlaybackStatus, intentFilter)
     }
 
     /**
@@ -143,7 +143,7 @@ open class BaseActivity : AppCompatActivity() {
         super.onDestroy()
         unbindService()
         mMusicListener.clear()
-        unregisterReceiver(mPlaybackStatus)
+//        unregisterReceiver(mPlaybackStatus)
     }
 
     private fun unbindService() {

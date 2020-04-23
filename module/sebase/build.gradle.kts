@@ -30,8 +30,12 @@ android {
 
 dependencies {
     val kotlinVersion: String by project
-    implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
+    val corcoutinesVersion: String by project
+    val androidxVersion: String by project
+    api("androidx.appcompat:appcompat:$androidxVersion")
+    api("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corcoutinesVersion")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$corcoutinesVersion")
 }
 
 repositories {

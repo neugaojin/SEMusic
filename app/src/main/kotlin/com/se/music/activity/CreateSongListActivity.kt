@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.se.music.R
 import com.se.music.base.ToolBarActivity
 import com.se.music.databinding.ActivityCreateSongListBinding
-import com.se.music.support.database.metadata.*
+import com.se.music.base.data.metadata.*
 import com.se.music.support.utils.generateLoaderId
 import java.util.*
 

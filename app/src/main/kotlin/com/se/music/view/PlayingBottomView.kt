@@ -10,8 +10,8 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSeekBar
 import com.se.music.R
-import com.se.music.support.database.database.entity.MusicInfoCache
-import com.se.music.support.database.metadata.LOVE_SONG_CONTENT_URI
+import com.se.music.base.data.database.entity.MusicInfoCache
+import com.se.music.base.data.metadata.LOVE_SONG_CONTENT_URI
 import com.se.music.service.MediaService
 import com.se.music.service.MusicPlayer
 import com.se.music.support.utils.manager.GlobalPlayTimeManager
