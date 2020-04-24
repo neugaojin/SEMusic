@@ -22,11 +22,11 @@ import com.google.android.exoplayer2.audio.AudioDecoderException;
  */
 public final class FfmpegDecoderException extends AudioDecoderException {
 
-  /* package */ FfmpegDecoderException(String message) {
-    super(message);
-  }
+    /* package */ FfmpegDecoderException(String message) {
+        super(message);
+    }
 
-  /* package */ FfmpegDecoderException(String message, Throwable cause) {
-    super(message, cause);
-  }
+    /* package */ FfmpegDecoderException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
