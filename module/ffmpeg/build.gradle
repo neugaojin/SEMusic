@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        consumerProguardFiles 'proguard-rules.txt'
+    }
+
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/libs'
+        jni.srcDirs = []
+    }
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.1.0'
+    compileOnly 'org.checkerframework:checker-qual:2.5.0'
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion"
+    implementation "com.google.android.exoplayer:extension-mediasession:$exoplayerVersion"
+}

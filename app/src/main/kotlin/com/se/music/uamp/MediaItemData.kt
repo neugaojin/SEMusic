@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 data class MediaItemData(
         val mediaId: String,
         val title: String,
-        val subtitle: String,
+        val artist: String,
+        val album: String,
         val albumArtUri: Uri,
         val browsable: Boolean,
         var playbackRes: Int) {

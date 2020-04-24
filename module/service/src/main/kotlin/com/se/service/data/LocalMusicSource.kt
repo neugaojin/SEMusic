@@ -2,6 +2,7 @@ package com.se.service.data
 
 import android.content.Context
 import android.database.Cursor
+import android.net.Uri
 import android.provider.MediaStore
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
@@ -67,18 +68,18 @@ class LocalMusicSource(private val context: Context) : AbstractMusicSource() {
             album = cursor.getString(LM_ALBUM_INDEX)
             duration = cursor.getLong(LM_DURATION_INDEX)
             genre = "test"
-            mediaUri = "test"
-            albumArtUri = "test"
+            mediaUri = cursor.getString(LM_DATA_INDEX)
+            albumArtUri = "音乐封面图片"
             trackNumber = 1
             trackCount = 0
             flag = MediaBrowserCompat.MediaItem.FLAG_PLAYABLE
 
             // To make things easier for *displaying* these, set the display properties as well.
             displayTitle = cursor.getString(LM_TITLE_INDEX)
-            displaySubtitle = cursor.getString(LM_TITLE_INDEX)
-            displayDescription = cursor.getString(LM_TITLE_INDEX) + "displayDesc"
-            displayIconUri = cursor.getString(LM_TITLE_INDEX) + "image"
-            downloadStatus = MediaDescriptionCompat.STATUS_NOT_DOWNLOADED
+            displaySubtitle = cursor.getString(LM_ARTIST_INDEX)
+            displayDescription = cursor.getString(LM_ALBUM_INDEX)
+            displayIconUri = "test"
+            downloadStatus = MediaDescriptionCompat.STATUS_DOWNLOADED
         }
     }
 }

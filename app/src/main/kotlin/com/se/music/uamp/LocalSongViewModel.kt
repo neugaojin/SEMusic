@@ -10,7 +10,7 @@ import androidx.lifecycle.*
  *Time: 2020/4/21 8:51 PM
  */
 
-class SceneViewModel(musicServiceConnection: MusicServiceConnection) : ViewModel() {
+class LocalSongViewModel(musicServiceConnection: MusicServiceConnection) : ViewModel() {
 
     private val _mediaItems = MutableLiveData<List<MediaItemData>>()
     val mediaItems: LiveData<List<MediaItemData>> = _mediaItems
@@ -23,10 +23,10 @@ class SceneViewModel(musicServiceConnection: MusicServiceConnection) : ViewModel
         override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowserCompat.MediaItem>) {
             super.onChildrenLoaded(parentId, children)
             val itemsList = children.map { child ->
-                val subtitle = child.description.subtitle ?: ""
                 MediaItemData(child.mediaId!!
                         , child.description.title.toString()
-                        , subtitle.toString()
+                        , child.description.subtitle.toString()
+                        , child.description.description.toString()
                         , child.description.iconUri!!
                         , child.isBrowsable
                         , 0)
@@ -72,7 +72,7 @@ class SceneViewModel(musicServiceConnection: MusicServiceConnection) : ViewModel
 
         @Suppress("unchecked_cast")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return SceneViewModel(musicServiceConnection) as T
+            return LocalSongViewModel(musicServiceConnection) as T
         }
     }
 }

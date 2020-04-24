@@ -23,7 +23,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             ndk {
-                abiFilters("armeabi-v7a")
+                abiFilters("armeabi-v7a", "arm64-v8a")
             }
         }
     }
@@ -35,6 +35,7 @@ dependencies {
     val gsonVersion: String by project
     val exoplayerVersion: String by project
     implementation(project(":sebase"))
+    implementation(project(":ffmpeg"))
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     kapt("com.github.bumptech.glide:compiler:$glideVersion")
     api("androidx.media:media:$androidxMediaVersion")

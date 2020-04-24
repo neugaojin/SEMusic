@@ -3,7 +3,13 @@ package com.se.service.extensions
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v4.media.MediaBrowserCompat.MediaItem
+import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
+import com.google.android.exoplayer2.source.ConcatenatingMediaSource
+import com.google.android.exoplayer2.source.ExtractorMediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DataSource
+import com.se.music.base.log.Loger
 
 /**
  *Author: gaojin
@@ -217,10 +223,12 @@ inline var MediaMetadataCompat.Builder.downloadStatus: Long
         putLong(MediaMetadataCompat.METADATA_KEY_DOWNLOAD_STATUS, value)
     }
 
-/**
- * Custom property for storing whether a [MediaMetadataCompat] item represents an
- * item that is [MediaItem.FLAG_BROWSABLE] or [MediaItem.FLAG_PLAYABLE].
- */
+inline val MediaMetadataCompat.fullDescription
+    get() =
+        description.also {
+            it.extras?.putAll(bundle)
+        }
+
 @MediaItem.Flags
 inline var MediaMetadataCompat.Builder.flag: Int
     @Deprecated(NO_GET, level = DeprecationLevel.ERROR)
@@ -229,8 +237,17 @@ inline var MediaMetadataCompat.Builder.flag: Int
         putLong(METADATA_KEY_UAMP_FLAGS, value.toLong())
     }
 
-/**
- * Custom property that holds whether an item is [MediaItem.FLAG_BROWSABLE] or
- * [MediaItem.FLAG_PLAYABLE].
- */
+fun MediaMetadataCompat.toMediaSource(dataSourceFactory: DataSource.Factory): ProgressiveMediaSource =
+        ProgressiveMediaSource.Factory(dataSourceFactory)
+                .setTag(fullDescription)
+                .createMediaSource(mediaUri)
+
+fun List<MediaMetadataCompat>.toMediaSource(dataSourceFactory: DataSource.Factory): ConcatenatingMediaSource {
+    val concatenatingMediaSource = ConcatenatingMediaSource()
+    forEach {
+        concatenatingMediaSource.addMediaSource(it.toMediaSource(dataSourceFactory))
+    }
+    return concatenatingMediaSource
+}
+
 const val METADATA_KEY_UAMP_FLAGS = "com.se.music.media.METADATA_KEY_UAMP_FLAGS"

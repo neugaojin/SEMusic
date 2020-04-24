@@ -12,10 +12,12 @@ import com.se.music.uamp.MediaItemData
 /**
  * Created by gaojin on 2017/12/8.
  */
-class MusicListAdapter(private val mList: MutableList<MediaItemData>)
+class MusicListAdapter()
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val mHeadLayout = 0X01
     private val mContentLayout = 0X02
+    private val mList = mutableListOf<MediaItemData>()
+    private var listener: OnItemClickListener? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ListItem) {
@@ -33,6 +35,15 @@ class MusicListAdapter(private val mList: MutableList<MediaItemData>)
     override fun getItemViewType(position: Int) = when (position) {
         0 -> mHeadLayout
         else -> mContentLayout
+    }
+
+    fun setData(data: List<MediaItemData>) {
+        mList.clear()
+        mList.addAll(data)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
 
     inner class HeadItem(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
@@ -60,13 +71,18 @@ class MusicListAdapter(private val mList: MutableList<MediaItemData>)
             if (v.id == R.id.viewpager_list_button) {
                 //Empty
             } else {
+                listener?.onItemClick(mList[adapterPosition - 1])
             }
         }
 
         fun onBindData(musicEntity: MediaItemData) {
             mMusicName.text = musicEntity.title
-            mMusicInfo.text = musicEntity.subtitle
-            mAlbumInfo.text = musicEntity.subtitle
+            mMusicInfo.text = musicEntity.artist
+            mAlbumInfo.text = musicEntity.album
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(mediaItem: MediaItemData)
     }
 }

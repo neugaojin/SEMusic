@@ -17,7 +17,7 @@ import com.se.music.support.coroutine.SeCoroutineScope
 import com.se.music.uamp.InjectUtils
 import com.se.music.uamp.MainActivityViewModel
 import com.se.music.uamp.MediaItemData
-import com.se.music.uamp.SceneViewModel
+import com.se.music.uamp.LocalSongViewModel
 import com.se.music.widget.loading.LoadingView
 import com.se.service.data.MusicCategory
 import kotlinx.coroutines.delay
@@ -35,11 +35,10 @@ class LocalSongScene : UserVisibleHintGroupScene() {
     }
 
     private lateinit var mainViewModel: MainActivityViewModel
-    private lateinit var sceneViewModel: SceneViewModel
+    private lateinit var localSongViewModel: LocalSongViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var loadingView: LoadingView
     private lateinit var adapter: MusicListAdapter
-    private val musicList = mutableListOf<MediaItemData>()
     private val scope: SeCoroutineScope by lazy {
         SeCoroutineScope()
     }
@@ -49,13 +48,13 @@ class LocalSongScene : UserVisibleHintGroupScene() {
                 .of(activity as FragmentActivity, InjectUtils.provideMainActivityViewModel(sceneContext!!))
                 .get(MainActivityViewModel::class.java)
 
-        sceneViewModel = SceneViewModelProviders
+        localSongViewModel = SceneViewModelProviders
                 .of(this, InjectUtils.provideSceneViewModel(sceneContext!!))
-                .get(SceneViewModel::class.java)
+                .get(LocalSongViewModel::class.java)
 
         scope.launch {
             delay(DELAY_LOAD_TIME)
-            sceneViewModel.subscribe(MusicCategory.MUSIC.name)
+            localSongViewModel.subscribe(MusicCategory.MUSIC.name)
         }
         return inflater.inflate(R.layout.fragment_local_recycler_view, container, false) as ViewGroup
     }
@@ -65,12 +64,20 @@ class LocalSongScene : UserVisibleHintGroupScene() {
         loadingView = requireViewById(R.id.loading_view)
         recyclerView = requireViewById(R.id.recycler_view)
 
-        sceneViewModel.mediaItems.observe(this, Observer {
-            musicList.addAll(it)
-            adapter = MusicListAdapter(musicList)
-            recyclerView.layoutManager = LinearLayoutManager(activity)
-            recyclerView.setHasFixedSize(true)
-            recyclerView.adapter = adapter
+        adapter = MusicListAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = adapter
+
+        adapter.setOnItemClickListener(object : MusicListAdapter.OnItemClickListener {
+            override fun onItemClick(mediaItem: MediaItemData) {
+                mainViewModel.playMedia(mediaItem, true)
+            }
+        })
+
+        localSongViewModel.mediaItems.observe(this, Observer {
+            adapter.setData(it)
+            adapter.notifyDataSetChanged()
             loadingView.visibility = View.GONE
         })
     }

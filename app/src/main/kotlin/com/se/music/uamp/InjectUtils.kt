@@ -14,5 +14,5 @@ object InjectUtils {
 
     fun provideMainActivityViewModel(context: Context) = MainActivityViewModel.Factory(getMSC(context.applicationContext))
 
-    fun provideSceneViewModel(context: Context) = SceneViewModel.Factory(getMSC(context.applicationContext))
+    fun provideSceneViewModel(context: Context) = LocalSongViewModel.Factory(getMSC(context.applicationContext))
 }
