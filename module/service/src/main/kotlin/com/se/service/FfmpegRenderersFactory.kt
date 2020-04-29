@@ -16,7 +16,7 @@ import com.google.android.exoplayer2.video.VideoRendererEventListener
  *Time: 2020/4/24 9:41 PM
  */
 
-class SeRenderersFactory() : RenderersFactory {
+class FfmpegRenderersFactory : RenderersFactory {
     override fun createRenderers(eventHandler: Handler
                                  , videoRendererEventListener: VideoRendererEventListener
                                  , audioRendererEventListener: AudioRendererEventListener
@@ -25,5 +25,4 @@ class SeRenderersFactory() : RenderersFactory {
                                  , drmSessionManager: DrmSessionManager<FrameworkMediaCrypto>?): Array<Renderer> {
         return arrayOf(FfmpegAudioRenderer())
     }
-
 }

@@ -1,12 +1,9 @@
 <resources>
     <string name="app_name">SEMusic</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-
     <string name="behavior_scene">com.se.music.scene.mine.HeadSceneBehavior</string>
-
     <string name="string_help_text">当前应用缺少必要的权限</string>
 
+    <string name="close">关闭</string>
 
     <string name="help">帮助</string>
     <string name="quit">退出</string>
@@ -70,4 +67,6 @@
     <string name="related_song_list">相关歌单</string>
     <string name="related_song">相关单曲</string>
 
+    <string name="duration_unknown">--:--</string>
+    <string name="duration_format">%d:%02d</string>
 </resources>

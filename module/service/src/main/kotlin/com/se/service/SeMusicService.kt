@@ -51,13 +51,13 @@ open class SeMusicService : MediaBrowserServiceCompat() {
             .build()
 
     private val exoPlayer: ExoPlayer by lazy {
-        SimpleExoPlayer.Builder(this, SeRenderersFactory())
+        SimpleExoPlayer.Builder(this, FfmpegRenderersFactory())
                 .build().apply {
                     setAudioAttributes(uAmpAudioAttributes, true)
                 }
     }
 
-    private lateinit var playbackPreparer: UampPlaybackPreparer
+    private lateinit var playbackPreparer: SePlaybackPreparer
 
     override fun onCreate() {
         super.onCreate()
@@ -77,8 +77,10 @@ open class SeMusicService : MediaBrowserServiceCompat() {
 
         // ExoPlayer will manage the MediaSession for us.
         mediaSessionConnector = MediaSessionConnector(mediaSession).also { connector ->
-            val dataSourceFactory = DefaultDataSourceFactory(this, Util.getUserAgent(this, "semusic"), null)
-            playbackPreparer = UampPlaybackPreparer(exoPlayer, dataSourceFactory)
+            val dataSourceFactory = DefaultDataSourceFactory(
+                    this, Util.getUserAgent(this, "semusic"), null
+            )
+            playbackPreparer = SePlaybackPreparer(exoPlayer, dataSourceFactory)
             connector.setPlayer(exoPlayer)
             connector.setPlaybackPreparer(playbackPreparer)
             connector.setQueueNavigator(SeQueueNavigator(mediaSession))

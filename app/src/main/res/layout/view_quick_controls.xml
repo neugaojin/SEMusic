@@ -28,11 +28,12 @@
             android:scaleType="centerCrop" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:layout_toEndOf="@+id/play_bar_img"
+            android:layout_toStartOf="@id/operator_container"
+            android:layout_toEndOf="@id/play_bar_img"
             android:orientation="vertical">
 
             <TextView
@@ -73,6 +74,7 @@
             android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/operator_container"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"

@@ -9,10 +9,11 @@
     <color name="transparent">#00000000</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="black2">#666666</color>
+    <color name="black3">#80000000</color>
     <color name="gray">#FF999999</color>
     <color name="light_gray">#efeeee</color>
     <color name="light_black">#333333</color>
-    <color name="black2">#666666</color>
     <color name="select_gray">#dedede</color>
     <color name="medium_sea_green">#31C27C</color>
     <!--灰色-->

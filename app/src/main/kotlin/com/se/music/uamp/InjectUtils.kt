@@ -1,5 +1,6 @@
 package com.se.music.uamp
 
+import android.app.Application
 import android.content.ComponentName
 import android.content.Context
 import com.se.service.SeMusicService
@@ -15,4 +16,7 @@ object InjectUtils {
     fun provideMainActivityViewModel(context: Context) = MainActivityViewModel.Factory(getMSC(context.applicationContext))
 
     fun provideSceneViewModel(context: Context) = LocalSongViewModel.Factory(getMSC(context.applicationContext))
+
+    fun provideNowPlayingViewModel(context: Context) =
+            NowPlayingViewModel.Factory(context.applicationContext as Application, getMSC(context.applicationContext))
 }

@@ -94,7 +94,7 @@ dependencies {
     implementation(kotlin("reflect", kotlinVersion))
     implementation("androidx.appcompat:appcompat:$androidxVersion")
     implementation("androidx.core:core-ktx:$androidxVersion")
-    implementation("com.google.android.material:material:1.1.0-alpha10")
+    implementation("com.google.android.material:material:1.2.0-alpha06")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corcoutinesVersion")
@@ -104,7 +104,7 @@ dependencies {
     //For Lifecycles, LiveData, and ViewModel
     implementation("android.arch.lifecycle:runtime:$aacVersion")
     implementation("android.arch.lifecycle:extensions:$aacVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-beta01")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha01")
     kapt("android.arch.lifecycle:compiler:$aacVersion")
     //For Room
     implementation("android.arch.persistence.room:runtime:$aacVersion")
@@ -120,7 +120,7 @@ dependencies {
     //第三方
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     kapt("com.github.bumptech.glide:compiler:$glideVersion")
-    implementation("io.reactivex.rxjava2:rxandroid:2.1.0")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("io.reactivex.rxjava2:rxjava:2.2.6")
     implementation("com.youth.banner:banner:1.4.10")
     implementation("io.github.microutils:kotlin-logging:1.6.24")

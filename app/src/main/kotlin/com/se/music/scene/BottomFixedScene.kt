@@ -9,13 +9,25 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bytedance.scene.Scene
+import com.bytedance.scene.animation.animatorexecutor.DialogSceneAnimatorExecutor
+import com.bytedance.scene.interfaces.PushOptions
 import com.se.music.R
 import com.se.music.activity.PlayingActivity
+import com.se.music.scene.animation.BottomDialogSceneAnimatorExecutor
+import com.se.music.scene.base.DialogScene
+import com.se.music.scene.local.LocalMainScene
+import com.se.music.scene.sub.BottomListScene
 import com.se.music.service.MusicPlayer
 import com.se.music.support.utils.getLargeImageUrl
-import com.se.music.support.utils.isContentEmpty
 import com.se.music.support.utils.loadUrl
+import com.se.music.uamp.InjectUtils
+import com.se.music.uamp.MainActivityViewModel
+import com.se.music.uamp.NowPlayingViewModel
+import com.se.service.library.PlayState
 
 /**
  *Author: gaojin
@@ -24,7 +36,7 @@ import com.se.music.support.utils.loadUrl
 
 class BottomFixedScene : Scene(), View.OnClickListener {
 
-    companion object{
+    companion object {
         const val TAG = "BottomFixedScene"
     }
 
@@ -36,16 +48,22 @@ class BottomFixedScene : Scene(), View.OnClickListener {
     private lateinit var playNext: ImageView
     private lateinit var mLogan: TextView
     private lateinit var circleAnim: ObjectAnimator
+    private lateinit var playingViewModel: NowPlayingViewModel
+    private lateinit var mainViewModel: MainActivityViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        val root = inflater.inflate(R.layout.view_quick_controls, container, false)
-        album = root.findViewById(R.id.play_bar_img)
-        playBarSongName = root.findViewById(R.id.play_bar_song_name)
-        playBarSinger = root.findViewById(R.id.play_bar_singer)
-        playList = root.findViewById(R.id.play_list)
-        control = root.findViewById(R.id.control)
-        playNext = root.findViewById(R.id.play_next)
-        mLogan = root.findViewById(R.id.music_logan)
+        return inflater.inflate(R.layout.view_quick_controls, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        album = view.findViewById(R.id.play_bar_img)
+        playBarSongName = view.findViewById(R.id.play_bar_song_name)
+        playBarSinger = view.findViewById(R.id.play_bar_singer)
+        playList = view.findViewById(R.id.play_list)
+        control = view.findViewById(R.id.control)
+        playNext = view.findViewById(R.id.play_next)
+        mLogan = view.findViewById(R.id.music_logan)
 
         val albumCenterPoint = resources.getDimension(R.dimen.bottom_fragment_album_size) / 2
         album.pivotX = albumCenterPoint
@@ -58,62 +76,69 @@ class BottomFixedScene : Scene(), View.OnClickListener {
             start()
         }
 
-        root.setOnClickListener(this)
-        root.elevation = 100f
-
+        view.setOnClickListener(this)
+        view.elevation = 100f
         playList.setOnClickListener(this)
         control.setOnClickListener(this)
         playNext.setOnClickListener(this)
-        return root
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateFragment()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        playingViewModel = ViewModelProviders
+                .of(activity as FragmentActivity, InjectUtils.provideNowPlayingViewModel(sceneContext!!))
+                .get(NowPlayingViewModel::class.java)
+
+        mainViewModel = ViewModelProviders
+                .of(activity as FragmentActivity, InjectUtils.provideMainActivityViewModel(sceneContext!!))
+                .get(MainActivityViewModel::class.java)
+
+        playingViewModel.playingState.observe(this, Observer {
+            if (it == PlayState.PLAYING) {
+                control.setImageResource(R.drawable.playbar_btn_pause)
+                circleAnim.resume()
+            } else {
+                control.setImageResource(R.drawable.playbar_btn_play)
+                circleAnim.pause()
+            }
+        })
+
+        playingViewModel.mediaMetadata.observe(this, Observer {
+            if (it.title.isNullOrEmpty() || it.subtitle.isNullOrEmpty()) {
+                playBarSongName.visibility = View.GONE
+                playBarSinger.visibility = View.GONE
+                album.visibility = View.GONE
+                mLogan.visibility = View.VISIBLE
+            } else {
+                playBarSongName.visibility = View.VISIBLE
+                playBarSinger.visibility = View.VISIBLE
+                album.visibility = View.VISIBLE
+                mLogan.visibility = View.GONE
+                playBarSongName.text = it.title
+                playBarSinger.text = it.subtitle
+            }
+        })
+        album.loadUrl(MusicPlayer.getAlbumPic().getLargeImageUrl(), R.drawable.player_albumcover_default)
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.play_list -> {
+                DialogScene.show(requireNavigationScene(), BottomListScene::class.java)
             }
-            R.id.control -> MusicPlayer.playOrPause()
-            R.id.play_next -> MusicPlayer.nextPlay()
+            R.id.control -> {
+                playingViewModel.mediaMetadata.value?.let {
+                    mainViewModel.playMediaId(it.id)
+                }
+            }
+            R.id.play_next -> {
+                mainViewModel.skipToNext()
+            }
             else -> {
                 val intent = Intent(activity, PlayingActivity::class.java)
                 navigationScene?.startActivity(intent)
                 activity!!.overridePendingTransition(R.anim.push_down_in, R.anim.push_up_out)
             }
-        }
-    }
-
-//    override fun updatePlayInfo() {
-//        updateFragment()
-//    }
-
-    private fun updateFragment() {
-
-        album.loadUrl(MusicPlayer.getAlbumPic().getLargeImageUrl(), R.drawable.player_albumcover_default)
-
-        if (MusicPlayer.getTrackName().isContentEmpty() && MusicPlayer.getArtistName().isContentEmpty()) {
-            playBarSongName.visibility = View.GONE
-            playBarSinger.visibility = View.GONE
-            album.visibility = View.GONE
-            mLogan.visibility = View.VISIBLE
-        } else {
-            playBarSongName.visibility = View.VISIBLE
-            playBarSinger.visibility = View.VISIBLE
-            album.visibility = View.VISIBLE
-            mLogan.visibility = View.GONE
-            playBarSongName.text = MusicPlayer.getTrackName()
-            playBarSinger.text = MusicPlayer.getArtistName()
-        }
-
-        if (MusicPlayer.isPlaying()) {
-            control.setImageResource(R.drawable.playbar_btn_pause)
-            circleAnim.resume()
-        } else {
-            control.setImageResource(R.drawable.playbar_btn_play)
-            circleAnim.pause()
         }
     }
 }

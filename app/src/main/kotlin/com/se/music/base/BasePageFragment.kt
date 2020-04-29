@@ -20,7 +20,7 @@ import com.se.music.databinding.FragmentBaseBinding
  * Created by gaojin on 2018/2/28.
  */
 abstract class BasePageFragment : BaseFragment() {
-    protected lateinit var fm: FragmentManager
+    private lateinit var fm: FragmentManager
 
     private lateinit var mBinding: FragmentBaseBinding
 

@@ -15,9 +15,13 @@ import com.se.service.data.MusicSource
 import com.se.service.extensions.id
 import com.se.service.extensions.toMediaSource
 
+/**
+ *Author: gaojin
+ *Time: 2020/4/23 9:41 PM
+ */
 
-class UampPlaybackPreparer(private val exoPlayer: ExoPlayer
-                           , private val dataSourceFactory: DataSource.Factory) : MediaSessionConnector.PlaybackPreparer {
+class SePlaybackPreparer(private val exoPlayer: ExoPlayer
+                         , private val dataSourceFactory: DataSource.Factory) : MediaSessionConnector.PlaybackPreparer {
 
     var musicSource: MusicSource? = null
     override fun onPrepareFromSearch(query: String, playWhenReady: Boolean, extras: Bundle) = Unit
@@ -32,24 +36,23 @@ class UampPlaybackPreparer(private val exoPlayer: ExoPlayer
     override fun getSupportedPrepareActions(): Long =
             PlaybackStateCompat.ACTION_PREPARE_FROM_MEDIA_ID or
                     PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or
-                    PlaybackStateCompat.ACTION_PREPARE_FROM_SEARCH or
-                    PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH
+                    PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
+                    PlaybackStateCompat.ACTION_SET_REPEAT_MODE
 
     override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle) {
         Loger.e { "onPrepareFromMediaId: $mediaId" }
-        musicSource ?: return
-        val itemToPlay: MediaMetadataCompat? = musicSource!!.find { item ->
-            item.id == mediaId
-        }
-        if (itemToPlay != null) {
-            val metadataList = musicSource!!.map { it }
-            val mediaSource = metadataList.toMediaSource(dataSourceFactory)
-            val initialWindowIndex = metadataList.indexOf(itemToPlay)
-            Loger.e { "prepare mediaSource: $mediaSource" }
-            exoPlayer.prepare(mediaSource)
-            exoPlayer.seekTo(initialWindowIndex, 0)
+        musicSource?.let { source ->
+            val itemToPlay: MediaMetadataCompat? = source.find { item ->
+                item.id == mediaId
+            }
+            if (itemToPlay != null) {
+                val metadataList = source.map { it }
+                val mediaSource = metadataList.toMediaSource(dataSourceFactory)
+                val initialWindowIndex = metadataList.indexOf(itemToPlay)
+                Loger.e { "prepare mediaSource: $mediaSource" }
+                exoPlayer.prepare(mediaSource)
+                exoPlayer.seekTo(initialWindowIndex, 0)
+            }
         }
     }
 }
-
-private const val TAG = "MediaSessionHelper"

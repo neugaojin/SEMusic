@@ -7,5 +7,5 @@
     <item name="love_music" type="id" />
     <item name="running_radio" type="id" />
     <item name="buy_music" type="id" />
-
+    <item name="scene_dialog_content_view" type="id" />
 </resources>
