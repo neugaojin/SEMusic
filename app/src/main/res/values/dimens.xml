@@ -17,7 +17,7 @@
 
     <dimen name="mine_list_image_size">60dp</dimen>
     <dimen name="local_music_play_all_size">20dp</dimen>
-    <dimen name="bottom_fragment_album_size">41dp</dimen>
+    <dimen name="bottom_fragment_album_size">42dp</dimen>
     <dimen name="main_tool_bar_title_padding">10dp</dimen>
 
     <dimen name="content_image_head">60dp</dimen>

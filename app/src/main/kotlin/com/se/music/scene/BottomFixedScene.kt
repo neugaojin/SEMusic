@@ -13,20 +13,17 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bytedance.scene.Scene
-import com.bytedance.scene.animation.animatorexecutor.DialogSceneAnimatorExecutor
-import com.bytedance.scene.interfaces.PushOptions
 import com.se.music.R
 import com.se.music.activity.PlayingActivity
-import com.se.music.scene.animation.BottomDialogSceneAnimatorExecutor
+import com.se.music.base.singleton.ApplicationSingleton
 import com.se.music.scene.base.DialogScene
-import com.se.music.scene.local.LocalMainScene
 import com.se.music.scene.sub.BottomListScene
 import com.se.music.service.MusicPlayer
 import com.se.music.support.utils.getLargeImageUrl
 import com.se.music.support.utils.loadUrl
 import com.se.music.uamp.InjectUtils
-import com.se.music.uamp.MainActivityViewModel
-import com.se.music.uamp.NowPlayingViewModel
+import com.se.music.uamp.viewmodel.MainViewModel
+import com.se.music.uamp.viewmodel.NowPlayingViewModel
 import com.se.service.library.PlayState
 
 /**
@@ -49,7 +46,7 @@ class BottomFixedScene : Scene(), View.OnClickListener {
     private lateinit var mLogan: TextView
     private lateinit var circleAnim: ObjectAnimator
     private lateinit var playingViewModel: NowPlayingViewModel
-    private lateinit var mainViewModel: MainActivityViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.view_quick_controls, container, false)
@@ -85,13 +82,12 @@ class BottomFixedScene : Scene(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        playingViewModel = ViewModelProviders
-                .of(activity as FragmentActivity, InjectUtils.provideNowPlayingViewModel(sceneContext!!))
-                .get(NowPlayingViewModel::class.java)
+
+        playingViewModel = NowPlayingViewModel.getInstance()
 
         mainViewModel = ViewModelProviders
-                .of(activity as FragmentActivity, InjectUtils.provideMainActivityViewModel(sceneContext!!))
-                .get(MainActivityViewModel::class.java)
+                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(sceneContext!!))
+                .get(MainViewModel::class.java)
 
         playingViewModel.playingState.observe(this, Observer {
             if (it == PlayState.PLAYING) {

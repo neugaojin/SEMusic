@@ -17,8 +17,8 @@ import com.se.music.support.utils.*
  */
 
 class SingerListAdapter constructor(
-    private val context: Context,
-    private val list: MutableList<ArtistEntity>
+        private val context: Context,
+        private val list: MutableList<ArtistEntity>
 ) : RecyclerView.Adapter<SingerListAdapter.SingerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingerViewHolder {
         return SingerViewHolder(parent.inflate(R.layout.mine_local_singer_item))
@@ -37,29 +37,6 @@ class SingerListAdapter constructor(
             holder.singerAvatar.loadUrl(artistEntity.imageId.getMediumImageUrl(), R.drawable.default_singer_avatar)
         }
     }
-
-//    private fun buildArtistCallBacks(holder: SingerViewHolder, position: Int): CallLoaderCallbacks<Artist> {
-//        return object : CallLoaderCallbacks<Artist>(context) {
-//            override fun onCreateCall(id: Int, args: Bundle?): Call<Artist> {
-//                return MusicRetrofit.INSTANCE.getSingAvatar(list[position].artistName)
-//            }
-//
-//            override fun onSuccess(loader: Loader<*>, data: Artist) {
-//                holder.singerAvatar.setImageResource(R.drawable.default_singer_avatar)
-//                data.image?.run {
-//                    val imageId = get(0).imgUrl.getImageId()
-//                    holder.singerAvatar.loadUrl(imageId.getMediumImageUrl(), R.drawable.default_singer_avatar)
-//                    list[position].imageId = imageId
-//                    // 添加图片缓存
-//                    ImageStore.instance.addImage(list[position].artistName.hashCode(), imageId)
-//                }
-//            }
-//
-//            override fun onFailure(loader: Loader<*>, throwable: Throwable) {
-//                Log.e("SingerListAdapter", throwable.toString())
-//            }
-//        }
-//    }
 
     class SingerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val singerAvatar: ImageView = view.findViewById(R.id.local_singer_avatar)

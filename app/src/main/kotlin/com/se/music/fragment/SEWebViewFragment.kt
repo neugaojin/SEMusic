@@ -1,21 +1,18 @@
 package com.se.music.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.se.music.R
-import com.se.music.base.BasePageFragment
+import androidx.fragment.app.Fragment
 
 /**
  *Author: gaojin
  *Time: 2018/5/13 下午6:30
  */
 
-class SEWebViewFragment : BasePageFragment() {
+class SEWebViewFragment : Fragment() {
 
     private lateinit var mWebView: WebView
     private var mWebUrl: String? = null
@@ -29,11 +26,6 @@ class SEWebViewFragment : BasePageFragment() {
             fragment.arguments = args
             return fragment
         }
-    }
-
-    override fun createContentView(inflater: LayoutInflater, container: ViewGroup?): View {
-        mWebView = inflater.inflate(R.layout.activity_web_view, container, false) as WebView
-        return mWebView
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +56,6 @@ class SEWebViewFragment : BasePageFragment() {
             }
             webChromeClient = object : WebChromeClient() {
                 override fun onReceivedTitle(view: WebView, title: String) {
-                    setTitle(title)
                 }
             }
         }

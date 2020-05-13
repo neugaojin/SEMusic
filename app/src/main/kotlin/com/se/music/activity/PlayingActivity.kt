@@ -17,9 +17,11 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.bytedance.scene.Scene
 import com.se.music.R
 import com.se.music.adapter.PlayerPagerAdapter
 import com.se.music.base.BaseActivity
+import com.se.music.scene.RootScene
 import com.se.music.service.MusicPlayer
 import com.se.music.support.utils.blurBitmap
 import com.se.music.support.utils.getMegaImageUrl
@@ -47,10 +49,13 @@ class PlayingActivity : BaseActivity(), ViewPager.OnPageChangeListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_music)
         setTransparentForWindow(this)
-        showQuickControl(false)
         toolbarInit()
         initView()
     }
+
+    override fun getHomeSceneClass() = RootScene::class.java
+
+    override fun supportRestore() = false
 
     private fun initView() {
         activityBg = findViewById(R.id.player_activity_bg)
@@ -82,12 +87,12 @@ class PlayingActivity : BaseActivity(), ViewPager.OnPageChangeListener {
         setBackground()
     }
 
-    override fun musicChanged() {
-        super.musicChanged()
-        songTitle.text = MusicPlayer.getTrackName()
-        playingBottomView.musicChanged()
-        setBackground()
-    }
+//    override fun musicChanged() {
+//        super.musicChanged()
+//        songTitle.text = MusicPlayer.getTrackName()
+//        playingBottomView.musicChanged()
+//        setBackground()
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)

@@ -48,7 +48,7 @@ class Welcome : AppCompatActivity() {
     }
 
     private fun toMainActivity() {
-        val intent = Intent(this, MainActivityV2::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.setPackage(packageName)
         startActivity(intent)
         overridePendingTransition(0, 0)

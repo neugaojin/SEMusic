@@ -9,16 +9,18 @@
     <LinearLayout
         android:id="@+id/dialog_top_content"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
 
         <ImageView
+            android:id="@+id/dialog_repeat_mode"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
-            android:background="@android:drawable/btn_dialog" />
+            android:padding="17dp"
+            android:src="@drawable/dialog_repeat_all" />
 
         <TextView
             android:id="@+id/dialog_top_title"
@@ -26,32 +28,34 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/close"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textColor="@color/light_black"
+            android:textSize="14sp" />
 
         <ImageView
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_gravity="center_vertical"
-            android:background="@android:drawable/btn_dialog" />
+            android:padding="12dp"
+            android:src="@drawable/dialog_top_download" />
 
         <ImageView
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_gravity="center_vertical"
-            android:background="@android:drawable/btn_dialog" />
+            android:padding="12dp"
+            android:src="@drawable/dialog_top_create" />
 
         <ImageView
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_gravity="center_vertical"
-            android:background="@android:drawable/btn_dialog" />
+            android:padding="12dp"
+            android:src="@drawable/dialog_top_delete" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:background="@color/split_color" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -71,6 +75,6 @@
         android:layout_height="55dp"
         android:gravity="center"
         android:text="@string/close"
-        android:textColor="@color/black"
+        android:textColor="@color/light_black"
         android:textSize="16sp" />
 </LinearLayout>

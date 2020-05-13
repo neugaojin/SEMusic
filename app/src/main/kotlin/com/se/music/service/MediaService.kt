@@ -12,7 +12,6 @@ import android.text.TextUtils
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.se.music.R
-import com.se.music.init.MainActivity
 import com.se.music.base.APP_NAME
 import com.se.music.base.Null
 import com.se.music.base.data.database.entity.MusicEntity
@@ -36,6 +35,7 @@ class MediaService : Service() {
     companion object {
         const val TAG = "MediaService"
         const val TRACK_ENDED = 1
+
         /**
          * 自动切换下一首
          */
@@ -45,6 +45,7 @@ class MediaService : Service() {
         const val FADE_DOWN = 6
         const val FADE_UP = 7
         const val LRC_DOWNLOADED = -10
+
         /**
          * 单曲循环
          */
@@ -85,31 +86,38 @@ class MediaService : Service() {
     private lateinit var mNotificationManager: NotificationManager
 
     private val mShuffler = Shuffler.INSTANCE
+
     /**
      * 历史歌单 记录播放过的音乐的位置
      */
     private val mHistory = LinkedList<Int>()
+
     /**
      * 传进来的歌单
      */
     @SuppressLint("UseSparseArrays")
     private var mPlayListInfo = HashMap<Long, MusicEntity>()
+
     /**
      * 当前播放列表
      */
     private val mPlaylist = ArrayList<MusicTrack>(100)
+
     /**
      * 当前播放的音乐的实体
      */
     private var currentMusicEntity: MusicEntity? = null
+
     /**
      * 当前要播放音乐的地址
      */
     private var mFileToPlay: String = Null
+
     /**
      * 当前播放音乐的下标
      */
     private var mPlayPos = -1
+
     /**
      * 下一首歌的下标
      */
@@ -1121,8 +1129,7 @@ class MediaService : Service() {
         val prePIntent = PendingIntent.getBroadcast(this, 0, preIntent, 0)
         remoteViews.setOnClickPendingIntent(R.id.img_cancel, prePIntent)
 
-        val mMainIntent = Intent(this, MainActivity::class.java)
-        val mainIntent = PendingIntent.getActivity(this, 0, mMainIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val mainIntent = PendingIntent.getActivity(this, 0, null, PendingIntent.FLAG_UPDATE_CURRENT)
 
         if (mNotificationPostTime == 0L) {
             mNotificationPostTime = System.currentTimeMillis()

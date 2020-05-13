@@ -17,17 +17,6 @@ open class BaseFragment : Fragment(), MusicStateListener {
         mLoaderManager = LoaderManager.getInstance(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as BaseActivity).setMusicStateListenerListener(this)
-        reloadAdapter()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as BaseActivity).removeMusicStateListenerListener(this)
-    }
-
     override fun updateLrc() {
     }
 

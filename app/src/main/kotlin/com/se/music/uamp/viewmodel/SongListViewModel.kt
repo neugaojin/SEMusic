@@ -1,18 +1,27 @@
-package com.se.music.uamp
+package com.se.music.uamp.viewmodel
 
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.lifecycle.*
+import com.se.music.uamp.EMPTY_PLAYBACK_STATE
+import com.se.music.uamp.MediaItemData
+import com.se.music.uamp.MusicServiceConnection
+import com.se.music.uamp.NOTHING_PLAYING
+import com.se.service.extensions.id
+import com.se.service.extensions.isPlaying
+import com.se.service.library.PlayState
 
 /**
  *Author: gaojin
  *Time: 2020/4/21 8:51 PM
  */
 
-class LocalSongViewModel(musicServiceConnection: MusicServiceConnection) : ViewModel() {
+class SongListViewModel(musicServiceConnection: MusicServiceConnection) : ViewModel() {
 
-    private val _mediaItems = MutableLiveData<List<MediaItemData>>()
+    private val _mediaItems = MutableLiveData<List<MediaItemData>>().apply {
+        value = emptyList()
+    }
     val mediaItems: LiveData<List<MediaItemData>> = _mediaItems
 
     private lateinit var mediaId: String
@@ -29,7 +38,7 @@ class LocalSongViewModel(musicServiceConnection: MusicServiceConnection) : ViewM
                         , child.description.description.toString()
                         , child.description.iconUri!!
                         , child.isBrowsable
-                        , 0)
+                        , PlayState.EMPTY)
             }
             _mediaItems.postValue(itemsList)
         }
@@ -39,7 +48,7 @@ class LocalSongViewModel(musicServiceConnection: MusicServiceConnection) : ViewM
         val playbackState = it ?: EMPTY_PLAYBACK_STATE
         val metadata = musicServiceConnection.nowPlaying.value ?: NOTHING_PLAYING
         if (metadata.getString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID) != null) {
-//            _mediaItems.postValue()
+            _mediaItems.postValue(updateState(playbackState, metadata))
         }
     }
 
@@ -47,7 +56,7 @@ class LocalSongViewModel(musicServiceConnection: MusicServiceConnection) : ViewM
         val playbackState = musicServiceConnection.playbackState.value ?: EMPTY_PLAYBACK_STATE
         val metadata = it ?: NOTHING_PLAYING
         if (metadata.getString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID) != null) {
-//            _mediaItems.postValue(updateState(playbackState, metadata))
+            _mediaItems.postValue(updateState(playbackState, metadata))
         }
     }
 
@@ -68,11 +77,26 @@ class LocalSongViewModel(musicServiceConnection: MusicServiceConnection) : ViewM
         musicServiceConnection.unsubscribe(mediaId, subscriptionCallback)
     }
 
-    class Factory(private val musicServiceConnection: MusicServiceConnection) : ViewModelProvider.NewInstanceFactory() {
+    private fun updateState(
+            playbackState: PlaybackStateCompat,
+            mediaMetadata: MediaMetadataCompat
+    ): List<MediaItemData> {
 
+        val playState = when (playbackState.isPlaying) {
+            true -> PlayState.PLAYING
+            else -> PlayState.PAUSE
+        }
+
+        return mediaItems.value?.map {
+            val state = if (it.mediaId == mediaMetadata.id) playState else PlayState.EMPTY
+            it.copy(playbackState = state)
+        } ?: emptyList()
+    }
+
+    class Factory(private val musicServiceConnection: MusicServiceConnection) : ViewModelProvider.NewInstanceFactory() {
         @Suppress("unchecked_cast")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return LocalSongViewModel(musicServiceConnection) as T
+            return SongListViewModel(musicServiceConnection) as T
         }
     }
 }

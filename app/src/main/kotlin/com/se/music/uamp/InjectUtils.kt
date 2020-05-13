@@ -1,8 +1,9 @@
 package com.se.music.uamp
 
-import android.app.Application
 import android.content.ComponentName
 import android.content.Context
+import com.se.music.uamp.viewmodel.SongListViewModel
+import com.se.music.uamp.viewmodel.MainViewModel
 import com.se.service.SeMusicService
 
 /**
@@ -11,12 +12,9 @@ import com.se.service.SeMusicService
  */
 
 object InjectUtils {
-    private fun getMSC(context: Context) = MusicServiceConnection.getInstance(context, ComponentName(context, SeMusicService::class.java))
+    fun getMSC(context: Context) = MusicServiceConnection.getInstance(context, ComponentName(context, SeMusicService::class.java))
 
-    fun provideMainActivityViewModel(context: Context) = MainActivityViewModel.Factory(getMSC(context.applicationContext))
+    fun provideMainViewModel(context: Context) = MainViewModel.Factory(getMSC(context.applicationContext))
 
-    fun provideSceneViewModel(context: Context) = LocalSongViewModel.Factory(getMSC(context.applicationContext))
-
-    fun provideNowPlayingViewModel(context: Context) =
-            NowPlayingViewModel.Factory(context.applicationContext as Application, getMSC(context.applicationContext))
+    fun provideSongListViewModel(context: Context) = SongListViewModel.Factory(getMSC(context.applicationContext))
 }

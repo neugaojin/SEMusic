@@ -15,9 +15,10 @@ import com.se.music.R
 import com.se.music.adapter.MusicListAdapter
 import com.se.music.support.coroutine.SeCoroutineScope
 import com.se.music.uamp.InjectUtils
-import com.se.music.uamp.MainActivityViewModel
 import com.se.music.uamp.MediaItemData
-import com.se.music.uamp.LocalSongViewModel
+import com.se.music.uamp.viewmodel.MainViewModel
+import com.se.music.uamp.viewmodel.NowPlayingViewModel
+import com.se.music.uamp.viewmodel.SongListViewModel
 import com.se.music.widget.loading.LoadingView
 import com.se.service.data.MusicCategory
 import kotlinx.coroutines.delay
@@ -34,8 +35,8 @@ class LocalSongScene : UserVisibleHintGroupScene() {
         const val DELAY_LOAD_TIME = 250L
     }
 
-    private lateinit var mainViewModel: MainActivityViewModel
-    private lateinit var localSongViewModel: LocalSongViewModel
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var songListViewModel: SongListViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var loadingView: LoadingView
     private lateinit var adapter: MusicListAdapter
@@ -45,16 +46,22 @@ class LocalSongScene : UserVisibleHintGroupScene() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         mainViewModel = ViewModelProviders
-                .of(activity as FragmentActivity, InjectUtils.provideMainActivityViewModel(sceneContext!!))
-                .get(MainActivityViewModel::class.java)
+                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(sceneContext!!))
+                .get(MainViewModel::class.java)
 
-        localSongViewModel = SceneViewModelProviders
-                .of(this, InjectUtils.provideSceneViewModel(sceneContext!!))
-                .get(LocalSongViewModel::class.java)
+        songListViewModel = SceneViewModelProviders
+                .of(this, InjectUtils.provideSongListViewModel(sceneContext!!))
+                .get(SongListViewModel::class.java)
 
         scope.launch {
             delay(DELAY_LOAD_TIME)
-            localSongViewModel.subscribe(MusicCategory.MUSIC.name)
+            songListViewModel.subscribe(MusicCategory.MUSIC.name)
+            songListViewModel.mediaItems.observe(this@LocalSongScene, Observer { data ->
+                adapter.setData(data)
+                adapter.notifyDataSetChanged()
+                loadingView.visibility = View.GONE
+                NowPlayingViewModel.setMediaItems(data)
+            })
         }
         return inflater.inflate(R.layout.fragment_local_recycler_view, container, false) as ViewGroup
     }
@@ -73,12 +80,6 @@ class LocalSongScene : UserVisibleHintGroupScene() {
             override fun onItemClick(mediaItem: MediaItemData) {
                 mainViewModel.playMedia(mediaItem, true)
             }
-        })
-
-        localSongViewModel.mediaItems.observe(this, Observer {
-            adapter.setData(it)
-            adapter.notifyDataSetChanged()
-            loadingView.visibility = View.GONE
         })
     }
 

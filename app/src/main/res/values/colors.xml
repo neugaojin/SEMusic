@@ -3,8 +3,25 @@
     <color name="colorPrimaryDark">#146e6e</color>
     <color name="colorPrimary">#31C27C</color>
     <color name="colorAccent">#FF4081</color>
-
     <color name="color_bg">#FFF8F8F8</color>
+
+    <!-- base colors-->
+    <color name="ff4b10">#FF4B10</color>
+    <color name="b6b6b6">#ffb6b6b6</color>
+    <color name="ff8225">#ffff8225</color>
+    <color name="fcbd8f">#fffcbd8f</color>
+    <color name="fca386">#fffca386</color>
+    <color name="green">#FF32B9AA</color>
+    <color name="orange">#FF9900</color>
+    <color name="pure_black">#000000</color>
+    <color name="green_FF06C1AE">#FF06C1AE</color>
+    <color name="status_bar">#757575</color>
+    <color name="f2f2f2">#FFf2f2f2</color>
+    <color name="translucent_orange">#80ff9900</color>
+    <color name="FAFAFA">#FFFAFAFA</color>
+    <color name="FFFAF4">#FFFFFAF4</color>
+    <color name="f5f5f5">#fff5f5f5</color>
+    <color name="F9F9F9">#FFF9F9F9</color>
 
     <color name="transparent">#00000000</color>
     <color name="white">#ffffff</color>

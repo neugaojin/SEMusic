@@ -1,4 +1,4 @@
-package com.se.music.uamp
+package com.se.music.uamp.viewmodel
 
 import android.app.Application
 import android.content.Context
@@ -7,22 +7,41 @@ import android.os.Handler
 import android.os.Looper
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.se.music.R
+import com.se.music.base.singleton.ApplicationSingleton
+import com.se.music.uamp.*
 import com.se.service.extensions.*
 import com.se.service.library.PlayState
+import com.se.service.library.RepeatMode
 import kotlin.math.floor
 
 /**
  *Author: gaojin
- *Time: 2020/4/28 6:32 PM
+ *Time: 2020/5/13 10:51 AM
  */
 
 class NowPlayingViewModel(private val app: Application,
-                          musicServiceConnection: MusicServiceConnection
-) : AndroidViewModel(app) {
+                          musicServiceConnection: MusicServiceConnection) {
     companion object {
         private const val POSITION_UPDATE_INTERVAL_MILLIS = 100L
+
+        @Volatile
+        private var instance: NowPlayingViewModel? = null
+        fun getInstance() =
+                instance ?: synchronized(this) {
+                    instance ?: NowPlayingViewModel(
+                            ApplicationSingleton.instance,
+                            InjectUtils.getMSC(ApplicationSingleton.instance)
+                    ).also {
+                        instance = it
+                    }
+                }
+
+        fun setMediaItems(mediaItems: List<MediaItemData>) {
+            getInstance().mediaItems.postValue(mediaItems)
+        }
     }
 
     data class NowPlayingMetadata(
@@ -32,7 +51,6 @@ class NowPlayingViewModel(private val app: Application,
             val subtitle: String?,
             val duration: String
     ) {
-
         companion object {
             fun timestampToMSS(context: Context, position: Long): String {
                 val totalSeconds = floor(position / 1E3).toInt()
@@ -56,11 +74,18 @@ class NowPlayingViewModel(private val app: Application,
         postValue(PlayState.EMPTY)
     }
 
+    val repeatMode = MutableLiveData<RepeatMode>().apply {
+        postValue(RepeatMode.EMPTY)
+    }
+
+    val mediaItems = MutableLiveData<List<MediaItemData>>().apply {
+        value = emptyList()
+    }
+
     private val playbackStateObserver = Observer<PlaybackStateCompat> {
         playbackState = it ?: EMPTY_PLAYBACK_STATE
         val metadata = musicServiceConnection.nowPlaying.value ?: NOTHING_PLAYING
         updateState(playbackState, metadata)
-
         if (playbackState.isPlaying) {
             updatePosition = true
             checkPlaybackPosition()
@@ -73,9 +98,14 @@ class NowPlayingViewModel(private val app: Application,
         updateState(playbackState, it)
     }
 
-    private val musicServiceConnection = musicServiceConnection.also {
-        it.playbackState.observeForever(playbackStateObserver)
-        it.nowPlaying.observeForever(mediaMetadataObserver)
+    private val repeatModeObserver = Observer<RepeatMode> {
+        repeatMode.postValue(it)
+    }
+
+    private val musicServiceConnection = musicServiceConnection.apply {
+        playbackState.observeForever(playbackStateObserver)
+        nowPlaying.observeForever(mediaMetadataObserver)
+        nowRepeatMode.observeForever(repeatModeObserver)
         checkPlaybackPosition()
     }
 
@@ -92,7 +122,6 @@ class NowPlayingViewModel(private val app: Application,
             playbackState: PlaybackStateCompat,
             mediaMetadata: MediaMetadataCompat
     ) {
-
         // Only update media item once we have duration available
         if (mediaMetadata.duration != 0L) {
             val nowPlayingMetadata = NowPlayingMetadata(
@@ -104,7 +133,7 @@ class NowPlayingViewModel(private val app: Application,
             )
             this.mediaMetadata.postValue(nowPlayingMetadata)
         }
-        // Update the media button resource ID
+        // Update the play state
         playingState.postValue(
                 when (playbackState.isPlaying) {
                     true -> PlayState.PLAYING
@@ -113,23 +142,28 @@ class NowPlayingViewModel(private val app: Application,
         )
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        musicServiceConnection.playbackState.removeObserver(playbackStateObserver)
-        musicServiceConnection.nowPlaying.removeObserver(mediaMetadataObserver)
-
-        updatePosition = false
-    }
-
-    class Factory(
-            private val app: Application,
-            private val musicServiceConnection: MusicServiceConnection
-    ) : ViewModelProvider.NewInstanceFactory() {
-
-        @Suppress("unchecked_cast")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return NowPlayingViewModel(app, musicServiceConnection) as T
+    fun changeRepeatMode() {
+        var value = repeatMode.value?.value ?: return
+        value = (++value) % 3
+        when (value) {
+            RepeatMode.ALL.value -> {
+                musicServiceConnection.transportControls.apply {
+                    setRepeatMode(PlaybackStateCompat.REPEAT_MODE_ALL)
+                    setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_NONE)
+                }
+            }
+            RepeatMode.ONE.value -> {
+                musicServiceConnection.transportControls.apply {
+                    setRepeatMode(PlaybackStateCompat.REPEAT_MODE_ONE)
+                    setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_NONE)
+                }
+            }
+            RepeatMode.SHUFFLE.value -> {
+                musicServiceConnection.transportControls.apply {
+                    setRepeatMode(PlaybackStateCompat.REPEAT_MODE_ALL)
+                    setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_ALL)
+                }
+            }
         }
     }
-
 }

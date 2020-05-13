@@ -23,7 +23,7 @@ android {
         buildConfigField("String", "commitId", "\"123\"")
     }
 
-    dataBinding.isEnabled = true
+    dataBinding.isEnabled = false
 
     sourceSets["main"].java.srcDirs("src/main/kotlin", "src/main/aidl")
 
@@ -68,6 +68,8 @@ android {
         // true--显示错误的所有发生位置，不截取
         isShowAll = true
         htmlReport = true
+
+        disable("MissingTranslation", "ExtraTranslation")
 
         setHtmlOutput(project.rootProject.file("build${File.separator}reports${File.separator}lint${File.separator}lint-report.html"))
         isCheckGeneratedSources = false

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
     <string name="app_name">SEMusic</string>
     <string name="behavior_scene">com.se.music.scene.mine.HeadSceneBehavior</string>
     <string name="string_help_text">当前应用缺少必要的权限</string>
@@ -14,6 +14,10 @@
     <string name="mine">我的</string>
     <string name="music_room">音乐馆</string>
     <string name="find">发现</string>
+
+    <string name="repeat_mode_all">顺序播放</string>
+    <string name="repeat_mode_one">单曲循环</string>
+    <string name="repeat_mode_shuffle">随机播放</string>
 
     <string name="loading_text">数据加载中...</string>
 

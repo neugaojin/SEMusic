@@ -41,25 +41,6 @@ class AlbumListAdapter constructor(
         }
     }
 
-//    private fun buildAlbumCallBacks(context: Context, imageView: ImageView, albumEntity: AlbumEntity) = object : CallLoaderCallbacks<Album>(context) {
-//        override fun onCreateCall(id: Int, args: Bundle?): Call<Album> {
-//            return MusicRetrofit.INSTANCE.getAlbumInfo(albumEntity.albumArtist, albumEntity.albumName)
-//        }
-//
-//        override fun onSuccess(loader: Loader<*>, data: Album) {
-//            imageView.setImageResource(R.drawable.default_album_avatar)
-//            data.image?.run {
-//                val imageId = get(0).imgUrl.getImageId()
-//                imageView.loadUrl(imageId.getMegaImageUrl(), R.drawable.default_album_avatar)
-//                // 添加图片缓存
-//                ImageStore.instance.addImage(albumEntity.albumName.hashCode(), imageId)
-//            }
-//        }
-//
-//        override fun onFailure(loader: Loader<*>, throwable: Throwable) {
-//        }
-//    }
-
     class AlbumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val albumPic: ImageView = view.findViewById(R.id.local_album_pic)
         val albumName: TextView = view.findViewById(R.id.local_album_name)

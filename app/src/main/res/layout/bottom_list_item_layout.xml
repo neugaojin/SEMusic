@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/content_item_song"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/light_black"
+            android:textSize="14sp"
+            tools:text="四面楚歌" />
+
+        <View
+            android:id="@+id/content_divide_line"
+            android:layout_width="6dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/content_item_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/light_black"
+            android:textSize="12sp"
+            tools:text="周杰伦" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bottom_item_delete"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="end"
+        android:padding="14dp"
+        android:src="@drawable/bottom_close" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:background="@color/split_color" />
+</FrameLayout>

@@ -2,16 +2,19 @@ package com.se.music.uamp
 
 import android.content.ComponentName
 import android.content.Context
+import android.media.session.MediaSession
 import android.os.Bundle
-import android.os.Handler
-import android.os.ResultReceiver
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.lifecycle.MutableLiveData
+import com.se.music.base.log.Loger
+import com.se.music.support.utils.logger
+import com.se.music.uamp.util.getRepeatMode
 import com.se.service.NETWORK_FAILURE
+import com.se.service.library.RepeatMode
 
 /**
  *Author: gaojin
@@ -21,6 +24,7 @@ import com.se.service.NETWORK_FAILURE
 class MusicServiceConnection(context: Context, serviceComponent: ComponentName) {
 
     companion object {
+        @Volatile
         private var instance: MusicServiceConnection? = null
         fun getInstance(context: Context, serviceComponent: ComponentName) =
                 instance ?: synchronized(this) {
@@ -35,8 +39,6 @@ class MusicServiceConnection(context: Context, serviceComponent: ComponentName) 
     private val mediaBrowser = MediaBrowserCompat(context, serviceComponent
             , mediaBrowserConnectionCallback, null).apply { connect() }
 
-    val rootMediaId: String get() = mediaBrowser.root
-
     val playbackState = MutableLiveData<PlaybackStateCompat>().apply { postValue(EMPTY_PLAYBACK_STATE) }
 
     val isConnected = MutableLiveData<Boolean>().apply { postValue(false) }
@@ -44,6 +46,8 @@ class MusicServiceConnection(context: Context, serviceComponent: ComponentName) 
     val networkFailure = MutableLiveData<Boolean>().apply { postValue(false) }
 
     val nowPlaying = MutableLiveData<MediaMetadataCompat>().apply { postValue(NOTHING_PLAYING) }
+
+    val nowRepeatMode = MutableLiveData<RepeatMode>().apply { postValue(RepeatMode.EMPTY) }
 
     val transportControls: MediaControllerCompat.TransportControls
         get() = mediaController.transportControls
@@ -58,27 +62,21 @@ class MusicServiceConnection(context: Context, serviceComponent: ComponentName) 
         mediaBrowser.unsubscribe(parentId, callback)
     }
 
-    fun sendCommand(command: String, parameters: Bundle?) = sendCommand(command, parameters) { _, _ -> }
-
-    fun sendCommand(command: String, parameters: Bundle?, resultCallback: ((Int, Bundle?) -> Unit)): Boolean {
-        return if (mediaBrowser.isConnected) {
-            mediaController.sendCommand(command, parameters, object : ResultReceiver(Handler()) {
-                override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
-                    resultCallback(resultCode, resultData)
-                }
-            })
-            true
-        } else {
-            false
-        }
+    fun getMediaController(): MediaControllerCompat {
+        return mediaController
     }
 
     private inner class MediaBrowserConnectionCallback(private val context: Context) : MediaBrowserCompat.ConnectionCallback() {
         override fun onConnected() {
             mediaController = MediaControllerCompat(context, mediaBrowser.sessionToken).apply {
                 registerCallback(MediaControllerCallback())
+                transportControls.apply {
+                    transportControls.setShuffleMode(PlaybackStateCompat.SHUFFLE_MODE_NONE)
+                    transportControls.setRepeatMode(PlaybackStateCompat.REPEAT_MODE_ALL)
+                }
             }
             isConnected.postValue(true)
+            nowRepeatMode.postValue(getRepeatMode(mediaController.repeatMode, mediaController.shuffleMode))
         }
 
         override fun onConnectionSuspended() {
@@ -102,8 +100,15 @@ class MusicServiceConnection(context: Context, serviceComponent: ComponentName) 
         override fun onQueueChanged(queue: MutableList<MediaSessionCompat.QueueItem>?) {
         }
 
+        override fun onRepeatModeChanged(repeatMode: Int) {
+            nowRepeatMode.postValue(getRepeatMode(repeatMode, mediaController.shuffleMode))
+        }
+
+        override fun onShuffleModeChanged(shuffleMode: Int) {
+            nowRepeatMode.postValue(getRepeatMode(mediaController.repeatMode, shuffleMode))
+        }
+
         override fun onSessionEvent(event: String?, extras: Bundle?) {
-            super.onSessionEvent(event, extras)
             when (event) {
                 NETWORK_FAILURE -> networkFailure.postValue(true)
             }

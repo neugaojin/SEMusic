@@ -1,8 +1,10 @@
-package com.se.music.uamp
+package com.se.music.uamp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.se.music.base.log.Loger
+import com.se.music.uamp.MediaItemData
+import com.se.music.uamp.MusicServiceConnection
 import com.se.service.extensions.id
 import com.se.service.extensions.isPlayEnabled
 import com.se.service.extensions.isPlaying
@@ -13,10 +15,9 @@ import com.se.service.extensions.isPrepared
  *Time: 2020/4/16 7:19 PM
  */
 
-class MainActivityViewModel(private val musicServiceConnection: MusicServiceConnection) : ViewModel() {
+class MainViewModel(private val musicServiceConnection: MusicServiceConnection) : ViewModel() {
 
     fun playMedia(mediaItem: MediaItemData, pauseAllowed: Boolean = true) {
-        Loger.e { "playMedia: $mediaItem" }
         val nowPlaying = musicServiceConnection.nowPlaying.value
         val transportControls = musicServiceConnection.transportControls
 
@@ -52,7 +53,6 @@ class MainActivityViewModel(private val musicServiceConnection: MusicServiceConn
                 }
             }
         }
-
     }
 
     fun playMediaId(mediaId: String) {
@@ -75,7 +75,7 @@ class MainActivityViewModel(private val musicServiceConnection: MusicServiceConn
     class Factory(private val musicServiceConnection: MusicServiceConnection) : ViewModelProvider.NewInstanceFactory() {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MainActivityViewModel(musicServiceConnection) as T
+            return MainViewModel(musicServiceConnection) as T
         }
     }
 }

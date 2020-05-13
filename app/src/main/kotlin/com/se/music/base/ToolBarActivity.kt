@@ -6,26 +6,29 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import androidx.appcompat.widget.Toolbar
 import com.se.music.R
-import com.se.music.databinding.FragmentBaseBinding
 
 /**
  * Creator：gaojin
  * date：2017/11/6 下午8:32
  */
 abstract class ToolBarActivity : AppCompatActivity() {
-    private lateinit var mBinding: FragmentBaseBinding
+
+    protected lateinit var toolBar: Toolbar
+    protected lateinit var toolBarTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inflater = LayoutInflater.from(this)
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_base, null, false)
-        val rootView = mBinding.root as LinearLayout
+        val rootView = LayoutInflater.from(this).inflate(R.layout.fragment_base, null, false) as LinearLayout
         rootView.addView(createContentView(inflater, rootView))
         setContentView(rootView)
-        setSupportActionBar(mBinding.baseToolbar)
+        toolBar = findViewById(R.id.base_toolbar)
+        toolBar = findViewById(R.id.toolbar_title)
+        setSupportActionBar(toolBar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
     }
@@ -33,7 +36,7 @@ abstract class ToolBarActivity : AppCompatActivity() {
     protected abstract fun createContentView(inflater: LayoutInflater, rootView: ViewGroup): View
 
     override fun setTitle(title: CharSequence) {
-        mBinding.toolbarTitle.text = title
+        toolBarTitle.text = title
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
