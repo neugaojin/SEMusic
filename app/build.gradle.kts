@@ -9,12 +9,12 @@ plugins {
 
 android {
 
-    compileSdkVersion(28)
+    compileSdkVersion(29)
 
     defaultConfig {
         applicationId = "com.se.music"
         minSdkVersion(21)
-        targetSdkVersion(28)
+        targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true
@@ -71,7 +71,7 @@ android {
 
         disable("MissingTranslation", "ExtraTranslation")
 
-        setHtmlOutput(project.rootProject.file("build${File.separator}reports${File.separator}lint${File.separator}lint-report.html"))
+        htmlOutput = project.rootProject.file("build${File.separator}reports${File.separator}lint${File.separator}lint-report.html")
         isCheckGeneratedSources = false
     }
 }
@@ -96,7 +96,7 @@ dependencies {
     implementation(kotlin("reflect", kotlinVersion))
     implementation("androidx.appcompat:appcompat:$androidxVersion")
     implementation("androidx.core:core-ktx:$androidxVersion")
-    implementation("com.google.android.material:material:1.2.0-alpha06")
+    implementation("com.google.android.material:material:1.3.0-alpha01")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corcoutinesVersion")
@@ -106,7 +106,7 @@ dependencies {
     //For Lifecycles, LiveData, and ViewModel
     implementation("android.arch.lifecycle:runtime:$aacVersion")
     implementation("android.arch.lifecycle:extensions:$aacVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha01")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha04")
     kapt("android.arch.lifecycle:compiler:$aacVersion")
     //For Room
     implementation("android.arch.persistence.room:runtime:$aacVersion")

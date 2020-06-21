@@ -50,7 +50,7 @@ class TingCommonInterceptor : Interceptor {
     }
 
     private fun getUserAgent(): String {
-        val userAgent = System.getProperty("http.agent")
+        val userAgent = System.getProperty("http.agent") ?: ""
         val sb = StringBuffer()
         var i = 0
         val length = userAgent.length

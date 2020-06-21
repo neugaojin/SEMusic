@@ -175,7 +175,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private fun updateRepeatStatus() {
         when (MusicPlayer.getRepeatMode()) {
             MediaService.REPEAT_CURRENT -> repeatMode.setImageResource(R.drawable.player_btn_repeat_once)
-            MediaService.REPEAT_ALL -> repeatMode.setImageResource(R.drawable.player_btn_repeat)
+            MediaService.REPEAT_ALL -> repeatMode.setImageResource(R.drawable.player_btn_repeat_all)
             MediaService.REPEAT_SHUFFLER -> repeatMode.setImageResource(R.drawable.player_btn_random_normal)
         }
     }

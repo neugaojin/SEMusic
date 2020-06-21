@@ -2,11 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/player_activity_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/player_background_real"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -48,11 +45,4 @@
         app:button_radius="3dp"
         app:button_selected_color="@color/white"
         app:button_solid="@color/gray" />
-
-    <com.se.music.view.PlayingBottomView
-        android:id="@+id/playing_bottom_block"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp" />
-
 </LinearLayout>

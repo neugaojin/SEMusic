@@ -55,6 +55,20 @@ class MainViewModel(private val musicServiceConnection: MusicServiceConnection) 
         }
     }
 
+    fun skipToPrevious() {
+        val transportControls = musicServiceConnection.transportControls
+        transportControls.skipToPrevious()
+        transportControls.prepare()
+        val isPrepared = musicServiceConnection.playbackState.value?.isPrepared ?: false
+        if (isPrepared) {
+            musicServiceConnection.playbackState.value?.let { playbackState ->
+                when {
+                    playbackState.isPlayEnabled -> transportControls.play()
+                }
+            }
+        }
+    }
+
     fun playMediaId(mediaId: String) {
         val nowPlaying = musicServiceConnection.nowPlaying.value
         val transportControls = musicServiceConnection.transportControls

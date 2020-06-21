@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/player_background_real"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.bytedance.scene.group.ScenePlaceHolderView
+        android:id="@+id/playing_first_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.bytedance.scene.group.ScenePlaceHolderView
+        android:id="@+id/playing_second_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

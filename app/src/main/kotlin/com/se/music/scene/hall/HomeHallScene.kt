@@ -2,8 +2,10 @@ package com.se.music.scene.hall
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
+import com.bytedance.scene.group.GroupScene
 import com.bytedance.scene.group.ScenePlaceHolderView
 import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.bytedance.scene.ktx.viewModels
@@ -22,33 +24,32 @@ class HomeHallScene : UserVisibleHintGroupScene(), NestedScrollView.OnScrollChan
     private val scrollEvent = ScrollEvent(0f, 0f)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
-        val rootView = inflater.inflate(R.layout.fragment_music_mvp_v2, container, false) as NestedScrollView
+        val rootView = inflater.inflate(R.layout.fragment_music_mvp, container, false) as NestedScrollView
         rootView.setOnScrollChangeListener(this)
         return rootView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireViewById<ScenePlaceHolderView>(R.id.banner).apply {
+            sceneName = BannerScene::class.java.name
+            sceneTag = BannerScene::class.java.simpleName
+        }
 
-//        requireViewById<ScenePlaceHolderView>(R.id.banner).apply {
-//            sceneName = BannerScene::class.java.name
-//            sceneTag = BannerSc    ene::class.java.simpleName
-//        }
-//
-//        requireViewById<ScenePlaceHolderView>(R.id.classify_view).apply {
-//            sceneName = COTScene::class.java.name
-//            sceneTag = COTScene::class.java.simpleName
-//        }
-//
-//        requireViewById<ScenePlaceHolderView>(R.id.online_recommend).apply {
-//            sceneName = RecommendScene::class.java.name
-//            sceneTag = RecommendScene::class.java.simpleName
-//        }
-//
-//        requireViewById<ScenePlaceHolderView>(R.id.online_express).apply {
-//            sceneName = RecommendScene::class.java.name
-//            sceneTag = RecommendScene::class.java.simpleName
-//        }
+        requireViewById<ScenePlaceHolderView>(R.id.classify_view).apply {
+            sceneName = COTScene::class.java.name
+            sceneTag = COTScene::class.java.simpleName
+        }
+
+        requireViewById<ScenePlaceHolderView>(R.id.online_recommend).apply {
+            sceneName = RecommendScene::class.java.name
+            sceneTag = RecommendScene::class.java.simpleName
+        }
+
+        requireViewById<ScenePlaceHolderView>(R.id.online_express).apply {
+            sceneName = NewSongScene::class.java.name
+            sceneTag = NewSongScene::class.java.simpleName
+        }
     }
 
     override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {

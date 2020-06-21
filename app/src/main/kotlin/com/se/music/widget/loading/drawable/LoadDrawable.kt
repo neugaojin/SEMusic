@@ -98,7 +98,7 @@ abstract class LoadDrawable : Drawable(), ValueAnimator.AnimatorUpdateListener, 
         callback?.invalidateDrawable(this)
     }
 
-    override fun invalidateDrawable(who: Drawable?) {
+    override fun invalidateDrawable(p0: Drawable) {
         invalidateSelf()
     }
 

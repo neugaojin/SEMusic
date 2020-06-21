@@ -8,11 +8,11 @@ apply("$rootDir/gradle/common.kts")
 
 android {
 
-    compileSdkVersion(28)
+    compileSdkVersion(29)
 
     defaultConfig {
         minSdkVersion(21)
-        targetSdkVersion(28)
+        targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
     }
@@ -32,7 +32,7 @@ dependencies {
     val kotlinVersion: String by project
     val corcoutinesVersion: String by project
     implementation(project(":sebase"))
-    api("com.squareup.retrofit2:retrofit:2.4.0")
+    api("com.squareup.retrofit2:retrofit:2.6.2")
     api("com.squareup.retrofit2:converter-gson:2.4.0")
     api("com.squareup.retrofit2:adapter-rxjava2:2.4.0")
     api("com.squareup.retrofit2:adapter-rxjava:2.6.2")
