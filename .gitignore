@@ -4,7 +4,6 @@
 .DS_Store
 /build
 /tmp
-/config
 /.idea
 /captures
 .externalNativeBuild

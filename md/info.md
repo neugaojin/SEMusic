@@ -3,7 +3,7 @@ Kotlin实现
 # 数据库表结构
 - SongListTable
 - 歌单表
-- [SongListContentProvider](https://github.com/neugaojin/SEMusic/blob/master/app/src/main/java/com/se/music/provider/SongListContentProvider.kt)
+- [SongListContentProvider]
 
 | _id    | _name  | _count     | _creator | _create_time | _pic       | _info    |
 | ------ | ------ | ---------- | -------- | ------------ | ---------- | -------- |
@@ -35,3 +35,6 @@ https://u.y.qq.com/cgi-bin/musicu.fcg?data={"comm":{"ct":24},"recomPlaylist":{"m
 "recomPlaylist":{"method":"get_hot_recommend","param":{"async":1,"cmd":2},"module":"playlist.HotRecommendServer"},"
 
 "focus":{"module":"QQMusic.MusichallServer","method":"GetFocus","param":{}}
+
+[SongListContentProvider]: https://github.com/neugaojin/SEMusic/blob/master/app/src/main/java/com/se/music/provider/SongListContentProvider.kt
+<!-- @IGNORE PREVIOUS: link -->

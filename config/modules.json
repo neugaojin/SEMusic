@@ -1,0 +1,22 @@
+[
+  {
+    "name": ":app",
+    "path": "app"
+  },
+  {
+    "name": ":ffmpeg",
+    "path": "module/ffmpeg"
+  },
+  {
+    "name": ":sebase",
+    "path": "module/sebase"
+  },
+  {
+    "name": ":senet",
+    "path": "module/senet"
+  },
+  {
+    "name": ":service",
+    "path": "module/service"
+  }
+]
