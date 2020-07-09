@@ -16,6 +16,7 @@ import com.bytedance.scene.group.GroupScene
 import com.se.music.R
 import com.se.music.base.data.database.entity.MusicInfoCache
 import com.se.music.base.data.metadata.LOVE_SONG_CONTENT_URI
+import com.se.music.base.scene.baseContext
 import com.se.music.service.MediaService
 import com.se.music.service.MusicPlayer
 import com.se.music.support.utils.ms2Minute
@@ -64,7 +65,7 @@ class PlayingBottomScene : GroupScene(), SeekBar.OnSeekBarChangeListener, View.O
         playingViewModel = NowPlayingViewModel.getInstance()
 
         mainViewModel = ViewModelProviders
-                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(sceneContext!!))
+                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(baseContext()))
                 .get(MainViewModel::class.java)
 
         repeatMode = requireViewById(R.id.repeat_mode)
@@ -174,7 +175,7 @@ class PlayingBottomScene : GroupScene(), SeekBar.OnSeekBarChangeListener, View.O
                         put(MusicInfoCache.IS_LOCAL, 1)
                     }
                 }
-                sceneContext!!.contentResolver.insert(LOVE_SONG_CONTENT_URI, values)
+                baseContext().contentResolver.insert(LOVE_SONG_CONTENT_URI, values)
             }
         }
     }

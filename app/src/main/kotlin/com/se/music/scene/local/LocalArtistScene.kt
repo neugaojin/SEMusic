@@ -12,6 +12,7 @@ import com.se.music.adapter.SingerListAdapter
 import com.se.music.base.data.database.entity.ArtistEntity
 import com.se.music.support.coroutine.SeCoroutineScope
 import com.se.music.base.data.DataBase
+import com.se.music.base.scene.baseContext
 import com.se.music.widget.loading.LoadingView
 import kotlinx.coroutines.launch
 
@@ -40,7 +41,7 @@ class LocalArtistScene : UserVisibleHintGroupScene() {
         loadingView = requireViewById(R.id.loading_view)
         recyclerView = requireViewById(R.id.recycler_view)
 
-        adapter = SingerListAdapter(sceneContext!!, artistList)
+        adapter = SingerListAdapter(baseContext(), artistList)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter

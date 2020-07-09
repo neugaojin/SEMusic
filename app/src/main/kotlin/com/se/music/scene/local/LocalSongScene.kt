@@ -13,6 +13,7 @@ import com.bytedance.scene.SceneViewModelProviders
 import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.se.music.R
 import com.se.music.adapter.MusicListAdapter
+import com.se.music.base.scene.baseContext
 import com.se.music.support.coroutine.SeCoroutineScope
 import com.se.music.uamp.InjectUtils
 import com.se.music.uamp.MediaItemData
@@ -46,11 +47,11 @@ class LocalSongScene : UserVisibleHintGroupScene() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         mainViewModel = ViewModelProviders
-                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(sceneContext!!))
+                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(baseContext()))
                 .get(MainViewModel::class.java)
 
         songListViewModel = SceneViewModelProviders
-                .of(this, InjectUtils.provideSongListViewModel(sceneContext!!))
+                .of(this, InjectUtils.provideSongListViewModel(baseContext()))
                 .get(SongListViewModel::class.java)
 
         scope.launch {

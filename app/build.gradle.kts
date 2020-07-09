@@ -71,7 +71,6 @@ android {
 
         disable("MissingTranslation", "ExtraTranslation")
 
-        htmlOutput = project.rootProject.file("build${File.separator}reports${File.separator}lint${File.separator}lint-report.html")
         isCheckGeneratedSources = false
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bytedance.scene.Scene
 import com.se.music.R
+import com.se.music.base.scene.baseContext
 
 /**
  *Author: gaojin
@@ -15,7 +16,7 @@ import com.se.music.R
 class COTScene : Scene(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        val rootView = LayoutInflater.from(sceneContext).inflate(R.layout.online_classify_block, null)
+        val rootView = LayoutInflater.from(baseContext()).inflate(R.layout.online_classify_block, null)
         val singer: View = rootView.findViewById(R.id.classify_singer)
         val rank: View = rootView.findViewById(R.id.classify_rank)
         val radio: View = rootView.findViewById(R.id.classify_radio)

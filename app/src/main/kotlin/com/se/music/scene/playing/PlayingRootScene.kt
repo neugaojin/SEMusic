@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.bytedance.scene.group.GroupScene
 import com.bytedance.scene.group.ScenePlaceHolderView
 import com.se.music.R
+import com.se.music.base.scene.baseContext
 
 /**
  *Author: gaojin
@@ -63,7 +64,7 @@ class PlayingRootScene : GroupScene() {
         val newBitmap = Bitmap.createBitmap(bg.copy(Bitmap.Config.ARGB_8888, true))
         val canvas = Canvas(newBitmap)
         val paint = Paint()
-        paint.color = ContextCompat.getColor(sceneContext!!, R.color.hex_33000000)
+        paint.color = ContextCompat.getColor(baseContext(), R.color.hex_33000000)
         canvas.drawRect(0f, 0f, bg.width.toFloat(), bg.height.toFloat(), paint)
         canvas.save()
         canvas.restore()

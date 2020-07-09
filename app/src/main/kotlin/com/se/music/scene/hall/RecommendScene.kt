@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.bytedance.scene.Scene
 import com.bytedance.scene.ktx.activityViewModels
 import com.bytedance.scene.ktx.viewModels
+import com.se.music.base.scene.baseContext
 import com.se.music.online.recommend.RecommendSongListBlock
 
 /**
@@ -20,7 +21,7 @@ class RecommendScene : Scene() {
     private lateinit var recommendView: RecommendSongListBlock
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        recommendView = RecommendSongListBlock(sceneContext!!)
+        recommendView = RecommendSongListBlock(baseContext())
         return recommendView
     }
 

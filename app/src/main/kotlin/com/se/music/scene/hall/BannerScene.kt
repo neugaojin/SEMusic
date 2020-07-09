@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.bytedance.scene.Scene
 import com.bytedance.scene.ktx.activityViewModels
 import com.se.music.R
+import com.se.music.base.scene.baseContext
 import com.se.music.support.utils.manager.GlideImageLoader
 import com.youth.banner.Banner
 import com.youth.banner.listener.OnBannerListener
@@ -30,12 +31,12 @@ class BannerScene : Scene(), OnBannerListener {
     private val viewModel: HallViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        banner = Banner(sceneContext)
-        height = sceneContext?.resources?.getDimensionPixelOffset(R.dimen.online_banner_height) ?: 0
+        banner = Banner(baseContext())
+        height = baseContext().resources?.getDimensionPixelOffset(R.dimen.online_banner_height) ?: 0
         val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
         banner.layoutParams = params
 
-        rootContainer = FrameLayout(sceneContext!!)
+        rootContainer = FrameLayout(baseContext())
         rootContainer.addView(banner)
         ViewCompat.setElevation(rootContainer, -10f)
         return rootContainer
@@ -71,6 +72,6 @@ class BannerScene : Scene(), OnBannerListener {
     }
 
     override fun OnBannerClick(position: Int) {
-        Toast.makeText(sceneContext, "$position", Toast.LENGTH_SHORT).show()
+        Toast.makeText(baseContext(), "$position", Toast.LENGTH_SHORT).show()
     }
 }

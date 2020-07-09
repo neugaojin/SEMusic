@@ -9,6 +9,7 @@ import com.bytedance.scene.Scene
 import com.bytedance.scene.interfaces.PushOptions
 import com.bytedance.scene.navigation.NavigationScene
 import com.se.music.R
+import com.se.music.base.scene.baseContext
 import com.se.music.scene.animation.BottomDialogSceneAnimatorExecutor
 
 /**
@@ -29,7 +30,7 @@ abstract class DialogScene : Scene() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        val rootContainer = FrameLayout(sceneContext!!)
+        val rootContainer = FrameLayout(baseContext())
         val content = onCreateContentView(inflater, rootContainer, savedInstanceState).apply {
             id = R.id.scene_dialog_content_view
         }

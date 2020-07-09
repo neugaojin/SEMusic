@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.adapter.BottomListAdapter
 import com.se.music.base.log.Loger
+import com.se.music.base.scene.baseContext
 import com.se.music.scene.base.DialogScene
 import com.se.music.support.coroutine.SeCoroutineScope
 import com.se.music.uamp.InjectUtils
@@ -53,7 +54,7 @@ class BottomListScene : DialogScene() {
         nowPlayingViewModel = NowPlayingViewModel.getInstance()
 
         mainViewModel = ViewModelProviders
-                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(sceneContext!!))
+                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(baseContext()))
                 .get(MainViewModel::class.java)
     }
 
@@ -73,7 +74,7 @@ class BottomListScene : DialogScene() {
         recyclerView = requireViewById(R.id.dialog_list_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
-        adapter = BottomListAdapter(sceneContext!!)
+        adapter = BottomListAdapter(baseContext())
         adapter.setOnItemClickListener { _, mediaItemData ->
             val mediaItem = mediaItemData ?: return@setOnItemClickListener
             mainViewModel.playMedia(mediaItem)
@@ -116,15 +117,15 @@ class BottomListScene : DialogScene() {
     fun setTopTitleContent(mode: RepeatMode?, listSize: Int) {
         when (mode) {
             ALL -> {
-                repeatMode.setImageDrawable(ContextCompat.getDrawable(sceneContext!!, R.drawable.dialog_repeat_all))
+                repeatMode.setImageDrawable(ContextCompat.getDrawable(baseContext(), R.drawable.dialog_repeat_all))
                 repeatModeText.text = "${getString(R.string.repeat_mode_all)}(${listSize}首)"
             }
             ONE -> {
-                repeatMode.setImageDrawable(ContextCompat.getDrawable(sceneContext!!, R.drawable.dialog_repeat_one))
+                repeatMode.setImageDrawable(ContextCompat.getDrawable(baseContext(), R.drawable.dialog_repeat_one))
                 repeatModeText.text = getString(R.string.repeat_mode_one)
             }
             SHUFFLE -> {
-                repeatMode.setImageDrawable(ContextCompat.getDrawable(sceneContext!!, R.drawable.dialog_repeat_shuffle))
+                repeatMode.setImageDrawable(ContextCompat.getDrawable(baseContext(), R.drawable.dialog_repeat_shuffle))
                 repeatModeText.text = "${getString(R.string.repeat_mode_shuffle)}(${listSize}首)"
             }
             EMPTY -> {

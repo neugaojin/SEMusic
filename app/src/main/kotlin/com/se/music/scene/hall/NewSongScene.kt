@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.bytedance.scene.Scene
 import com.bytedance.scene.ktx.activityViewModels
 import com.bytedance.scene.ktx.viewModels
+import com.se.music.base.scene.baseContext
 import com.se.music.online.newsong.NewSongExpressBlock
 
 /**
@@ -21,7 +22,7 @@ class NewSongScene : Scene() {
     private val viewModel: HallViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        expressView = NewSongExpressBlock(sceneContext!!)
+        expressView = NewSongExpressBlock(baseContext())
         return expressView
     }
 

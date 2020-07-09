@@ -14,25 +14,26 @@ import kotlin.coroutines.resumeWithException
  */
 
 suspend fun <T> Call<T>.await(): T {
-    return suspendCancellableCoroutine { it ->
-        it.invokeOnCancellation {
+    return suspendCancellableCoroutine { cancellableContinuation ->
+        cancellableContinuation.invokeOnCancellation {
             it?.printStackTrace()
             cancel()
         }
         Loger.e("ApiSource") {
-            this.request().url().host() +
-                    this.request().url().encodedPath()
+            request().url().host() +
+                    request().url().encodedPath()
         }
         enqueue(object : Callback<T> {
             override fun onFailure(call: Call<T>, t: Throwable) {
-                it.resumeWithException(t)
+                cancellableContinuation.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<T>, response: Response<T>) {
-                if (response.isSuccessful) {
-                    it.resume(response.body()!!)
+                val body = response.body()
+                if (body != null && response.isSuccessful) {
+                    cancellableContinuation.resume(body)
                 } else {
-                    it.resumeWithException(Throwable(response.toString()))
+                    cancellableContinuation.resumeWithException(Throwable(response.toString()))
                 }
             }
         })

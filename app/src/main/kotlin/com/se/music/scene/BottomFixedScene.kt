@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.bytedance.scene.Scene
 import com.se.music.R
 import com.se.music.activity.PlayingActivity
+import com.se.music.base.scene.baseContext
 import com.se.music.base.singleton.ApplicationSingleton
 import com.se.music.scene.base.DialogScene
 import com.se.music.scene.sub.BottomListScene
@@ -86,7 +87,7 @@ class BottomFixedScene : Scene(), View.OnClickListener {
         playingViewModel = NowPlayingViewModel.getInstance()
 
         mainViewModel = ViewModelProviders
-                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(sceneContext!!))
+                .of(activity as FragmentActivity, InjectUtils.provideMainViewModel(baseContext()))
                 .get(MainViewModel::class.java)
 
         playingViewModel.playingState.observe(this, Observer {

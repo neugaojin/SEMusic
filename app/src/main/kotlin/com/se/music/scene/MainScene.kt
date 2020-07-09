@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import com.bytedance.scene.group.GroupScene
 import com.bytedance.scene.ktx.activityViewModels
 import com.se.music.R
+import com.se.music.base.scene.baseContext
 import com.se.music.scene.hall.HallViewModel
 import com.se.music.scene.hall.HomeHallScene
 import com.se.music.scene.mine.HomeFindScene
@@ -93,33 +94,33 @@ class MainScene : GroupScene(), View.OnClickListener, ViewPager.OnPageChangeList
         when (position) {
             MINE -> {
                 mineView.textSize = 19f
-                mineView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.white))
+                mineView.setTextColor(ContextCompat.getColor(baseContext(), R.color.white))
 
                 musicRoomView.textSize = 18f
-                musicRoomView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.light_gray))
+                musicRoomView.setTextColor(ContextCompat.getColor(baseContext(), R.color.light_gray))
 
                 findView.textSize = 18f
-                findView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.light_gray))
+                findView.setTextColor(ContextCompat.getColor(baseContext(), R.color.light_gray))
             }
             MUSIC -> {
                 musicRoomView.textSize = 19f
-                musicRoomView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.white))
+                musicRoomView.setTextColor(ContextCompat.getColor(baseContext(), R.color.white))
 
                 mineView.textSize = 18f
-                mineView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.light_gray))
+                mineView.setTextColor(ContextCompat.getColor(baseContext(), R.color.light_gray))
 
                 findView.textSize = 18f
-                findView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.light_gray))
+                findView.setTextColor(ContextCompat.getColor(baseContext(), R.color.light_gray))
             }
             FIND -> {
                 findView.textSize = 19f
-                findView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.white))
+                findView.setTextColor(ContextCompat.getColor(baseContext(), R.color.white))
 
                 mineView.textSize = 18f
-                mineView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.light_gray))
+                mineView.setTextColor(ContextCompat.getColor(baseContext(), R.color.light_gray))
 
                 musicRoomView.textSize = 18f
-                musicRoomView.setTextColor(ContextCompat.getColor(sceneContext!!, R.color.light_gray))
+                musicRoomView.setTextColor(ContextCompat.getColor(baseContext(), R.color.light_gray))
             }
         }
     }

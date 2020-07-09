@@ -12,6 +12,7 @@ import com.se.music.adapter.AlbumListAdapter
 import com.se.music.base.data.database.entity.AlbumEntity
 import com.se.music.support.coroutine.SeCoroutineScope
 import com.se.music.base.data.DataBase
+import com.se.music.base.scene.baseContext
 import com.se.music.widget.loading.LoadingView
 import kotlinx.coroutines.launch
 
@@ -41,7 +42,7 @@ class LocalAlbumScene : UserVisibleHintGroupScene() {
         loadingView = requireViewById(R.id.loading_view)
         recyclerView = requireViewById(R.id.recycler_view)
 
-        adapter = AlbumListAdapter(sceneContext!!, albumList)
+        adapter = AlbumListAdapter(baseContext(), albumList)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter

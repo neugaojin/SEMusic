@@ -8,9 +8,14 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.se.music.R
 import com.se.music.support.utils.lacksPermissions
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 /**
  *Author: gaojin
@@ -32,7 +37,7 @@ class Welcome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (lacksPermissions(this, permissions)) {
-            requestPermissions(permissions, PERMISSION_REQUEST_CODE) // 请求权限
+            ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE)// 请求权限
         } else {
             jump()
         }

@@ -12,6 +12,7 @@ import com.bytedance.scene.interfaces.PushOptions
 import com.bytedance.scene.ktx.viewModels
 import com.se.music.R
 import com.se.music.base.data.database.entity.SongListEntity
+import com.se.music.base.scene.baseContext
 import com.se.music.scene.local.LocalMainScene
 
 /**
@@ -30,16 +31,16 @@ class HomeMineScene : UserVisibleHintGroupScene(), HeaderViewOperation {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         val rootView: View = inflater.inflate(R.layout.fragment_mine_mvp, container, false)
         recyclerView = rootView.findViewById(R.id.mine_recycler_view)
-        headerView = MineHeaderView(sceneContext!!)
+        headerView = MineHeaderView(baseContext())
         headerView.headerViewOperation = this
         //init adapter
         repeat(30) {
             list.add(SongListEntity("1", "周杰伦", "00000000"))
         }
-        adapterV2 = MineAdapterV2(sceneContext!!, list)
+        adapterV2 = MineAdapterV2(baseContext(), list)
         adapterV2.addHeader(headerView)
 
-        recyclerView.layoutManager = LinearLayoutManager(sceneContext)
+        recyclerView.layoutManager = LinearLayoutManager(baseContext())
         recyclerView.adapter = adapterV2
         return rootView as ViewGroup
     }

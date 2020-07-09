@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.se.music.R
+import com.se.music.base.data.DataBase
+import com.se.music.base.scene.baseContext
 import com.se.music.scene.base.SeCompatScene
 import com.se.music.support.coroutine.SeCoroutineScope
-import com.se.music.base.data.DataBase
 import com.se.music.support.utils.setupWithViewPagerWithTitle
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -32,7 +33,7 @@ class LocalMainScene : SeCompatScene() {
     }
 
     override fun createContentView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        return LayoutInflater.from(sceneContext).inflate(R.layout.fragment_local_music, container, false)
+        return LayoutInflater.from(baseContext()).inflate(R.layout.fragment_local_music, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
