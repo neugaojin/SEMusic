@@ -15,8 +15,6 @@
  */
 package com.google.android.exoplayer2.ext.ffmpeg;
 
-import androidx.annotation.Nullable;
-
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.decoder.DecoderInputBuffer;
@@ -29,6 +27,8 @@ import com.google.android.exoplayer2.util.Util;
 
 import java.nio.ByteBuffer;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * FFmpeg audio decoder.

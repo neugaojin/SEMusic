@@ -32,7 +32,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             ndk {
-                abiFilters("armeabi-v7a")
+                abiFilters("arm64-v8a")
             }
             buildConfigField("String", "type", "\"release\"")
         }
@@ -41,7 +41,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             ndk {
-                abiFilters("armeabi-v7a", "arm64-v8a", "x86")
+                abiFilters("arm64-v8a", "x86")
             }
             buildConfigField("String", "type", "\"debug\"")
         }
@@ -95,7 +95,8 @@ dependencies {
     implementation(kotlin("reflect", kotlinVersion))
     implementation("androidx.appcompat:appcompat:$androidxVersion")
     implementation("androidx.core:core-ktx:$androidxVersion")
-    implementation("com.google.android.material:material:1.3.0-alpha01")
+    implementation("com.google.android.material:material:1.3.0-alpha02")
+    implementation("androidx.startup:startup-runtime:1.0.0-alpha02")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corcoutinesVersion")

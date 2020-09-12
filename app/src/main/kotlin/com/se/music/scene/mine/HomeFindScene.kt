@@ -1,11 +1,10 @@
 package com.se.music.scene.mine
 
-import android.graphics.BitmapFactory
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.se.music.R
 import com.se.music.base.log.Loger
@@ -16,7 +15,17 @@ import com.se.music.base.log.Loger
  */
 class HomeFindScene : UserVisibleHintGroupScene() {
 
-    private lateinit var imageView: ImageView
+    private lateinit var view1: View
+
+    private val animator: ValueAnimator = ValueAnimator.ofFloat(0F, 1F).apply {
+        duration = 250
+        addUpdateListener {
+            val percent = 1 - it.animatedFraction
+            Loger.e { percent }
+            view1.scaleX = percent
+            view1.scaleY = percent
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         return inflater.inflate(R.layout.fragment_local_folder, container, false) as ViewGroup
@@ -25,15 +34,20 @@ class HomeFindScene : UserVisibleHintGroupScene() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<View>(R.id.text_view).setOnClickListener {
+            scaleImage()
         }
-        imageView = requireViewById(R.id.image_view)
-        createBitmap()
+        view1 = requireViewById(R.id.image_view)
     }
 
-    private fun createBitmap() {
-        var bitmap = BitmapFactory.decodeResource(resources, R.drawable.avatar)
-        imageView.setImageBitmap(bitmap)
-        Loger.e { bitmap.isRecycled }
-        bitmap = null
+
+    private fun scaleImage() {
+        view1.pivotX = (view1.width / 2).toFloat()
+        view1.pivotY = 0F
+
+        if (view1.scaleX == 0F) {
+            animator.reverse()
+        } else {
+            animator.start()
+        }
     }
 }

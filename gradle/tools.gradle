@@ -1,0 +1,15 @@
+project.afterEvaluate {
+    tasks.getByName('transformNativeLibsWithMergeJniLibsForDebug') {
+        task ->
+            println("println task $it")
+            task.doLast {
+                it.inputs.files.each { fileTemp ->
+                    println "input file: $fileTemp.absolutePath"
+                }
+                println '—————————————————————————'
+                it.outputs.files.each { fileTemp ->
+                    println "output file: $fileTemp.absolutePath"
+                }
+            }
+    }
+}

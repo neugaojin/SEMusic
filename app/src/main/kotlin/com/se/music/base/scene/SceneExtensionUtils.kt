@@ -2,7 +2,6 @@ package com.se.music.base.scene
 
 import android.content.Context
 import com.bytedance.scene.Scene
-import com.se.music.base.singleton.ApplicationSingleton
 
 /**
  *Author: gaojin
@@ -10,9 +9,10 @@ import com.se.music.base.singleton.ApplicationSingleton
  */
 
 fun Scene.baseContext(): Context {
-    var context = sceneContext
-    if (context == null) {
-        context = ApplicationSingleton.instance
+    val context = sceneContext
+    if (context != null) {
+        return context
+    } else {
+        throw IllegalArgumentException("Scene is not attached to Activity")
     }
-    return context
 }
