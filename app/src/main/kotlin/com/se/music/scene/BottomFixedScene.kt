@@ -16,11 +16,8 @@ import com.bytedance.scene.Scene
 import com.se.music.R
 import com.se.music.activity.PlayingActivity
 import com.se.music.base.scene.baseContext
-import com.se.music.base.singleton.ApplicationSingleton
 import com.se.music.scene.base.DialogScene
 import com.se.music.scene.sub.BottomListScene
-import com.se.music.service.MusicPlayer
-import com.se.music.support.utils.getLargeImageUrl
 import com.se.music.support.utils.loadUrl
 import com.se.music.uamp.InjectUtils
 import com.se.music.uamp.viewmodel.MainViewModel
@@ -115,7 +112,7 @@ class BottomFixedScene : Scene(), View.OnClickListener {
                 playBarSinger.text = it.subtitle
             }
         })
-        album.loadUrl(MusicPlayer.getAlbumPic().getLargeImageUrl(), R.drawable.player_albumcover_default)
+        album.loadUrl("", R.drawable.player_albumcover_default)
     }
 
     override fun onClick(v: View) {

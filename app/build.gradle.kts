@@ -19,13 +19,16 @@ android {
         versionName = "1.0"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "commitId", "\"123\"")
     }
 
     dataBinding.isEnabled = false
 
-    sourceSets["main"].java.srcDirs("src/main/kotlin", "src/main/aidl")
+    sourceSets["main"].java.srcDirs("src/main/kotlin")
+    sourceSets["test"].java.srcDirs("src/test/kotlin")
+    sourceSets["androidTest"].java.srcDirs("src/androidTest/kotlin")
 
     buildTypes {
         getByName("release") {
@@ -96,7 +99,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:$androidxVersion")
     implementation("androidx.core:core-ktx:$androidxVersion")
     implementation("com.google.android.material:material:1.3.0-alpha02")
-    implementation("androidx.startup:startup-runtime:1.0.0-alpha02")
+    implementation("androidx.startup:startup-runtime:1.0.0-beta01")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corcoutinesVersion")
@@ -106,7 +109,7 @@ dependencies {
     //For Lifecycles, LiveData, and ViewModel
     implementation("android.arch.lifecycle:runtime:$aacVersion")
     implementation("android.arch.lifecycle:extensions:$aacVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha04")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha07")
     kapt("android.arch.lifecycle:compiler:$aacVersion")
     //For Room
     implementation("android.arch.persistence.room:runtime:$aacVersion")
@@ -132,6 +135,10 @@ dependencies {
     implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
     implementation("com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion")
     implementation("com.google.android.exoplayer:extension-mediasession:$exoplayerVersion")
+
+    testImplementation("junit:junit:4.13")
+    androidTestImplementation("com.android.support.test:runner:1.0.2")
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
 }
 
 androidExtensions {

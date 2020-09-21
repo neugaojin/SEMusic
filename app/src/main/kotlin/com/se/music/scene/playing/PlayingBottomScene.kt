@@ -1,6 +1,5 @@
 package com.se.music.scene.playing
 
-import android.content.ContentValues
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bytedance.scene.group.GroupScene
 import com.se.music.R
-import com.se.music.base.data.database.entity.MusicInfoCache
-import com.se.music.base.data.metadata.LOVE_SONG_CONTENT_URI
 import com.se.music.base.scene.baseContext
-import com.se.music.service.MediaService
-import com.se.music.service.MusicPlayer
 import com.se.music.support.utils.ms2Minute
 import com.se.music.uamp.InjectUtils
 import com.se.music.uamp.viewmodel.MainViewModel
@@ -52,8 +47,6 @@ class PlayingBottomScene : GroupScene(), SeekBar.OnSeekBarChangeListener, View.O
 
     private lateinit var playingViewModel: NowPlayingViewModel
     private lateinit var mainViewModel: MainViewModel
-
-    private var duration: Long = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         return inflater.inflate(R.layout.block_playing_bottom, container, false) as ViewGroup
@@ -130,9 +123,8 @@ class PlayingBottomScene : GroupScene(), SeekBar.OnSeekBarChangeListener, View.O
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         seekTimePlayed.text = progress.toLong().ms2Minute()
-        val i = progress * MusicPlayer.duration() / 1000
+        val i = 100L / 1000
         if (fromUser) {
-            MusicPlayer.seek(i)
             seekTimePlayed.text = i.ms2Minute()
         }
     }
@@ -160,32 +152,8 @@ class PlayingBottomScene : GroupScene(), SeekBar.OnSeekBarChangeListener, View.O
                 mainViewModel.skipToNext()
             }
             R.id.playing_favorite -> {
-                val values = ContentValues()
-                values.run {
-                    put(MusicInfoCache.SONG_ID, MusicPlayer.getAudioId())
-                    put(MusicInfoCache.NAME, MusicPlayer.getTrackName())
-                    put(MusicInfoCache.ALBUM_ID, MusicPlayer.getAlbumId())
-                    put(MusicInfoCache.ALBUM_NAME, MusicPlayer.getAlbumName())
-                    put(MusicInfoCache.ALBUM_PIC, MusicPlayer.getAlbumPic())
-                    put(MusicInfoCache.ARTIST_NAME, MusicPlayer.getArtistName())
-                    put(MusicInfoCache.DURATION, MusicPlayer.duration())
-                    if (MusicPlayer.isTrackLocal()) {
-                        put(MusicInfoCache.IS_LOCAL, 0)
-                    } else {
-                        put(MusicInfoCache.IS_LOCAL, 1)
-                    }
-                }
-                baseContext().contentResolver.insert(LOVE_SONG_CONTENT_URI, values)
+//                baseContext().contentResolver.insert(LOVE_SONG_CONTENT_URI, values)
             }
-        }
-    }
-
-    private fun setSeekBar() {
-        duration = MusicPlayer.duration()
-        seekTotalTime.text = duration.ms2Minute()
-        seekTimePlayed.text = MusicPlayer.position().ms2Minute()
-        if (duration != 0.toLong()) {
-            seekBar.progress = (1000 * MusicPlayer.position() / duration).toInt()
         }
     }
 }

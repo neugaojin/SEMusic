@@ -2,7 +2,6 @@ package com.se.music.widget
 
 import android.view.View
 import androidx.viewpager.widget.ViewPager
-import com.se.music.fragment.AlbumInfoFragment
 
 /**
  *Author: gaojin
@@ -13,7 +12,7 @@ class PlayingAlbumPageTransformer : ViewPager.PageTransformer {
 
     override fun transformPage(page: View, position: Float) {
         val pageWidth = page.width
-        if (page.tag is String && page.tag.toString() == AlbumInfoFragment.TAG) {
+        if (page.tag is String && page.tag.toString() == "") {
             when {
                 position < 0 -> { // [-1,0)
                     page.alpha = 1 + position

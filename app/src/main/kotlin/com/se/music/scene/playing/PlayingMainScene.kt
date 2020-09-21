@@ -10,7 +10,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
 import com.bytedance.scene.group.GroupScene
 import com.se.music.R
-import com.se.music.adapter.PlayerPagerAdapter
 import com.se.music.widget.MultiButtonLayout
 import com.se.music.widget.PlayingAlbumPageTransformer
 
@@ -41,10 +40,8 @@ class PlayingMainScene : GroupScene(), ViewPager.OnPageChangeListener {
         multiButtonLayout = requireViewById(R.id.playing_select_radio)
 
         viewPager.run {
-            adapter = PlayerPagerAdapter((activity as AppCompatActivity).supportFragmentManager)
             setPageTransformer(false, PlayingAlbumPageTransformer())
             addOnPageChangeListener(this@PlayingMainScene)
-            currentItem = PlayerPagerAdapter.ALBUM_INFO
             offscreenPageLimit = 2
         }
     }
