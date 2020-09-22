@@ -4,7 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import com.se.music.support.retrofit.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 /**
  *Author: gaojin
@@ -21,8 +25,8 @@ class SingerListViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         presenterScope.launch {
-            val result = Repository.getSinger()
-            if (result.data?.list?.isEmpty() == false) {
+            val result = Repository.getSinger(100, 1).body()
+            if (result?.data?.list?.isEmpty() == false) {
                 mObservableSingers.value = result.data.list
             }
         }

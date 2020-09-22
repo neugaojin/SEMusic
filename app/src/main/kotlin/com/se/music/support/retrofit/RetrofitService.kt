@@ -1,12 +1,16 @@
 package com.se.music.support.retrofit
 
-import com.se.music.entity.*
+import com.se.music.entity.Album
+import com.se.music.entity.Artist
+import com.se.music.entity.LrcInfo
+import com.se.music.entity.OtherVersionInfo
+import com.se.music.entity.SimilarSongInfo
 import com.se.music.mvvm.SingerEntity
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.online.model.HallModel
 import com.se.music.online.model.RecommendListModel
-import io.reactivex.Observable
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
@@ -18,22 +22,16 @@ interface RetrofitService {
 
     interface QQ {
         @GET("musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg")
-        fun getMusicHallService(): Call<HallModel>
-
-        @GET("musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg")
-        fun getMusicHallServiceV1(): Observable<HallModel>
-
-        @GET("musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg")
-        fun getMusicHallServiceV2(): Observable<HallModel>
+        suspend fun getMusicHallService(): Response<HallModel>
 
         @GET("cgi-bin/musicu.fcg")
-        fun getRecommendList(@Query("data") data: String): Call<RecommendListModel>
+        suspend fun getRecommendList(@Query("data") data: String): Response<RecommendListModel>
 
         @GET("v8/fcg-bin/v8.fcg")
-        fun getSinger(@QueryMap map: Map<String, String>, @Query("pagesize") pagesize: Int, @Query("pagenum") pagenum: Int): Call<SingerEntity>
+        suspend fun getSinger(@QueryMap map: Map<String, String>, @Query("pagesize") pagesize: Int, @Query("pagenum") pagenum: Int): Response<SingerEntity>
 
         @GET("cgi-bin/musicu.fcg")
-        fun getNewSongInfo(@Query("data") data: String): Call<ExpressInfoModel>
+        suspend fun getNewSongInfo(@Query("data") data: String): Response<ExpressInfoModel>
     }
 
     interface LastFm {

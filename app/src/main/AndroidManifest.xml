@@ -27,10 +27,10 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
 
         <activity
-            android:name="com.se.music.init.Welcome"
+            android:name="com.se.music.start.Welcome"
             android:configChanges="orientation|keyboardHidden"
             android:noHistory="false"
             android:screenOrientation="portrait"
@@ -44,7 +44,7 @@
         </activity>
 
         <activity
-            android:name="com.se.music.init.MainActivity"
+            android:name="com.se.music.start.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
@@ -52,10 +52,14 @@
         <activity android:name="com.se.music.activity.PlayingActivity" />
         <activity android:name="com.se.music.activity.CreateSongListActivity" />
 
-        <service
-            android:name="com.se.music.service.MediaService"
-            android:enabled="true"
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="com.se.music.androidx-startup"
             android:exported="false"
-            android:process=":remote" />
+            tools:node="merge">
+            <meta-data
+                android:name="com.se.music.initiate.BaseUtilInitializer"
+                android:value="androidx.startup" />
+        </provider>
     </application>
 </manifest>

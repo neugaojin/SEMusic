@@ -49,9 +49,10 @@ class HallViewModel(application: Application) : AndroidViewModel(application) {
 
     private suspend fun getFirstData() {
         return withContext(Dispatchers.Main) {
-            val hallResult = async { Repository.getMusicHall() }
-            val recommendListResult = async { Repository.getRecommendList() }
-            val expressInfoResult = async { Repository.getNewSongInfo() }
+            val hallResult = async { Repository.getMusicHall().body() }
+            val recommendListResult = async { Repository.getRecommendList().body() }
+            val expressInfoResult = async { Repository.getNewSongInfo().body() }
+            //execute by order
             hall.value = hallResult.await()
             recommendList.value = recommendListResult.await()
             expressInfo.value = expressInfoResult.await()

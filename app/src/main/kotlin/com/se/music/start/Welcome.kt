@@ -1,4 +1,4 @@
-package com.se.music.init
+package com.se.music.start
 
 import android.Manifest
 import android.content.Intent

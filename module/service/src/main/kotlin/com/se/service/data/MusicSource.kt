@@ -1,6 +1,5 @@
 package com.se.service.data
 
-import android.provider.MediaStore
 import android.support.v4.media.MediaMetadataCompat
 import androidx.annotation.IntDef
 

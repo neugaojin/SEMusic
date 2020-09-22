@@ -11,6 +11,9 @@ enum class PlayState {
     EMPTY, PLAYING, PAUSE, STOP
 }
 
+/**
+ * 歌曲循环状态
+ */
 enum class RepeatMode(val value: Int) {
     EMPTY(-1), ALL(0), ONE(1), SHUFFLE(2)
 }

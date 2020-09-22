@@ -1,11 +1,8 @@
 package com.se.music
 
-import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
-import com.se.music.base.BaseConfig
-import com.se.music.base.Null
-import com.se.music.base.log.Loger
+import android.util.Log
 import com.se.music.base.singleton.ApplicationSingleton
 
 /**
@@ -20,30 +17,7 @@ class MusicApplication : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
+        Log.e("gj", "ApplicationSingleton.bindInstance")
         ApplicationSingleton.bindInstance(this)
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        val processName = getProcessName(this, android.os.Process.myPid())
-        if (processName == packageName) {
-            onCreateInit()
-        }
-    }
-
-    private fun onCreateInit() {
-        BaseConfig.init(this)
-        Loger.init(APP_NAME)
-    }
-
-    private fun getProcessName(cxt: Context, pid: Int): String {
-        val am = cxt.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        val runningApps = am.runningAppProcesses ?: return Null
-        for (procInfo in runningApps) {
-            if (procInfo.pid == pid) {
-                return procInfo.processName
-            }
-        }
-        return Null
     }
 }

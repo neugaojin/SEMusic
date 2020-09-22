@@ -1,4 +1,4 @@
-package com.se.music.init
+package com.se.music.start
 
 import android.os.RemoteException
 import android.widget.Toast
