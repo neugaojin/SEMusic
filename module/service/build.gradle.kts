@@ -30,19 +30,15 @@ android {
 }
 
 dependencies {
-    val androidxMediaVersion: String by project
-    val glideVersion: String by project
-    val gsonVersion: String by project
-    val exoplayerVersion: String by project
     implementation(project(":sebase"))
     implementation(project(":ffmpeg"))
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
-    kapt("com.github.bumptech.glide:compiler:$glideVersion")
-    api("androidx.media:media:$androidxMediaVersion")
-    api("com.google.code.gson:gson:$gsonVersion")
-    api("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
-    api("com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion")
-    api("com.google.android.exoplayer:extension-mediasession:$exoplayerVersion")
+    implementation(Libs.glide)
+    kapt(Libs.glide_compiler)
+    api(Libs.ExoPlayer.media)
+    api(Libs.gson)
+    api(Libs.ExoPlayer.core)
+    api(Libs.ExoPlayer.ui)
+    api(Libs.ExoPlayer.mediasession)
 }
 
 repositories {

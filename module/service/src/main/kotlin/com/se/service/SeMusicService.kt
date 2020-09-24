@@ -43,8 +43,6 @@ open class SeMusicService : MediaBrowserServiceCompat() {
     private lateinit var mediaController: MediaControllerCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
 
-    private var musicSource: MusicSource? = null
-
     private val uAmpAudioAttributes = AudioAttributes.Builder()
             .setContentType(C.CONTENT_TYPE_MUSIC)
             .setUsage(C.USAGE_MEDIA)
@@ -102,14 +100,14 @@ open class SeMusicService : MediaBrowserServiceCompat() {
 
     override fun onLoadChildren(parentId: String, result: Result<List<MediaItem>>) {
         Loger.d { "parentId : $parentId" }
-        musicSource = getMusicSource(parentId) ?: return
+        val musicSource = getMusicSource(parentId)
         serviceScope.launch {
-            musicSource?.load()
+            musicSource.load()
         }
-        val resultSent = musicSource?.whenReady { successfullyInitialized ->
+        val resultSent = musicSource.whenReady { successfullyInitialized ->
             if (successfullyInitialized) {
                 playbackPreparer.musicSource = musicSource
-                val children = musicSource?.map { item ->
+                val children = musicSource.map { item ->
                     MediaItem(item.description, item.flag)
                 }
                 result.sendResult(children)
@@ -117,14 +115,14 @@ open class SeMusicService : MediaBrowserServiceCompat() {
                 mediaSession.sendSessionEvent(NETWORK_FAILURE, null)
                 result.sendResult(null)
             }
-        } ?: false
+        }
 
         if (!resultSent) {
             result.detach()
         }
     }
 
-    private fun getMusicSource(parentId: String): MusicSource? {
+    private fun getMusicSource(parentId: String): MusicSource {
         if (parentId == MusicCategory.MUSIC.name) {
             return LocalMusicSource(this)
         }

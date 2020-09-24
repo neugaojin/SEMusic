@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import com.se.music.R
 import com.se.music.base.singleton.ApplicationSingleton
 import com.se.music.uamp.EMPTY_PLAYBACK_STATE
-import com.se.music.uamp.InjectUtils
 import com.se.music.uamp.MediaItemData
 import com.se.music.uamp.MusicServiceConnection
 import com.se.music.uamp.NOTHING_PLAYING
@@ -37,17 +36,11 @@ class NowPlayingViewModel(private val app: Application,
     companion object {
         private const val POSITION_UPDATE_INTERVAL_MILLIS = 100L
 
-        @Volatile
-        private var instance: NowPlayingViewModel? = null
-        fun getInstance() =
-                instance ?: synchronized(this) {
-                    instance ?: NowPlayingViewModel(
-                            ApplicationSingleton.instance,
-                            InjectUtils.getMSC(ApplicationSingleton.instance)
-                    ).also {
-                        instance = it
-                    }
-                }
+        fun getInstance() = Inner.singleton
+
+        private object Inner {
+            val singleton = NowPlayingViewModel(ApplicationSingleton.instance, MusicServiceConnection.getInstance())
+        }
 
         fun setMediaItems(mediaItems: List<MediaItemData>) {
             getInstance().mediaItems.postValue(mediaItems)

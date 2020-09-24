@@ -29,13 +29,10 @@ android {
 }
 
 dependencies {
-    val kotlinVersion: String by project
-    val corcoutinesVersion: String by project
-    val androidxVersion: String by project
-    api("androidx.appcompat:appcompat:$androidxVersion")
-    api("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corcoutinesVersion")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$corcoutinesVersion")
+    api(Libs.app_compat)
+    api(Libs.Kotlin.kotlin_stdlib_jdk8)
+    api(Libs.Kotlin.kotlinx_coroutines_core)
+    api(Libs.Kotlin.kotlinx_coroutines_android)
 }
 
 repositories {

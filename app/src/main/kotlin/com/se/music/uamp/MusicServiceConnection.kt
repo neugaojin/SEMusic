@@ -2,7 +2,6 @@ package com.se.music.uamp
 
 import android.content.ComponentName
 import android.content.Context
-import android.media.session.MediaSession
 import android.os.Bundle
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
@@ -10,10 +9,10 @@ import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.lifecycle.MutableLiveData
-import com.se.music.base.log.Loger
-import com.se.music.support.utils.logger
+import com.se.music.base.singleton.ApplicationSingleton
 import com.se.music.uamp.util.getRepeatMode
 import com.se.service.NETWORK_FAILURE
+import com.se.service.SeMusicService
 import com.se.service.library.RepeatMode
 
 /**
@@ -21,23 +20,19 @@ import com.se.service.library.RepeatMode
  *Time: 2020-01-13 22:00
  */
 
-class MusicServiceConnection(context: Context, serviceComponent: ComponentName) {
+class MusicServiceConnection private constructor(context: Context, serviceComponent: ComponentName) {
 
     companion object {
-        @Volatile
-        private var instance: MusicServiceConnection? = null
-        fun getInstance(context: Context, serviceComponent: ComponentName) =
-                instance ?: synchronized(this) {
-                    instance ?: MusicServiceConnection(context, serviceComponent).also {
-                        instance = it
-                    }
-                }
+        fun getInstance() = Inner.singleton
+
+        private object Inner {
+            val singleton = MusicServiceConnection(ApplicationSingleton.instance, ComponentName(ApplicationSingleton.instance, SeMusicService::class.java))
+        }
     }
 
     private val mediaBrowserConnectionCallback = MediaBrowserConnectionCallback(context)
 
-    private val mediaBrowser = MediaBrowserCompat(context, serviceComponent
-            , mediaBrowserConnectionCallback, null).apply { connect() }
+    private val mediaBrowser = MediaBrowserCompat(context, serviceComponent, mediaBrowserConnectionCallback, null).apply { connect() }
 
     val playbackState = MutableLiveData<PlaybackStateCompat>().apply { postValue(EMPTY_PLAYBACK_STATE) }
 

@@ -29,11 +29,9 @@ android {
 }
 
 dependencies {
-    val kotlinVersion: String by project
-    val corcoutinesVersion: String by project
     implementation(project(":sebase"))
-    api("com.squareup.retrofit2:retrofit:2.9.0")
-    api("com.squareup.retrofit2:converter-gson:2.9.0")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corcoutinesVersion")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$corcoutinesVersion")
+    api(Libs.Retrofit2.retrofit)
+    api(Libs.Retrofit2.converter_gson)
+    api(Libs.Kotlin.kotlinx_coroutines_core)
+    api(Libs.Kotlin.kotlinx_coroutines_android)
 }

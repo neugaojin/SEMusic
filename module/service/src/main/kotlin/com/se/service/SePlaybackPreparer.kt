@@ -20,8 +20,7 @@ import com.se.service.extensions.toMediaSource
  *Time: 2020/4/23 9:41 PM
  */
 
-class SePlaybackPreparer(private val exoPlayer: ExoPlayer
-                         , private val dataSourceFactory: DataSource.Factory) : MediaSessionConnector.PlaybackPreparer {
+class SePlaybackPreparer(private val exoPlayer: ExoPlayer, private val dataSourceFactory: DataSource.Factory) : MediaSessionConnector.PlaybackPreparer {
 
     var musicSource: MusicSource? = null
     override fun onPrepareFromSearch(query: String, playWhenReady: Boolean, extras: Bundle) = Unit
