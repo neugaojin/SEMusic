@@ -1,7 +1,10 @@
 package com.se.music.support.retrofit
 
+import com.se.music.base.singleton.ApplicationSingleton
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 /**
  *Author: gaojin
@@ -64,5 +67,32 @@ class TingCommonInterceptor : Interceptor {
             i++
         }
         return sb.toString()
+    }
+}
+
+class SoCommonInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val oldRequest = chain.request()
+
+        val oldUrlBuilder = oldRequest.url().newBuilder().apply {
+            scheme(oldRequest.url().scheme())
+            host(oldRequest.url().host())
+            addQueryParameter("raw", "0")
+            addQueryParameter("ownCookie", "0")
+        }
+
+        val newRequest = oldRequest.newBuilder().run {
+            method(oldRequest.method(), oldRequest.body())
+            url(oldUrlBuilder.build())
+//            val input = ApplicationSingleton.instance.assets.open("cookie.json")
+//            val inputString = BufferedReader(InputStreamReader(input)).useLines { lines ->
+//                val results = StringBuilder()
+//                lines.forEach { results.append(it) }
+//                results.toString()
+//            }
+//            addHeader("cookie", inputString)
+            build()
+        }
+        return chain.proceed(newRequest)
     }
 }

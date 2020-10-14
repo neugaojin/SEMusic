@@ -8,6 +8,11 @@ import android.view.ViewGroup
 import com.bytedance.scene.group.UserVisibleHintGroupScene
 import com.se.music.R
 import com.se.music.base.log.Loger
+import com.se.music.entity.Artist
+import com.se.music.support.retrofit.Repository
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  *Author: gaojin
@@ -35,6 +40,7 @@ class HomeFindScene : UserVisibleHintGroupScene() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<View>(R.id.text_view).setOnClickListener {
             scaleImage()
+            getAlbumInfo()
         }
         view1 = requireViewById(R.id.image_view)
     }
@@ -49,5 +55,15 @@ class HomeFindScene : UserVisibleHintGroupScene() {
         } else {
             animator.start()
         }
+    }
+
+    private fun getAlbumInfo() {
+        Repository.getSingAvatar("周杰伦").enqueue(object : Callback<Artist> {
+            override fun onResponse(call: Call<Artist>, response: Response<Artist>) {
+            }
+
+            override fun onFailure(call: Call<Artist>, t: Throwable) {
+            }
+        })
     }
 }

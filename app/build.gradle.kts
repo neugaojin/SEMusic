@@ -71,9 +71,6 @@ android {
 }
 
 dependencies {
-    val androidxMediaVersion: String by project
-
-
     implementation(project(":senet"))
     implementation(project(":service"))
     implementation(project(":sebase"))
@@ -95,6 +92,9 @@ dependencies {
     implementation(Libs.Jetpack.lifecycle_runtime)
     implementation(Libs.Jetpack.lifecycle_extensions)
     implementation(Libs.Jetpack.lifecycle_viewmodel_ktx)
+    implementation(Libs.Jetpack.lifecycle_livedata_ktx)
+    implementation(Libs.Jetpack.lifecycle_runtime_ktx)
+    implementation(Libs.Jetpack.lifecycle_viewmodel_savedstate)
     kapt(Libs.Jetpack.lifecycle_compiler)
     //****************  LifeCycle  ****************
 
@@ -110,8 +110,10 @@ dependencies {
     implementation(Libs.RxJava.rx_android)
     implementation(Libs.RxJava.rx_java)
     implementation(Libs.banner)
+    implementation(Libs.okhttp_logging_interceptor)
     implementation(Libs.kotlin_logging)
     implementation(Libs.gson)
+    implementation(Libs.constraintlayout)
 
     implementation(Libs.ExoPlayer.media)
     implementation(Libs.ExoPlayer.core)

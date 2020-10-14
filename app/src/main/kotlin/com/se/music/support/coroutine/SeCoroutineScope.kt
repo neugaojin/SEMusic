@@ -12,7 +12,6 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class SeCoroutineScope : CoroutineScope, Closeable {
-
     private val job = SupervisorJob()
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job

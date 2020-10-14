@@ -12,7 +12,6 @@ import com.se.music.online.model.RecommendListModel
 import com.se.music.online.params.CommonPostParams
 import com.se.music.online.params.ExpressPostParams
 import com.se.senet.base.GsonFactory
-import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -26,16 +25,18 @@ object Repository {
     private const val API_BASE_U_URL = "http://u.y.qq.com/"
     private const val API_LAST_FM_URL = "http://ws.audioscrobbler.com/"
     private const val API_TING_BAIDU = "http://tingapi.ting.baidu.com/"
+    private const val API_BASE_SO = "http://39.105.193.124"
 
     // QQ音乐
-    private val baseCRetrofit: Retrofit = QQRetrofitFactory.getInstance(API_BASE_C_URL)
-    private val baseURetrofit: Retrofit = QQRetrofitFactory.getInstance(API_BASE_U_URL)
+    private val baseCRetrofit: Retrofit = RetrofitFactory.create(API_BASE_C_URL, RetrofitFactory.Type.QQ)
+    private val baseURetrofit: Retrofit = RetrofitFactory.create(API_BASE_U_URL, RetrofitFactory.Type.QQ)
+    private val soRetrofit: Retrofit = RetrofitFactory.create(API_BASE_SO, RetrofitFactory.Type.SO)
 
     // lastFm
-    private val baseLastFmRetrofit: Retrofit = LastFmRetrofitFactory.getInstance(API_LAST_FM_URL)
+    private val baseLastFmRetrofit: Retrofit = RetrofitFactory.create(API_LAST_FM_URL, RetrofitFactory.Type.LAST_FM)
 
     // 百度音乐
-    private val tingRetrofit: Retrofit = TingRetrofitFactory.getInstance(API_TING_BAIDU)
+    private val tingRetrofit: Retrofit = RetrofitFactory.create(API_TING_BAIDU, RetrofitFactory.Type.Ting)
 
     suspend fun getMusicHall(): Response<HallModel> {
         return baseCRetrofit.create(RetrofitService.QQ::class.java).getMusicHallService()
@@ -51,10 +52,11 @@ object Repository {
                 .getRecommendList(GsonFactory.INSTANCE.toJson(params))
     }
 
-    suspend fun getSinger(pagesize: Int, pagenum: Int): Response<SingerEntity> {
-        val map = hashMapOf("channel" to "singer", "key" to "all_all_all", "page" to "list", "format" to "jsonp")
-        return baseCRetrofit.create(RetrofitService.QQ::class.java).getSinger(map, pagesize, pagenum)
+    suspend fun getSinger(pagesize: Int, pageNo: Int, area: Int, sex: Int, genre: Int): SingerEntity {
+        return soRetrofit.create(RetrofitService.So::class.java).getSinger(pageNo, area, sex, genre)
     }
+
+    suspend fun getSingerCategory() = soRetrofit.create(RetrofitService.So::class.java).getSingerCategory()
 
     suspend fun getNewSongInfo(): Response<ExpressInfoModel> {
         val expressPostParams = ExpressPostParams()

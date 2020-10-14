@@ -5,6 +5,7 @@ import com.se.music.entity.Artist
 import com.se.music.entity.LrcInfo
 import com.se.music.entity.OtherVersionInfo
 import com.se.music.entity.SimilarSongInfo
+import com.se.music.mvvm.SingerCategory
 import com.se.music.mvvm.SingerEntity
 import com.se.music.online.model.ExpressInfoModel
 import com.se.music.online.model.HallModel
@@ -13,7 +14,6 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 /**
  * Created by gaojin on 2017/12/18.
@@ -26,9 +26,6 @@ interface RetrofitService {
 
         @GET("cgi-bin/musicu.fcg")
         suspend fun getRecommendList(@Query("data") data: String): Response<RecommendListModel>
-
-        @GET("v8/fcg-bin/v8.fcg")
-        suspend fun getSinger(@QueryMap map: Map<String, String>, @Query("pagesize") pagesize: Int, @Query("pagenum") pagenum: Int): Response<SingerEntity>
 
         @GET("cgi-bin/musicu.fcg")
         suspend fun getNewSongInfo(@Query("data") data: String): Response<ExpressInfoModel>
@@ -67,5 +64,16 @@ interface RetrofitService {
                 @Query("method") method: String,
                 @Query("query") query: String
         ): Call<LrcInfo>
+    }
+
+    interface So {
+        @GET("singer/list")
+        suspend fun getSinger(@Query("pageNo") pageNo: Int,
+                              @Query("area") area: Int,
+                              @Query("sex") sex: Int,
+                              @Query("genre") genre: Int): SingerEntity
+
+        @GET("singer/category")
+        suspend fun getSingerCategory(): SingerCategory
     }
 }

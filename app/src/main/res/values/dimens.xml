@@ -35,4 +35,8 @@
     <dimen name="lrc_time_width">40dp</dimen>
 
     <dimen name="mine_header_scene_height">200dp</dimen>
+
+    <dimen name="singer_list_filter_view_height">30dp</dimen>
+    <dimen name="singer_list_filter_height">45dp</dimen>
+    <dimen name="singer_list_filter_view_width">60dp</dimen>
 </resources>

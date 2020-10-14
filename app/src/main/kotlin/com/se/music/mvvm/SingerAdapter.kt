@@ -3,6 +3,8 @@ package com.se.music.mvvm
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.se.music.R
 import com.se.music.base.picBaseUrl_300
@@ -12,25 +14,36 @@ import com.se.music.widget.CircleImageView
 
 /**
  *Author: gaojin
- *Time: 2019-07-05 17:16
+ *Time: 2020/10/8 5:30 PM
  */
 
-class SingerAdapter(private val singerList: List<Singer>) : RecyclerView.Adapter<ItemViewHolder>() {
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.singerName.text = singerList[position].Fsinger_name
-        holder.singerAvatar.loadUrl(String.format(picBaseUrl_300, singerList[position].Fsinger_mid))
+class SingerAdapter
+    : PagingDataAdapter<Singer, SingerViewHolder>(SINGER_COMPARATOR) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingerViewHolder {
+        return SingerViewHolder(parent.inflate(R.layout.online_singer_item))
     }
 
-    override fun getItemCount(): Int {
-        return singerList.size
+    override fun onBindViewHolder(holder: SingerViewHolder, position: Int) {
+        getItem(position)?.let {
+            holder.singerName.text = it.singer_name
+            holder.singerAvatar.loadUrl(String.format(picBaseUrl_300, it.singer_mid), R.drawable.placeholder_disk)
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        return ItemViewHolder(parent.inflate(R.layout.online_singer_item))
+    companion object {
+        val SINGER_COMPARATOR = object : DiffUtil.ItemCallback<Singer>() {
+            override fun areItemsTheSame(oldItem: Singer, newItem: Singer): Boolean =
+                    oldItem.singer_id == newItem.singer_id
+
+            override fun areContentsTheSame(oldItem: Singer, newItem: Singer): Boolean =
+                    oldItem == newItem
+
+        }
     }
 }
 
-class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class SingerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var singerAvatar: CircleImageView = itemView.findViewById(R.id.singer_avatar)
     var singerName: TextView = itemView.findViewById(R.id.singer_name)
 }

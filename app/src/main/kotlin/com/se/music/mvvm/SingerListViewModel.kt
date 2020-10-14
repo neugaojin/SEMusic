@@ -2,13 +2,10 @@ package com.se.music.mvvm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.se.music.support.retrofit.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 
 /**
  *Author: gaojin
@@ -16,24 +13,32 @@ import kotlinx.coroutines.launch
  */
 
 class SingerListViewModel(application: Application) : AndroidViewModel(application) {
-
-    val mObservableSingers: MediatorLiveData<List<Singer>?> = MediatorLiveData()
-
-    private val presenterScope: CoroutineScope by lazy {
-        CoroutineScope(Dispatchers.Main + Job())
+    companion object {
+        const val DEFAULT_FILTER_INDEX = 0
     }
 
-    init {
-        presenterScope.launch {
-            val result = Repository.getSinger(100, 1).body()
-            if (result?.data?.list?.isEmpty() == false) {
-                mObservableSingers.value = result.data.list
-            }
-        }
+    private val initCategoryInfo = CategoryInfo(-100, "全部").apply {
+        index = DEFAULT_FILTER_INDEX
     }
 
-    override fun onCleared() {
-        presenterScope.cancel()
+    val singerCategory = MutableLiveData<CategoryData?>()
+    val areaFilterIndex = MutableLiveData<CategoryInfo>().apply {
+        postValue(initCategoryInfo)
+    }
+    val sexFilterIndex = MutableLiveData<CategoryInfo>().apply {
+        postValue(initCategoryInfo)
+    }
+    val genreFilterIndex = MutableLiveData<CategoryInfo>().apply {
+        postValue(initCategoryInfo)
     }
 
+    val flow =
+            Pager(PagingConfig(pageSize = 80, initialLoadSize = 2))
+            {
+                SingerListPagingSource(areaFilterIndex, sexFilterIndex, genreFilterIndex)
+            }.flow
+
+    suspend fun fetchCategoryData() {
+        singerCategory.value = Repository.getSingerCategory().data
+    }
 }

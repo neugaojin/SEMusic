@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import com.bytedance.scene.group.GroupScene
 import com.bytedance.scene.navigation.OnBackPressedListener
 import com.se.music.R
+import com.se.music.support.coroutine.SeCoroutineScope
 
 /**
  *Author: gaojin
@@ -20,6 +21,10 @@ import com.se.music.R
 abstract class SeCompatScene : GroupScene() {
 
     private lateinit var toolbarTitle: TextView
+
+    protected val coroutineScope: SeCoroutineScope by lazy {
+        SeCoroutineScope()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): ViewGroup {
         val root = inflater.inflate(R.layout.fragment_base, container, false)
@@ -44,4 +49,9 @@ abstract class SeCompatScene : GroupScene() {
     }
 
     abstract fun createContentView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        coroutineScope.close()
+    }
 }

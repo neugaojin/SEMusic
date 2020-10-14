@@ -1,6 +1,7 @@
 package com.se.music.entity
 
 import com.google.gson.JsonElement
+import com.se.senet.base.ConvertData
 import com.se.senet.base.GsonFactory
 
 /**
@@ -8,7 +9,7 @@ import com.se.senet.base.GsonFactory
  *Time: 2018/7/9 下午11:30
  */
 
-class Album : com.se.senet.base.ConvertData<Album?> {
+class Album : ConvertData<Album?> {
     override fun convertData(jsonElement: JsonElement): Album? {
         val root = jsonElement.asJsonObject
         if (!root.has("album")) {

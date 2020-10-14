@@ -28,9 +28,6 @@ class LocalMainScene : SeCompatScene() {
     private val tabName = mutableListOf<String>()
 
     private val childScene = listOf(LocalSongScene(), LocalArtistScene(), LocalAlbumScene())
-    private val scope: SeCoroutineScope by lazy {
-        SeCoroutineScope()
-    }
 
     override fun createContentView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
         return LayoutInflater.from(baseContext()).inflate(R.layout.fragment_local_music, container, false)
@@ -54,7 +51,7 @@ class LocalMainScene : SeCompatScene() {
 
     override fun onResume() {
         super.onResume()
-        scope.launch {
+        coroutineScope.launch {
             val songCount = async { DataBase.queryLocalSongCount() }
             val singerCount = async { DataBase.queryLocalArtistCount() }
             val albumCount = async { DataBase.queryLocalAlbumCount() }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/singer_list_filter_view_width"
+    android:layout_height="@dimen/singer_list_filter_view_height"
+    android:layout_margin="5dp"
+    android:background="@drawable/singer_filter_item_bg"
+    android:gravity="center"
+    android:paddingStart="7dp"
+    android:paddingTop="2dp"
+    android:paddingEnd="7dp"
+    android:paddingBottom="2dp"
+    android:textColor="@color/light_black"
+    tools:ignore="RtlSymmetry" />

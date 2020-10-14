@@ -2,7 +2,6 @@ package com.se.music.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.media.session.MediaSessionCompat
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -63,10 +62,10 @@ class BottomListAdapter(private val context: Context) : RecyclerView.Adapter<Bot
 
         init {
             view.findViewById<ImageView>(R.id.bottom_item_delete).setOnClickListener {
-                itemDelete?.invoke(adapterPosition, list?.get(adapterPosition))
+                itemDelete?.invoke(absoluteAdapterPosition, list?.get(absoluteAdapterPosition))
             }
             view.setOnClickListener {
-                itemClick?.invoke(adapterPosition, list?.get(adapterPosition))
+                itemClick?.invoke(absoluteAdapterPosition, list?.get(absoluteAdapterPosition))
             }
         }
 

@@ -27,7 +27,6 @@ class ConverterDataInterceptor : ConvertIntercepter {
     }
 
     private fun getConvertDataClass(type: Type): Class<*>? {
-
         val cls = `$Gson$Types`.getRawType(type)
         if (type is ParameterizedType) {
             val types = type.actualTypeArguments
