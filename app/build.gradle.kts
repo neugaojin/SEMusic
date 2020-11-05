@@ -77,14 +77,23 @@ dependencies {
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(Libs.Kotlin.kotlin_stdlib)
-    implementation(Libs.Kotlin.kotlin_reflect)
-    implementation(Libs.Kotlin.kotlin_stdlib_jdk8)
-    implementation(Libs.Kotlin.kotlinx_coroutines_core)
-    implementation(Libs.Kotlin.kotlinx_coroutines_android)
+    implementation(Libs.Kotlin.kotlin_stdlib) {
+        isForce = true
+    }
+    implementation(Libs.Kotlin.kotlin_reflect) {
+        isForce = true
+    }
+    implementation(Libs.Kotlin.kotlin_stdlib_jdk8) {
+        isForce = true
+    }
+    implementation(Libs.Kotlin.kotlinx_coroutines_core) {
+        isForce = true
+    }
+    implementation(Libs.Kotlin.kotlinx_coroutines_android) {
+        isForce = true
+    }
 
     implementation(Libs.app_compat)
-    implementation(Libs.core_ktx)
     implementation(Libs.material)
     implementation(Libs.startup_runtime)
 

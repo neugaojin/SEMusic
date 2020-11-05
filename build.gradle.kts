@@ -1,5 +1,4 @@
 buildscript {
-    val kotlinVersion: String by project
     repositories {
         google()
         jcenter()
@@ -12,7 +11,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.6.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_gradle_plugin_version}")
 //        classpath("com.gaojin.viti:viti:0.0.1")
     }
 }

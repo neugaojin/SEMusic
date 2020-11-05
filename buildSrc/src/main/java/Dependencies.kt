@@ -3,11 +3,13 @@
  *Time: 2020/9/24 3:29 PM
  */
 object Versions {
+    const val kotlin_version = "1.4.0"
+    const val kotlin_gradle_plugin_version = "1.4.10"
+    const val kotlin_corcoutine_version = "1.3.9"
+
     const val app_compat = "1.2.0"
     const val material = "1.3.0-alpha02"
     const val startup_runtime = "1.0.0-beta01"
-    const val kotlin_version = "1.3.71"
-    const val corcoutine_version = "1.3.1"
     const val aac_version = "2.2.0"
     const val lifecycle_ktx_version = "2.2.0"
     const val scene_version = "1.+"
@@ -28,7 +30,6 @@ object Versions {
 
 object Libs {
     const val app_compat = "androidx.appcompat:appcompat:${Versions.app_compat}"
-    const val core_ktx = "androidx.core:core-ktx:${Versions.app_compat}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val startup_runtime = "androidx.startup:startup-runtime:${Versions.startup_runtime}"
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide_version}"
@@ -43,8 +44,8 @@ object Libs {
         const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
         const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin_version}"
         const val kotlin_stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin_version}"
-        const val kotlinx_coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.corcoutine_version}"
-        const val kotlinx_coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.corcoutine_version}"
+        const val kotlinx_coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlin_corcoutine_version}"
+        const val kotlinx_coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlin_corcoutine_version}"
     }
 
     object Jetpack {
