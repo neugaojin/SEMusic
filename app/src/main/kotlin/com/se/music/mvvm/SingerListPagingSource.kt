@@ -12,9 +12,10 @@ import java.io.IOException
  */
 
 class SingerListPagingSource(
-        private val area: LiveData<CategoryInfo>,
-        private val sex: LiveData<CategoryInfo>,
-        private val genre: LiveData<CategoryInfo>
+    private val area: LiveData<CategoryInfo>,
+    private val sex: LiveData<CategoryInfo>,
+    private val genre: LiveData<CategoryInfo>,
+    private val resultCache: MutableMap<String, LoadResult<Int, Singer>>
 ) : PagingSource<Int, Singer>() {
     companion object {
         private const val ALL = -100
@@ -23,30 +24,41 @@ class SingerListPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Singer> {
         return try {
             var nextPageNumber = params.key ?: 1
-            val result = Repository.getSinger(params.loadSize,
+            val key = getKey(nextPageNumber)
+            return resultCache.getOrElse(key, {
+                val result = Repository.getSinger(
+                    params.loadSize,
                     nextPageNumber,
-                    area.value?.id ?: ALL,
-                    sex.value?.id ?: ALL,
-                    genre.value?.id ?: ALL)
-            val data = result.data?.list ?: emptyList()
-            if (data.isNotEmpty()) {
-                nextPageNumber++
-                LoadResult.Page(
+                    getCategoryId(area),
+                    getCategoryId(sex),
+                    getCategoryId(genre)
+                )
+                val data = result.data?.list ?: emptyList()
+                return@getOrElse if (data.isNotEmpty()) {
+                    nextPageNumber++
+                    LoadResult.Page(
                         data = data,
                         prevKey = null,
                         nextKey = nextPageNumber
-                )
-            } else {
-                LoadResult.Page(
+                    ).also {
+                        resultCache[key] = it
+                    }
+                } else {
+                    LoadResult.Page(
                         data = data,
                         prevKey = null,
                         nextKey = null
-                )
-            }
+                    )
+                }
+            })
         } catch (e: IOException) {
             LoadResult.Error(e)
         } catch (e: HttpException) {
             LoadResult.Error(e)
         }
     }
+
+    private fun getCategoryId(liveData: LiveData<CategoryInfo>) = liveData.value?.id ?: ALL
+
+    private fun getKey(pageNumber: Int) = "${pageNumber}_${area.value?.name}_${sex.value?.name}_${genre.value?.name}"
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.bytedance.scene.ktx.viewModels
 import com.google.android.material.appbar.AppBarLayout
 import com.se.music.R
@@ -54,6 +55,14 @@ class SingerListScene : SeCompatScene() {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
             adapter = pagingAdapter
+
+            itemAnimator?.let {
+                it.addDuration = 0
+                it.changeDuration = 0
+                it.moveDuration = 0
+                it.removeDuration = 0
+                (it as SimpleItemAnimator).supportsChangeAnimations = false
+            }
         }
 
         setFilterRecyclerView(areaRecyclerView)
@@ -76,12 +85,14 @@ class SingerListScene : SeCompatScene() {
             pagingAdapter.loadStateFlow.collectLatest { loadState ->
                 loadingView.visibility = when (loadState.refresh) {
                     is LoadState.NotLoading -> {
+                        recyclerView.scrollToPosition(0)
                         View.GONE
                     }
                     is LoadState.Loading -> {
                         View.VISIBLE
                     }
                     is LoadState.Error -> {
+                        recyclerView.scrollToPosition(0)
                         View.GONE
                     }
                 }
@@ -103,17 +114,17 @@ class SingerListScene : SeCompatScene() {
                 }
             })
 
-            areaFilterIndex.observe(owner, Observer {
+            areaFilterIndex.observe(owner, {
                 getAdapter(areaRecyclerView).updateSelectPosition(it.index)
                 refreshData()
             })
 
-            sexFilterIndex.observe(owner, Observer {
+            sexFilterIndex.observe(owner, {
                 getAdapter(sexRecyclerView).updateSelectPosition(it.index)
                 refreshData()
             })
 
-            genreFilterIndex.observe(owner, Observer {
+            genreFilterIndex.observe(owner, {
                 getAdapter(genreRecyclerView).updateSelectPosition(it.index)
                 refreshData()
             })

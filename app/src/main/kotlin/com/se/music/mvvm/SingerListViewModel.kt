@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingSource.LoadResult
 import com.se.music.support.retrofit.Repository
 
 /**
@@ -16,6 +17,8 @@ class SingerListViewModel(application: Application) : AndroidViewModel(applicati
     companion object {
         const val DEFAULT_FILTER_INDEX = 0
     }
+
+    private val resultCache = mutableMapOf<String, LoadResult<Int, Singer>>()
 
     private val initCategoryInfo = CategoryInfo(-100, "全部").apply {
         index = DEFAULT_FILTER_INDEX
@@ -33,10 +36,12 @@ class SingerListViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     val flow =
-            Pager(PagingConfig(pageSize = 80, initialLoadSize = 2))
-            {
-                SingerListPagingSource(areaFilterIndex, sexFilterIndex, genreFilterIndex)
-            }.flow
+        Pager(
+            config = PagingConfig(pageSize = 80, initialLoadSize = 2),
+            pagingSourceFactory = {
+                SingerListPagingSource(areaFilterIndex, sexFilterIndex, genreFilterIndex, resultCache)
+            }
+        ).flow
 
     suspend fun fetchCategoryData() {
         singerCategory.value = Repository.getSingerCategory().data
